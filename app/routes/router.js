@@ -2,9 +2,26 @@ var express = require("express");
 var router = express.Router();
 var bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(10);
+const uuid = require('uuid');
+const mysql = require('mysql')
 
 var fabricaDeConexao = require("../../config/connection-factory");
 var conexao = fabricaDeConexao();
+
+const db = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "",
+    database: "athenashop",
+    port: 3306
+  });
+
+  db.connect((err) => {
+    if (err) {
+      throw err;
+    }
+    console.log('Conectado ao MySQL');
+  });
 
 var UsuarioDAL = require("../models/UsuarioDAL");
 var usuarioDAL = new UsuarioDAL(conexao);
@@ -105,57 +122,101 @@ router.get("/addprod", function(req, res){
     res.render("pages/addprod", {retorno: null, erros: null})
 });
 
+router.get("/formenviado", function(req, res){
+    res.render("pages/formenviado", {retorno: null, erros: null})}
+);
+
+
 // Defina o sal para o bcrypt
 const saltRounds = 10;
 
-router.post(
-  '/cadastrar',
-  async function (req, res) {
-    const erros = validationResult(req);
+// router.post(
+//   '/cadastrar',
+//   async function (req, res) {
+//     const erros = validationResult(req);
 
-    if (!erros.isEmpty()) {
-      return res.render('pages/cadastro', {
-        retorno: null,
-        listaErros: erros.array(),
-        valors: req.body,
-      });
-    }
+//     if (!erros.isEmpty()) {
+//       return res.render('pages/cadastro', {
+//         retorno: null,
+//         listaErros: erros.array(),
+//         valors: req.body,
+//       });
+//     }
 
-    try {
-      const dadosForm = {
+//     try {
+//       const dadosForm = {
+//         nome: req.body.nome,
+//         email: req.body.email,
+//         senha: bcrypt.hashSync(req.body.senha, saltRounds)
+//       };
+
+//         // Supondo que "usuarioDAL.create" seja a função que insere os dados no banco de dados.
+//         // Certifique-se de tratá-la adequadamente no seu código.
+
+//         // const create = await usuarioDAL.create(dadosForm);
+
+//         // Após inserir os dados no banco de dados, você pode redirecionar o usuário para outra página.
+
+//         //   Cadastrar o usuário
+//         const create = await usuarioDAL.create(dadosForm);
+
+//       res.redirect('/');
+//     } catch (e) {
+//       res.render('pages/cadastro', {
+//         listaErros: null,
+//         retorno: null,
+//         valors: req.body,
+//       });
+//     }
+//   }
+// );
+
+
+router.post("/cadastrar", 
+    body("nome")
+        .isLength({ min: 3, max: 50 }).withMessage("Mínimo de 3 letras e máximo de 50!"),
+    body("email")
+        .isEmail().withMessage("Digite um e-mail válido!"),
+    body("senha ")
+        .isStrongPassword()
+        .withMessage("A senha deve ter no mínimo 8 caracteres, 1 letra maiúscula, 1 caractere especial e 1 número"),
+
+    async function(req, res){
+    
+    const dadosForm = {
         nome: req.body.nome,
         email: req.body.email,
-        senha: bcrypt.hashSync(req.body.senha, saltRounds)
-      };
-
-        // Supondo que "usuarioDAL.create" seja a função que insere os dados no banco de dados.
-        // Certifique-se de tratá-la adequadamente no seu código.
-
-        // const create = await usuarioDAL.create(dadosForm);
-
-        // Após inserir os dados no banco de dados, você pode redirecionar o usuário para outra página.
-
-        //   Cadastrar o usuário
-        const create = await usuarioDAL.create(dadosForm);
-
-      res.redirect('/');
-    } catch (e) {
-      res.render('pages/cadastro', {
-        listaErros: null,
-        retorno: null,
-        valors: req.body,
-      });
+        senha: req.body.senha
     }
-  }
-);
+    if (!dadosForm.email || !dadosForm.senha) {
+        return res.status(400).send('Por favor, preencha todos os campos.');
+    }
+    const id = uuid.v4();
+
+    const query = 'INSERT INTO usuarios (id, nome, email, senha) VALUES (?, ?, ?, ?)';
+    const values = [id, dadosForm.nome, dadosForm.email, dadosForm.senha];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+          console.error('Erro ao inserir dados no banco de dados:', err);
+        } else {
+          console.log('Dados inseridos com sucesso!');
+        }
+      });
+
+      setTimeout(function () {
+        res.render("pages/formenviado", { email: dadosForm.email });
+      }, 1000); 
+
+      console.log(dadosForm)
+})
 
 router.post(
-    "/login",
-    body("d-login"),
-    body("t-email")
+    "/logando",
+    body("email")
         .isEmail({min:5, max:50})
         .withMessage("O email deve ser válido"),
-    body("t-senha")
+    body("senha")
         .isStrongPassword()
         .withMessage("A senha deve ser válida"),
 

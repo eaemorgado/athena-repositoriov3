@@ -25,67 +25,16 @@
     </header>
 
     <main>
-        <% 
-     
-        let avisoErro = {"temail":"", "tsenha":""};
-        let msgErro = {"temail":"", "tsenha":""};
-            if(listaErros){
-                listaErros.errors.forEach(function(itemErro){
-                    if(itemErro.path == "temail"){
-                        avisoErro.temail = "erro";
-                        msgErro.temail = itemErro.msg;
-                    }
-                    if(itemErro.path == "tsenha"){
-                        avisoErro.tsenha = "erro";
-                        msgErro.tsenha = itemErro.msg;
-                    }
-                })
-            }
-    %>
-        <form action="/login" method="post">
-            <h2 class="txt">Entrar</h2>
 
-            <label for="t-email"></label>
-            <input type="email" name="t-email" id="t-email" value="<%= valores.temail %>"
-                placeholder="E-mail" class="<%= avisoErro.temail%>" required>
-            <span>
-                <%= msgErro.temail %>
-            </span>
+    <form action="/logando" method="post">
+        <input type="text" name="nome" placeholder="Nome de usuáio ou e-mail"/><br>
+        <br>
+        <input type="password" name="senha" placeholder="senha" /><br>
+        <br>
+        <button type="submit">Entrar</button><br>
+    </form>
 
-            <label for="t-senha"></label>
-            <input type="password" name="t-senha" id="t-senha" value="<%= valores.tsenha %>"
-                placeholder="Senha" class="<%= avisoErro.tsenha %>" required>
-            <span>
-                <%= msgErro.tsenha %>
-            </span>
-
-        <div class="aling">
-            <a href="">
-                <h5 id="senha-ex">Esqueci a senha</h5>
-            </a>
-        </div>
-            <div id="checkbox-d">
-                <input type="checkbox" name="Lembrar" class="checkbox-dd">
-                <h4 id="h5-c">Lembrar conta</h4>
-            </div>
-
-
-            <div class="button">
-
-                <div class="button-cadastro">
-
-                    <button onclick="window.location = '/cadastro' " type="button" id="button-cadastro"> Cadastrar
-                    </button>
-
-                </div>
-
-                <div class="button-logar">
-
-                    <button type="submit" id="button-login"> Logar </button>
-
-                </div>
-            </div>
-        </form>
+        
     </main>
 </body>
 

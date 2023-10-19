@@ -1,14 +1,14 @@
 const { validationResult } = require("express-validator");
 
-function verificarUsuAutenticado (req, res, next) {
 
+function verificarUsuAutenticado(req, res, next) {
     if (req.session.autenticado) {
         var autenticado = req.session.autenticado;
     } else {
-        var autenticado = {autenticado: null};
+        var autenticado = { autenticado: null };
     }
-
     req.session.autenticado = autenticado;
+    console.log(req.session.autenticado);
     next();
 }
 
@@ -18,21 +18,21 @@ function limparSessao(req, res, next) {
 }
 
 function gravarUsuAutenticado(usuarioDAL, bcrypt) {
-    return async (req, re, next) => {
+    return async (req, res, next) => {
         erros = validationResult(req)
         if (erros.isEmpty()) {
             var dadosForm = {
-                email_usuario: req.body.temail,
-                senha_usuario: req.body.tsenha
+                email: req.body.email,
+                senha: req.body.senha
             };
             var results = await usuarioDAL.findUserEmail(dadosForm);
             var total = Object.keys(results).length;
             if (total == 1) {
-                if (bcrypt.compareSync(dadosForm.t-senha, results[0].t-senha)){
+                if (bcrypt.compareSync(dadosForm.senha, results[0].senha)){
                     var autenticado = {
-                        autenticado: results[0].nome_usu,
-                        id: results[0].id_usu,
-                        tipo: results[0].tipo_usu,
+                        autenticado: results[0].nome,
+                        id: results[0].id,
+                        // tipo: results[0].tipo_us,
                     };
                 }
             } else {
