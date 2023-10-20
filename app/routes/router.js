@@ -219,7 +219,9 @@ router.post(
         .isStrongPassword()
         .withMessage("A senha deve ser válida"),
 
-    gravarUsuAutenticado(usuarioDAL, bcrypt),
+
+
+    // gravarUsuAutenticado(usuarioDAL, bcrypt),
     function(req, res){
 
         const dadosForm = {
@@ -240,9 +242,9 @@ router.post(
         //      res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
         //  }
 
-        // setTimeout(function () {
-        //     res.render("pages/home", { email: dadosForm.email });
-        //   }, 1000); 
+        setTimeout(function () {
+             res.render("pages/home", { email: dadosForm.email });
+           }, 1000); 
     });
 
 
