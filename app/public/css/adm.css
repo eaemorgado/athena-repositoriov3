@@ -1,3 +1,11 @@
+body{
+    background: linear-gradient(to bottom, #7A29FF, #361270);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: 'Outfit', sans-serif;
+}
+
+
 table {
     width: 50%;
     border-collapse: collapse;
@@ -21,7 +29,7 @@ th, td {
     cursor: pointer;
 }
 
-th:nth-child(4) {
-    background-color: purple;
-    color: white;
+h1{
+        color: white;
+
 }
