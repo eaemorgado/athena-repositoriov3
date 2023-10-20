@@ -173,13 +173,12 @@ const saltRounds = 10;
 
 
 router.post("/cadastrar", 
-    body("nome")
-        .isLength({ min: 3, max: 50 }).withMessage("Mínimo de 3 letras e máximo de 50!"),
     body("email")
-        .isEmail().withMessage("Digite um e-mail válido!"),
-    body("senha ")
-        .isStrongPassword()
-        .withMessage("A senha deve ter no mínimo 8 caracteres, 1 letra maiúscula, 1 caractere especial e 1 número"),
+    .isEmail({min:5, max:50})
+    .withMessage("O email deve ser válido"),
+    body("senha")
+    .isStrongPassword()
+    .withMessage("A senha deve ser válida"),
 
     async function(req, res){
     
