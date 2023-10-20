@@ -30,20 +30,20 @@ var { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuA
 
 const {body, validationResult } = require("express-validator");
 
-router.get("/", verificarUsuAutenticado, function (req, res){
-    let objJson = req.session.autenticado;
-    objJson.retorno = null;
-    objJson.erros = null;
-    res.locals.erroLogin = null;
-    res.render("pages/home", objJson)
-});
+router.get("/", verificarUsuAutenticado, function (req, res) {
+    req.session.autenticado.login = req.query.login;
+    res.render("pages/home", req.session.autenticado);
+  });
 
+router.get("/sair", limparSessao, function (req, res) {
+    res.redirect("/");
+  });
 
 // ,{ retorno: null, erros: null, }
 router.get('/cadastro', (req, res) => {
     // Lógica para renderizar a página de cadastro
     res.locals.erroLogin = null;
-    res.render('pages/cadastro', { listaErros: null, valors: { "nomeUsu":"", "senhaUsu":"", "emailUsu":""} }); // Passe erros ou null, dependendo do seu caso
+    res.render('pages/cadastro', { listaErros: null, valors: { "nome":"", "senha":"", "email":""} }); // Passe erros ou null, dependendo do seu caso
 });
 
 router.get("/home", verificarUsuAutenticado, function(req, res){
@@ -235,14 +235,14 @@ router.post(
              return res.render("pages/login", {retorno: null, listaErros: errors, valores: req.body});
          }
         // if(req.session.autenticado != null) {
-        //     res.redirect("/");
+        //    res.redirect("/");
         // } else {
-        //     res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
-        // }
+        //      res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
+        //  }
 
-        setTimeout(function () {
-            res.render("pages/home", { email: dadosForm.email });
-          }, 1000); 
+        // setTimeout(function () {
+        //     res.render("pages/home", { email: dadosForm.email });
+        //   }, 1000); 
     });
 
 

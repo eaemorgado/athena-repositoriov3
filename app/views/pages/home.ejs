@@ -63,7 +63,7 @@
                                     <div class="total-price">R$0</div>
                                 </div>
                                 <button type="button" class="btn-buy">Pagar agora</button>
-                                <i class='bx bx-x' id="close-cart"></i>
+                                <i class='bx bx-x delete-button' id="close-cart"></i>
 
                             </div>
 
@@ -258,14 +258,7 @@
                                 sidebar.classList.remove("show");
                             });
 
-                            function ready(){
-                                var removeCartButtons = document.getElementById("cart-remove")
-                                console.log(removeCartButtons)
-                                for (var i = 0; i < removeCartButtons.length; i++){
-                                    var button = removeCartButtons[i]
-                                    button.addEventListener("click", removeCartItem)
-                                }
-                            }
+                            
                             
                         </script>
 </body>
