@@ -4,15 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Athena Shop</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/adm.css">
 </head>
+
+<header>
+
+    <a href="/">
+        
+        <picture>
+
+            <source media="(max-width: 390px)" srcset="img/logo-icon.png">
+            <source media="(max-width: 479px)" srcset="img/logo-icon.png">
+            <img src="img/logo-letreiro.png" alt="logo-athena" class="logo-athena">
+    
+        </picture>
+    </a>
+
+    <input type="search" name="" id="search-bar-header">
+
+    
+    
+    <a href="/usuario"><img src="img/profile-user_white.png" alt="perfil" id="profile-user"></a>
+
+</header>
+
+
 <body>
-    <% if(autenticado) { %>
-        <span>Olá <%=autenticado %>!</span>
-    <% } %>
-            <p><a href="/sair"> Sair </a></p>
-            <h1>Área do ADministrador</h1>
-            <h1>ramon loco</h1>
-           <H2>morgado</H2>
-           <div><h2>ramon</h2></div>
-</body>
-</html>
+    <h1>Painel Administrativo</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID de Usuário</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>João</td>
+                <td>joao@email.com</td>
+                <td><button class="delete-button"><i class="fa fa-trash"></i></button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Ramon</td>
+                <td>ramon@email.com</td>
+                <td><button class="delete-button"><i class="fa fa-trash"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('delete-button')) {
+                const row = e.target.parentNode.parentNode;
+                row.parentNode.removeChild(row);
+            }
+        });
+</script>
