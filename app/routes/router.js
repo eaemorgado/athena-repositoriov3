@@ -212,7 +212,7 @@ router.post("/cadastrar",
 })
 
 router.post(
-    "/logando",
+    "/login",
     body("email")
         .isEmail({min:5, max:50})
         .withMessage("O email deve ser válido"),
@@ -222,20 +222,29 @@ router.post(
 
     gravarUsuAutenticado(usuarioDAL, bcrypt),
     function(req, res){
-        const errors = validationResult(req)
-        if(!errors.isEmpty()){
-            console.log(errors);    
-            return res.render("pages/login", {retorno: null, listaErros: errors, valores: req.body});
+
+        const dadosForm = {
+            email: req.body.email,
+            senha: req.body.senha
         }
-        if(req.session.autenticado != null) {
-            res.redirect("/");
-        } else {
-            res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
+        if (!dadosForm.email || !dadosForm.senha) {
+            return res.status(400).send('Por favor, preencha todos os campos.');
         }
+         const errors = validationResult(req)
+         if(!errors.isEmpty()){
+             console.log(errors);    
+             return res.render("pages/login", {retorno: null, listaErros: errors, valores: req.body});
+         }
+        // if(req.session.autenticado != null) {
+        //     res.redirect("/");
+        // } else {
+        //     res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
+        // }
+
+        setTimeout(function () {
+            res.render("pages/home", { email: dadosForm.email });
+          }, 1000); 
     });
 
-router.post("/home", function(req, res){
-    res.json(req.body)
-});
 
 module.exports = router

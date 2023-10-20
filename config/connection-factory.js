@@ -6,7 +6,7 @@ module.exports = function(){
         host:   "127.0.0.1",
         user:   "root",
         password:   "",
-        database:   "athena",
+        database:   "athenashop",
         port:   "3306"
     });
 

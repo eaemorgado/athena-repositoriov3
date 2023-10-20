@@ -41,7 +41,7 @@ module.exports = class TipoUsuarioDAL {
 
     update(camposJson) {
         return new Promise((resolve, reject) => {
-            this.athena.query(
+            this.athenashop.query(
                 "UPDATE tipo_usu SET tipo_usuario = ?, inscricao_usuario = ? WHERE id_tipo_usuario = ?",
                 [camposJson.tipo_usuario, camposJson.descricao_usuario, camposJson.id_tipo_usuario],
                 function (error, results, fields) {
