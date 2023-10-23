@@ -11,9 +11,9 @@ var fabricaDeConexao = require("../../config/connection-factory");
 var conexao = fabricaDeConexao();
 
 const db = mysql.createConnection({
-    host: "127.0.0.1",
+    host: "localhost",
     user: "root",
-    password: "@ITB123456",
+    password: "R29112005@",
     database: "athenashop",
     port: 3306
   });
@@ -132,6 +132,9 @@ router.get("/formenviado", function(req, res){
 );
 router.get("/politica", function(req, res){
     res.render("pages/politica", {retorno: null, erros: null})}
+);
+router.get("/termos", function(req, res){
+  res.render("pages/termos", {retorno: null, erros: null})}
 );
 
 
