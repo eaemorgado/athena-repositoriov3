@@ -13,7 +13,7 @@ var conexao = fabricaDeConexao();
 const db = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
-    password: "",
+    password: "@ITB123456",
     database: "athenashop",
     port: 3306
   });
@@ -193,7 +193,7 @@ router.post("/cadastrar",
     const dadosForm = {
         nome: req.body.nome,
         email: req.body.email,
-        senha: req.body.senha
+        senha: bcrypt.hashSync(req.body.senha, salt)
     }
     if (!dadosForm.email || !dadosForm.senha) {
         return res.status(400).send('Por favor, preencha todos os campos.');
