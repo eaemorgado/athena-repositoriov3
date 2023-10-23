@@ -40,6 +40,23 @@
     </header>
 
     <main>
+
+        <% if(autenticado){
+
+            let arquivo={"imagem":"imagem/img-perfil.png"} ;
+            if(autenticado.img_perfil_pasta !=null){ 
+                 arquivo.imagem = img_perfil_pasta;
+            }else if(autenticado.img_perfil_banco !=null){ 
+                 const imgBuffer = Buffer.from(img_perfil_banco);
+                 const imgBase64 = imgBuffer.toString('base64');
+                 const dataURL = `data:image/jpeg;base64,${imgBase64}`;
+                 arquivo.imagem= dataURL;
+            } 
+        %>
+   
+       <% }else{ %>
+           <span>Olá visitante!</span>
+       <% } %>
             <div class="username-area">
 
                 <picture>
@@ -48,7 +65,7 @@
 
                 </picture>
 
-                <a href="/cadastro"><span>Nome de usuario</span></a>
+                <a href="/cadastro"><span><%= autenticado%></span></a>
 
             </div>
 

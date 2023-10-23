@@ -3,7 +3,9 @@ var router = express.Router();
 var bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(10);
 const uuid = require('uuid');
-const mysql = require('mysql')
+const mysql = require('mysql');
+const flash = require('express-flash');
+const app = require('express')
 
 var fabricaDeConexao = require("../../config/connection-factory");
 var conexao = fabricaDeConexao();
@@ -23,12 +25,14 @@ const db = mysql.createConnection({
     console.log('Conectado ao MySQL');
   });
 
+
+
 var UsuarioDAL = require("../models/UsuarioDAL");
 var usuarioDAL = new UsuarioDAL(conexao);
 
 var { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuAutorizado } = require("../models/autenticador_middleware");
 
-const {body, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
 router.get("/", verificarUsuAutenticado, function (req, res) {
     req.session.autenticado.login = req.query.login;
@@ -62,7 +66,8 @@ router.get("/produto", function(req, res){
     res.render("pages/produto", {retorno: null, erros: null})}
 );
 
-router.get("/usuario", function(req, res){
+router.get("/usuario", verificarUsuAutenticado, function(req, res){
+    req.session.autenticado.login = req.query.login;
     res.render("pages/usuario", {retorno: null, erros: null})}
 );
 
@@ -210,42 +215,85 @@ router.post("/cadastrar",
       console.log(dadosForm)
 })
 
-router.post(
-    "/login",
-    body("email")
-        .isEmail({min:5, max:50})
-        .withMessage("O email deve ser válido"),
-    body("senha")
-        .isStrongPassword()
-        .withMessage("A senha deve ser válida"),
+// router.post(
+//     "/login",
+//     body("email")
+//         .isEmail({min:5, max:50})
+//         .withMessage("O email deve ser válido"),
+//     body("senha")
+//         .isStrongPassword()
+//         .withMessage("A senha deve ser válida"),
 
 
 
-    // gravarUsuAutenticado(usuarioDAL, bcrypt),
-    function(req, res){
+//     // gravarUsuAutenticado(usuarioDAL, bcrypt),
+//     function(req, res){
 
-        const dadosForm = {
+//         const dadosForm = {
+//             email: req.body.email,
+//             senha: req.body.senha
+//         }
+//         if (!dadosForm.email || !dadosForm.senha) {
+            
+//             return res.status(400).send('Por favor, preencha todos os campos.');
+//         }
+//          const errors = validationResult(req)
+//          if(!errors.isEmpty()){
+//             req.body.errorMessage = 'Senha incorreta! Tente novamente.';
+//              console.log(errors);    
+//              return res.render("pages/login", {retorno: null, listaErros: errors, valores: req.body});
+//          }
+//         // if(req.session.autenticado != null) {
+//         //    res.redirect("/");
+//         // } else {
+//         //      res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
+//         //  }
+
+//         setTimeout(function () {
+//              res.render("pages/home", { email: dadosForm.email });
+//            }, 1000); 
+//     });
+
+
+    router.post(
+        "/login",
+        body("email")
+          .isEmail()
+          .withMessage("O email deve ser válido")
+          .isLength({ min: 5, max: 50 })
+          .withMessage("O email deve ter entre 5 e 50 caracteres"),
+        body("senha")
+          .isStrongPassword()
+          .withMessage("A senha deve ser válida"),
+      
+        function (req, res) {
+          const dadosForm = {
             email: req.body.email,
-            senha: req.body.senha
-        }
-        if (!dadosForm.email || !dadosForm.senha) {
+            senha: req.body.senha,
+          };
+      
+          if (!dadosForm.email || !dadosForm.senha) {
             return res.status(400).send('Por favor, preencha todos os campos.');
+          }
+          const errors = validationResult(req)
+          if(!errors.isEmpty()){
+             req.body.errorMessage = 'Senha incorreta! Tente novamente.';
+              console.log(errors);    
+              return res.render("pages/login", {retorno: null, listaErros: errors, valores: req.body});
+          }    
+          
+          if(req.session.autenticado != null) {
+               res.redirect("/");
+            } else {
+                  res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
+              }
+         
+          setTimeout(function () {
+            res.render("pages/home", { email: dadosForm.email });
+          }, 1000);
         }
-         const errors = validationResult(req)
-         if(!errors.isEmpty()){
-             console.log(errors);    
-             return res.render("pages/login", {retorno: null, listaErros: errors, valores: req.body});
-         }
-        // if(req.session.autenticado != null) {
-        //    res.redirect("/");
-        // } else {
-        //      res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
-        //  }
-
-        setTimeout(function () {
-             res.render("pages/home", { email: dadosForm.email });
-           }, 1000); 
-    });
+      );
+      
 
 
 module.exports = router

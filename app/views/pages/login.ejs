@@ -18,6 +18,10 @@
 </head>
 
 <body>
+
+    <% if (typeof errorMessage !== 'undefined') { %>
+        <p class="error"><%= errorMessage %></p>
+    <% } %>
     <header>
 
             <img src="img/logo-letreiro.png" alt="logo" class="logo">
