@@ -125,6 +125,9 @@ router.get("/addprod", function(req, res){
 router.get("/formenviado", function(req, res){
     res.render("pages/formenviado", {retorno: null, erros: null})}
 );
+router.get("/politica", function(req, res){
+    res.render("pages/politica", {retorno: null, erros: null})}
+);
 
 
 // Defina o sal para o bcrypt
