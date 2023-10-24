@@ -11,9 +11,9 @@ var fabricaDeConexao = require("../../config/connection-factory");
 var conexao = fabricaDeConexao();
 
 const db = mysql.createConnection({
-    host: "127.0.0.1",
+    host: "localhost",
     user: "root",
-    password: "",
+    password: "R29112005@",
     database: "athenashop",
     port: 3306
   });
@@ -133,6 +133,9 @@ router.get("/formenviado", function(req, res){
 router.get("/politica", function(req, res){
     res.render("pages/politica", {retorno: null, erros: null})}
 );
+router.get("/termos", function(req, res){
+  res.render("pages/termos", {retorno: null, erros: null})}
+);
 
 
 // Defina o sal para o bcrypt
@@ -193,7 +196,7 @@ router.post("/cadastrar",
     const dadosForm = {
         nome: req.body.nome,
         email: req.body.email,
-        senha: req.body.senha
+        senha: bcrypt.hashSync(req.body.senha, salt)
     }
     if (!dadosForm.email || !dadosForm.senha) {
         return res.status(400).send('Por favor, preencha todos os campos.');

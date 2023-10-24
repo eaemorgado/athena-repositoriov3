@@ -1,86 +1,59 @@
-/* Estilo do corpo da página */
+/* style.css */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-    color: #333;
-  }
+  font-family: 'Outfit', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: (#7A29FF, #361270);
+  color: #fff;
+  text-align: center;
+  padding: -10px;
+}
+
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-size: 28px;
   
-  /* Estilo do cabeçalho */
-  header {
-    background-color: #0074c2;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+footer {
+  background-color: #7A29FF;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Adicione animações CSS conforme necessário */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
   }
-  
-  /* Estilo do título da página */
-  h1 {
-    font-size: 36px;
+  100% {
+      opacity: 1;
   }
-  
-  /* Estilo da seção de conteúdo da política de privacidade */
-  .privacy-policy {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Estilo dos parágrafos do conteúdo */
-  .privacy-policy p {
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-  
-  /* Estilo dos links */
-  .privacy-policy a {
-    color: #0074c2;
-    text-decoration: none;
-  }
-  
-  .privacy-policy a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Estilo do rodapé */
-  footer {
-    background-color: #0074c2;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  /* Estilo de lista de marcadores */
-  .privacy-policy ul {
-    list-style: disc;
-    margin-left: 20px;
-  }
-  
-  /* Estilo de lista numerada */
-  .privacy-policy ol {
-    list-style: decimal;
-    margin-left: 20px;
-  }
-  
-  /* Estilo de cabeçalho de seção */
-  .privacy-policy h2 {
-    font-size: 24px;
-    margin-top: 20px;
-  }
-  
-  /* Estilo de citações */
-  .privacy-policy blockquote {
-    background-color: #f9f9f9;
-    border-left: 5px solid #0074c2;
-    margin: 0;
-    padding: 10px;
-  }
-  
-  /* Estilo de formulários (se aplicável) */
-  .privacy-policy form {
-    margin-top: 20px;
-  }
+}
+
+section {
+  animation: fadeIn 1s ease-in;
+}
   

@@ -5,7 +5,7 @@ module.exports = function(){
     return mysql.createConnection({
         host:   "localhost",
         user:   "root",
-        password:   "",
+        password:   "@ITB123456",
         database:   "athenashop",
         port:   "3306"
     });
@@ -13,12 +13,12 @@ module.exports = function(){
 };
 
 // module.exports = function(){
-//     return mysql.createConnection({
-//         host:   "127.0.0.1",
-//         user:   "root",
-//         password:   "",
-//         database:   "athenashop",
-//         port:   "3306"
+    // return mysql.createConnection({
+    //     host:   "127.0.0.1",
+    //     user:   "root",
+    //     password:   "",
+    //     database:   "athenashop",
+    //     port:   "3306"
 //     });
 
 // };
