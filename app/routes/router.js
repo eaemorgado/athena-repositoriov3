@@ -30,6 +30,9 @@ const db = mysql.createConnection({
 var UsuarioDAL = require("../models/UsuarioDAL");
 var usuarioDAL = new UsuarioDAL(conexao);
 
+const path = require('path');
+const e = require('express')
+
 var { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuAutorizado } = require("../models/autenticador_middleware");
 
 const { body, validationResult } = require("express-validator");
@@ -59,8 +62,14 @@ router.get("/sair", limparSessao, function(req,res){
 })
 
 router.get("/login", verificarUsuAutenticado, function(req, res){
-    res.render("pages/login", {listaErros:null, retorno: null, erros: null,  valores: {"tsenha":"","temail":""}})}
+    res.render("pages/login", {listaErros:null, retorno: null, erros: null,  valores: {"senha":"","email":""}})}
 );
+
+router.get("/usuario", verificarUsuAutenticado, function(req, res){
+    req.session.autenticado.login = req.query.login;
+    res.render("pages/usuario",{autenticado: req.session.autenticado, retorno: null, erros: null})}
+);
+
 
 router.get("/produto", function(req, res){
     res.render("pages/produto", {retorno: null, erros: null})}
@@ -87,7 +96,7 @@ router.get("/config", function(req, res){
     res.render("pages/config", {retorno: null, erros: null})}
 );
 
-router.get("/adm", verificarUsuAutenticado, function(req, res){
+router.get("/adm", verificarUsuAutenticado([3], "pages/restrito"), function(req, res){
     res.render("pages/adm", {retorno: null, erros: null})}
 );
 
@@ -330,25 +339,26 @@ router.post("/cadastrar",
     });
       
 
-      router.get('/usuario', verificarUsuAutorizado([1, 2, 3], verificarUsuAutenticado,"pages/restrito"), async function (req, res) {
-        try {
-          req.session.autenticado.login = req.query.login
-          let results = await usuarioDAL.findID(req.session.autenticado.id);
-          console.log(results);
-          let campos = {
-            nome: results[0].nome, email: results[0].email,
-            senha: ""
-          }
-          res.render("pages/perfilUsuario", { listaErros: null, dadosNotificacao: null, valores: campos, autenticado: req.session.autenticado })
-        } catch (e) {
-          res.render("pages/perfilUsuario", {
-            listaErros: null, dadosNotificacao: null, valores: {
-              nome: "", email: "", senha: ""
-            }
-          })
-          console.log(e)
-        }
-      });
+    //   router.get('/usuario', verificarUsuAutorizado([1, 2, 3], verificarUsuAutenticado,"pages/restrito"), async function (req, res) {
+    //     try {
+    //       req.session.autenticado.login = req.query.login
+    //       let results = await usuarioDAL.findID(req.session.autenticado.id);
+    //       console.log(results);
+    //       let campos = {
+    //         nome: results[0].nome, email: results[0].email,
+    //         senha: ""
+    //       }
+    //       res.render("pages/perfilUsuario", { listaErros: null, dadosNotificacao: null, valores: campos, autenticado: req.session.autenticado })
+    //     } catch (e) {
+    //       res.render("pages/perfilUsuario", {
+    //         listaErros: null, dadosNotificacao: null, valores: {
+    //           nome: "", email: "", senha: ""
+    //         }
+    //       })
+    //       console.log(e)
+    //     }
+    //   });
+
 
 
 module.exports = router

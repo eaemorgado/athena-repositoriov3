@@ -17,6 +17,11 @@
     <title>Usuário - Athena Shop</title>
 </head>
 <body>
+    <% if(autenticado.autenticado){
+        if(autenticado.login){%>
+       <h3>Login efetuado com sucesso, Olá <%= autenticado.autenticado%></h3>
+       <% }
+    } %>  
     
     <header>
 
@@ -37,6 +42,7 @@
         
         <img src="img/profile-user_white.png" alt="perfil" id="profile-user">
 
+
     </header>
 
     <main>
@@ -51,7 +57,7 @@
 
                 </picture>
 
-                <a href="/cadastro"><span></span></a>
+                <h3><%= autenticado.autenticado%></h3>
                 
 
             </div>
