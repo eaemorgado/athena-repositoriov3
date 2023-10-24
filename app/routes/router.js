@@ -136,7 +136,9 @@ router.get("/politica", function(req, res){
 router.get("/termos", function(req, res){
   res.render("pages/termos", {retorno: null, erros: null})}
 );
-
+router.get("/contato", function(req, res){
+  res.render("pages/contato", {retorno: null, erros: null})}
+);
 
 // Defina o sal para o bcrypt
 const saltRounds = 10;
