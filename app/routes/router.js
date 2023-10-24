@@ -11,7 +11,7 @@ var fabricaDeConexao = require("../../config/connection-factory");
 var conexao = fabricaDeConexao();
 
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "127.0.0.1",
     user: "root",
     password: "",
     database: "athenashop",
@@ -66,10 +66,10 @@ router.get("/produto", function(req, res){
     res.render("pages/produto", {retorno: null, erros: null})}
 );
 
-router.get("/usuario", verificarUsuAutenticado, function(req, res){
-    req.session.autenticado.login = req.query.login;
-    res.render("pages/usuario", {retorno: null, erros: null})}
-);
+// router.get("/usuario", verificarUsuAutenticado, function(req, res){
+//     req.session.autenticado.login = req.query.login;
+//     res.render("pages/usuario", {retorno: null, erros: null})}
+// );
 
 router.get("/notifi", function(req, res){
     res.render("pages/notifi", {retorno: null, erros: null})}
@@ -265,45 +265,90 @@ router.post("/cadastrar",
 //     });
 
 
+    // router.post(
+    //     "/login",
+    //     body("email")
+    //       .isEmail()
+    //       .withMessage("O email deve ser válido")
+    //       .isLength({ min: 5, max: 50 })
+    //       .withMessage("O email deve ter entre 5 e 50 caracteres"),
+    //     body("senha")
+    //       .isStrongPassword()
+    //       .withMessage("A senha deve ser válida"),
+      
+    //     function (req, res) {
+    //       const dadosForm = {
+    //         email: req.body.email,
+    //         senha: req.body.senha,
+    //       };
+      
+    //       if (!dadosForm.email || !dadosForm.senha) {
+    //         return res.status(400).send('Por favor, preencha todos os campos.');
+    //       }
+    //       const errors = validationResult(req)
+    //       if(!errors.isEmpty()){
+    //          req.body.errorMessage = 'Senha incorreta! Tente novamente.';
+    //           console.log(errors);    
+    //           return res.render("pages/login", {retorno: null, listaErros: errors, valores: req.body});
+    //       }    
+          
+    //       if(req.session.autenticado != null) {
+    //            res.redirect("/");
+    //         } else {
+    //               res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
+    //           }
+         
+    //       setTimeout(function () {
+    //         res.render("pages/home", { email: dadosForm.email });
+    //       }, 1000);
+    //     }
+    //   );
+
     router.post(
         "/login",
         body("email")
-          .isEmail()
-          .withMessage("O email deve ser válido")
-          .isLength({ min: 5, max: 50 })
-          .withMessage("O email deve ter entre 5 e 50 caracteres"),
+          .isLength({ min: 4, max: 45 })
+          .withMessage("O nome de usuário/e-mail deve ter de 8 a 45 caracteres"),
         body("senha")
           .isStrongPassword()
-          .withMessage("A senha deve ser válida"),
+          .withMessage("A senha deve ter no mínimo 8 caracteres (mínimo 1 letra maiúscula, 1 caractere especial e 1 número)"),
       
+        gravarUsuAutenticado(usuarioDAL, bcrypt),
+        
         function (req, res) {
-          const dadosForm = {
-            email: req.body.email,
-            senha: req.body.senha,
-          };
-      
-          if (!dadosForm.email || !dadosForm.senha) {
-            return res.status(400).send('Por favor, preencha todos os campos.');
+          const erros = validationResult(req);
+          if (!erros.isEmpty()) {
+            
+            return res.render("pages/login", { listaErros: erros, dadosNotificacao: null, autenticado: null })
           }
-          const errors = validationResult(req)
-          if(!errors.isEmpty()){
-             req.body.errorMessage = 'Senha incorreta! Tente novamente.';
-              console.log(errors);    
-              return res.render("pages/login", {retorno: null, listaErros: errors, valores: req.body});
-          }    
-          
-          if(req.session.autenticado != null) {
-               res.redirect("/");
-            } else {
-                  res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
-              }
-         
-          setTimeout(function () {
-            res.render("pages/home", { email: dadosForm.email });
-          }, 1000);
-        }
-      );
+          if (req.session.autenticado != null) {
+            //mudar para página de perfil quando existir
+            res.redirect("/?login=logado");
+          } else {
+            res.render("pages/login", { listaErros: erros, autenticado: req.session.autenticado, dadosNotificacao: { titulo: "Erro ao logar!", mensagem: "E-mail e/ou senha inválidos!", tipo: "error" } })
+          }
+    });
       
+
+      router.get('/usuario', verificarUsuAutorizado([1, 2, 3], verificarUsuAutenticado,"pages/restrito"), async function (req, res) {
+        try {
+          req.session.autenticado.login = req.query.login
+          let results = await usuarioDAL.findID(req.session.autenticado.id);
+          console.log(results);
+          let campos = {
+            nome: results[0].nome, email: results[0].email,
+            senha: ""
+          }
+          res.render("pages/perfilUsuario", { listaErros: null, dadosNotificacao: null, valores: campos, autenticado: req.session.autenticado })
+        } catch (e) {
+          res.render("pages/perfilUsuario", {
+            listaErros: null, dadosNotificacao: null, valores: {
+              nome: "", email: "", senha: ""
+            }
+          })
+          console.log(e)
+        }
+      });
 
 
 module.exports = router

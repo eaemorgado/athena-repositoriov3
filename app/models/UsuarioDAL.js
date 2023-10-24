@@ -15,16 +15,30 @@ module.exports = class UsuarioDAL {
         });
     };
 
-    findUserEmail() {
+    findUserEmail(camposForm) {
         return new Promise((resolve, reject) => {
-            this.athenashop.query("SELECT * FROM usuarios WHERE nome = ? or email = ?", [dadosForm.nome, dadosForm.email], function (error, elements) {
-                if (error) {
-                    return reject(error);
-                }
-                return resolve(elements);
-            });
+            this.athenashop.query("SELECT * FROM usuarios WHERE email = ?",
+            [camposForm.email],
+                function (error, elements) {
+                    if (error) {
+                        return reject(error);
+                    }
+
+                    return resolve(elements);
+                });
         });
     };
+
+    // findUserEmail() {
+    //     return new Promise((resolve, reject) => {
+    //         this.athenashop.query("SELECT * FROM usuarios WHERE nome = ? or email = ?", [dadosForm.nome, dadosForm.email], function (error, elements) {
+    //             if (error) {
+    //                 return reject(error);
+    //             }
+    //             return resolve(elements);
+    //         });
+    //     });
+    // };
 
     // findID(id) {
     //     return new Promise((resolve, reject) => {

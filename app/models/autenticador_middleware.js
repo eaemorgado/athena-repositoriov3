@@ -62,7 +62,7 @@ function gravarUsuAutenticado(usuarioDAL, bcrypt) {
                 if (bcrypt.compareSync(dadosForm.senha, results[0].senha)) {
                     var autenticado = {
                         autenticado: results[0].nome,
-                        id: results[0].id_usuario,
+                        id: results[0].id,
                         img_perfil_pasta:"../public/img/profile-user.png"
                     };
                 }
@@ -83,7 +83,7 @@ function verificarUsuAutorizado(tipoPermitido, destionFalha){
         if (req.session.autenticado.autenticado != null && tipoPermitido.find(function (element) { return element == req.session.autenticado.tipo }) != undefined ) {
             next();
         } else {
-            res.render(destinoFalha);
+            res.render("pages/restrito");
         }
     };
 }
