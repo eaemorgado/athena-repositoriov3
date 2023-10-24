@@ -11,7 +11,7 @@ var fabricaDeConexao = require("../../config/connection-factory");
 var conexao = fabricaDeConexao();
 
 const db = mysql.createConnection({
-    host: "127.0.0.1",
+    host: "localhost",
     user: "root",
     password: "",
     database: "athenashop",
