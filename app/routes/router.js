@@ -58,7 +58,7 @@ router.get("/sair", limparSessao, function(req,res){
     res.redirect("/");
 })
 
-router.get("/login", function(req, res){
+router.get("/login", verificarUsuAutenticado, function(req, res){
     res.render("pages/login", {listaErros:null, retorno: null, erros: null,  valores: {"tsenha":"","temail":""}})}
 );
 
@@ -87,7 +87,7 @@ router.get("/config", function(req, res){
     res.render("pages/config", {retorno: null, erros: null})}
 );
 
-router.get("/adm", function(req, res){
+router.get("/adm", verificarUsuAutenticado, function(req, res){
     res.render("pages/adm", {retorno: null, erros: null})}
 );
 
@@ -210,6 +210,8 @@ router.post("/cadastrar",
           console.log('Dados inseridos com sucesso!');
         }
       });
+
+      
 
       setTimeout(function () {
         res.render("pages/formenviado", { email: dadosForm.email });
