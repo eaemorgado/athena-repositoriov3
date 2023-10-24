@@ -13,7 +13,7 @@ var conexao = fabricaDeConexao();
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "R29112005@",
+    password: "",
     database: "athenashop",
     port: 3306
   });
@@ -136,7 +136,9 @@ router.get("/politica", function(req, res){
 router.get("/termos", function(req, res){
   res.render("pages/termos", {retorno: null, erros: null})}
 );
-
+router.get("/contato", function(req, res){
+  res.render("pages/contato", {retorno: null, erros: null})}
+);
 
 // Defina o sal para o bcrypt
 const saltRounds = 10;
