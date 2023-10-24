@@ -96,9 +96,45 @@ router.get("/config", function(req, res){
     res.render("pages/config", {retorno: null, erros: null})}
 );
 
- router.get("/adm", verificarUsuAutorizado([3], "pages/restrito"), function(req, res){
-   res.render("pages/adm", {retorno: null, erros: null, autenticado: req.session.autenticado})
+ router.get("/adm", verificarUsuAutorizado([3], "pages/restrito"), async function(req, res){
+    try {
+
+        let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+          
+        inicio = parseInt(pagina - 1) * 5
+        results = await usuarioDAL.FindPage(inicio, 5);
+        totReg = await usuarioDAL.TotalReg();
+        console.log(results)
+    
+        totPaginas = Math.ceil(totReg[0].total / 5);
+    
+        var paginador = totReg[0].total <= 5 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
+    
+        console.log("auth --> ")
+        console.log(req.session.autenticado)
+        res.render("pages/adm",{ usuarios: results, paginador: paginador, autenticado:req.session.autenticado} );
+      } catch (e) {
+        console.log(e); // console log the error so we can see it in the console
+        res.json({ erro: "Falha ao acessar dados" });
+      }
+    
+    
+//    res.render("pages/adm", {usuarios: results, retorno: null, erros: null, autenticado: req.session.autenticado})
 } );
+
+
+router.get("/excluir/:id", function (req, res) {
+    var query = db.query(
+      "DELETE FROM usuarios WHERE ?",
+      { id: req.params.id },
+      function (error, results, fields) {
+        if (error) throw error;
+      }
+    );
+  
+    res.redirect("/adm");
+  });
+  
 
 router.get("/carrinho", function(req,res){
     res.render("pages/carrinho", {retorno: null, erros: null})
@@ -231,7 +267,7 @@ router.post("/cadastrar",
         res.render("pages/formenviado", { email: dadosForm.email });
       }, 1000); 
 
-      console.log(dadosForm)
+      console.log(dadosForm)    
 })
 
 // router.post(

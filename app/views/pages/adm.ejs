@@ -31,30 +31,63 @@
 
 
 <body>
+    <span>Olá <%= autenticado.autenticado %>!</span><br>
     <h1>Painel Administrativo</h1>
     <table>
         <thead>
             <tr>
-                <th>ID de Usuário</th>
+                <!-- <th>ID de Usuário</th> -->
                 <th>Nome</th>
-                <th>Email</th>
+                <th>email</th>
+                <th>tipo</th>
                 <th>Ação</th>
             </tr>
         </thead>
         <tbody>
-            usuarios.forEach(function)
-            <tr>
+            <% usuarios.forEach(function(usuario){ %>
 
-                <td>1</td>
-                <td>João</td>
-                <td>joao@email.com</td>
+            <tr> 
+                <td><%=usuario.nome %></td>
+                <td><%=usuario.email%></td>
+                <td><%=usuario.id_tipo_usuario %></td>
                 <td><button class="delete-button"><i class="fa fa-trash"></i></button></td>
+                <td>
+                    <button onclick="<%=" window.location='/excluir/"+ usuario.id %>'" >
+                        delete
+                    </button>
+                </td>
+                
             
                 
             </tr>
-            
+           <% }); %>
         </tbody>
     </table>
+
+    <% 
+    if(paginador){ 
+        %>
+
+        <div class="notificador">
+            <ul>
+                <%
+        for(var i=1; i <= paginador.total_paginas; i++){ 
+            if(paginador.pagina_atual==i){ 
+                %>
+                <li><a class="atual" href="?pagina=<%= i %>"> <%= i %> </a></li>
+            <%
+            } else {
+            %>    
+                <li><a href="?pagina=<%= i %>"> <%= i %> </a></li>
+            <%
+            }
+        }
+        %>
+    </ul>
+</div>
+<%
+    }
+        %>
 
     <script>
         document.addEventListener('click', function(e) {
