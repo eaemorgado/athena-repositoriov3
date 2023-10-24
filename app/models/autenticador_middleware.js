@@ -79,12 +79,12 @@ function gravarUsuAutenticado(usuarioDAL, bcrypt) {
     }
 }
 
-function verificarUsuAutorizado(tipoPermitido, destionFalha){
+function verificarUsuAutorizado(tipoPermitido, destinoFalha){
     return (req, res, next) => {
         if (req.session.autenticado.autenticado != null && tipoPermitido.find(function (element) { return element == req.session.autenticado.tipo }) != undefined ) {
             next();
         } else {
-            res.render("pages/restrito");
+            res.render(destinoFalha, {autenticado: req.session.autenticado});
         }
     };
 }

@@ -96,9 +96,9 @@ router.get("/config", function(req, res){
     res.render("pages/config", {retorno: null, erros: null})}
 );
 
-router.get("/adm", verificarUsuAutenticado([3], "pages/restrito"), function(req, res){
-    res.render("pages/adm", {retorno: null, erros: null})}
-);
+ router.get("/adm", verificarUsuAutorizado([3], "pages/restrito"), function(req, res){
+   res.render("pages/adm", {retorno: null, erros: null, autenticado: req.session.autenticado})
+} );
 
 router.get("/carrinho", function(req,res){
     res.render("pages/carrinho", {retorno: null, erros: null})
@@ -358,6 +358,8 @@ router.post("/cadastrar",
     //       console.log(e)
     //     }
     //   });
+
+
 
 
 
