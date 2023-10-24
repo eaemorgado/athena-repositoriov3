@@ -42,10 +42,6 @@ router.get("/", verificarUsuAutenticado, function (req, res) {
     res.render("pages/home", req.session.autenticado);
   });
 
-router.get("/sair", limparSessao, function (req, res) {
-    res.redirect("/");
-  });
-
 // ,{ retorno: null, erros: null, }
 router.get('/cadastro', (req, res) => {
     // Lógica para renderizar a página de cadastro
@@ -130,7 +126,7 @@ router.get("/excluir/:id", function (req, res) {
       function (error, results, fields) {
         if (error) throw error;
       }
-    );
+    );  
   
     res.redirect("/adm");
   });

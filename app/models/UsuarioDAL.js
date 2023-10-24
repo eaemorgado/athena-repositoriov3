@@ -65,7 +65,7 @@ module.exports = class UsuarioDAL {
 
     create(camposJson) {
         return new Promise((resolve, reject) => {
-            this.conexao.query("insert into usuarios set ?",
+            this.athenashop.query("insert into usuarios set ?",
                 camposJson,
                 function (error, elements) {
                     if (error) {
@@ -77,7 +77,7 @@ module.exports = class UsuarioDAL {
     }
     update(camposJson, id) {
         return new Promise((resolve, reject) => {
-            this.conexao.query("UPDATE usuarios SET ? WHERE id = ?",
+            this.athenashop.query("UPDATE usuarios SET ? WHERE id = ?",
             [camposJson, id],
             function (error, results, fields) {
                 if (error) {
@@ -90,7 +90,7 @@ module.exports = class UsuarioDAL {
 
     delete(id) {
         return new Promise((resolve, reject) => {
-            this.conexao.query("UPDATE usuarios SET id_tipo_usuario = 0 WHERE id = ?", [id], function (error, results) {
+            this.athenashop.query("UPDATE usuarios SET id_tipo_usuario = 0 WHERE id = ?", [id], function (error, results) {
                 if (error) {
                     return reject(error);
                 }

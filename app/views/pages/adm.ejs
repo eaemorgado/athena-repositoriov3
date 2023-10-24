@@ -50,7 +50,6 @@
                 <td><%=usuario.nome %></td>
                 <td><%=usuario.email%></td>
                 <td><%=usuario.id_tipo_usuario %></td>
-                <td><button class="delete-button"><i class="fa fa-trash"></i></button></td>
                 <td>
                     <button onclick="<%=" window.location='/excluir/"+ usuario.id %>'" >
                         delete
@@ -90,10 +89,5 @@
         %>
 
     <script>
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('delete-button')) {
-                const row = e.target.parentNode.parentNode;
-                row.parentNode.removeChild(row);
-            }
-        });
+    
 </script>
