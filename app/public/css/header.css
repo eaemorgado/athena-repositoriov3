@@ -40,14 +40,14 @@
     }
 
     #profile-user {
-        width: 40px;
-        height: 40px;
+        font-size: 35px;
+        color: white;
     }
 
 
 
     .logo-athena {
-        height: 40px;
+        height: 35px;
     }
 
     #v-menu ul {
