@@ -19,12 +19,15 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="js/home.js"></script>
+    <script src="js/notify.js"></script>
 </head>
 
 <body>
     <% if(autenticado){
         if(login){%>
-       <h3>Login efetuado com sucesso, Olá <%= autenticado%></h3>
+            <script>
+                notify("Login efetuado com sucesso", "Olá <%= autenticado%>", "success", "center")                        
+            </script>
        <% }
     } %>  
 
@@ -104,7 +107,7 @@
                 <!--Box 1-->
                 <a href="">
                     <div class="product-box">
-                        <img src="img/mochila1.webp" alt="" class="product-img">
+                        <%= produto.img_produto %>
                         <h2 class="product-title"><%=produto.nome_produto %></h2>
                         <span class="price">R$ <%=produto.preco_produto%></span>
                         <i class='bx bx-cart-add add-cart' style='color:#ffffff'></i>

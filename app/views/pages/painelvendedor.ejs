@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Athena Shop</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/adm.css">
+</head>
+
+<header>
+
+    <a href="/">
+        
+        <picture>
+
+            <source media="(max-width: 390px)" srcset="img/logo-icon.png">
+            <source media="(max-width: 479px)" srcset="img/logo-icon.png">
+            <img src="img/logo-letreiro.png" alt="logo-athena" class="logo-athena">
+    
+        </picture>
+    </a>
+
+    <input type="search" name="" id="search-bar-header">
+
+    
+    
+    <a href="/usuario"><img src="img/profile-user_white.png" alt="perfil" id="profile-user"></a>
+
+</header>
+
+
+<body>
+    <span>Olá <%= autenticado.autenticado %>!</span><br>
+    <h1>Painel do vendedor</h1>
+    <table>
+        <thead>
+            <tr>
+               
+                <th>imagem</th>
+                <th>nome</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% produtos.forEach(function(produto){ %>
+
+            <tr> 
+                <td><%=produto.img_produto %></td>
+                <td><%=produto.nome_produto%></td>
+                <td><%=produto.quantidade_produto %></td>
+                td><%=produto.preco_produto %></td>
+                <td>
+                    <button onclick="<%=" window.location='/excluirproduto/"+ produto.id_produto %>'" >
+                        delete
+                    </button>
+                </td>
+                
+            
+                
+            </tr>
+           <% }); %>
+        </tbody>
+    </table>
+
+    <% 
+    if(paginador){ 
+        %>
+
+        <div class="notificador">
+            <ul>
+                <%
+        for(var i=1; i <= paginador.total_paginas; i++){ 
+            if(paginador.pagina_atual==i){ 
+                %>
+                <li><a class="atual" href="?pagina=<%= i %>"> <%= i %> </a></li>
+            <%
+            } else {
+            %>    
+                <li><a href="?pagina=<%= i %>"> <%= i %> </a></li>
+            <%
+            }
+        }
+        %>
+    </ul>
+</div>
+<%
+    }
+        %>
+
+    <script>
+    
+</script>

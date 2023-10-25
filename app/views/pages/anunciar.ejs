@@ -19,44 +19,13 @@
         <h1></h1>
 
         <section class="sec-img-add">
+
             <div>
-                <form id="imageForm" enctype="multipart/form-data">
-                    <input type="file" id="imageInput" accept="image/*" onchange="displayImage()" required>
-                    <img id="previewImage" src="#" alt="Imagem selecionada" style="display: none; max-width: 100%;">
-                    <p id="errorMessage" style="color: red;"></p>
-                    <button type="submit">Enviar</button>
+                <form action="/carregarimg" method="post">
+                    <input type="file" name="imagem-perfil_usu" id="imagem-perfil_usu" onchange="loadImg()">
+                    <img class="img-perfil"  id="img-preview" src="<%= arquivo.imagem %>">
                 </form>
-            </div>
-            <script>
-                function displayImage() {
-                    const fileInput = document.getElementById("imageInput");
-                    const previewImage = document.getElementById("previewImage");
-                    const errorMessage = document.getElementById("errorMessage");
-
-                    const file = fileInput.files[0];
-
-                    if (file) {
-                        if (file.size > 100 * 1024) { // 90KB em bytes
-                            errorMessage.textContent = "A imagem selecionada excede o limite de tamanho de 90KB.";
-                            previewImage.style.display = "none";
-                        } else {
-                            errorMessage.textContent = "";
-                            const reader = new FileReader();
-                            reader.onload = function (e) {
-                                previewImage.src = e.target.result;
-                                previewImage.style.display = "block";
-                            };
-                            reader.readAsDataURL(file);
-                        }
-                    } else {
-                        errorMessage.textContent = "";
-                        previewImage.style.display = "none";
-                    }
-                }
-            </script>
-
-            <div>
-                <form action="/publicarproduto" method="post">
+                <form action="/publicarproduto" method="post" enctype="multipart/form-data">
 
                     <section class="sec1-desc">
 
