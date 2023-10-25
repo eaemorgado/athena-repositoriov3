@@ -30,17 +30,60 @@ const db = mysql.createConnection({
 var UsuarioDAL = require("../models/UsuarioDAL");
 var usuarioDAL = new UsuarioDAL(conexao);
 
+var ProdutosDAL = require("../models/ProdutosDAL");
+var produtosDAL = new ProdutosDAL(conexao);
+
 const path = require('path');
 const e = require('express')
+
+// var storagePasta = multer.diskStorage({
+//     destination: (req, file, callBack) => {
+//       callBack(null, './app/public/imagem/perfil/') // diretório de destino  
+//     },
+//     filename: (req, file, callBack) => {
+//       callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+//       //renomeando o arquivo para evitar duplicidade de nomes
+//     }
+//   })
+  
+//   var upload = multer({ storage: storagePasta });
+  
 
 var { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuAutorizado } = require("../models/autenticador_middleware");
 
 const { body, validationResult } = require("express-validator");
 
-router.get("/", verificarUsuAutenticado, function (req, res) {
-    req.session.autenticado.login = req.query.login;
-    res.render("pages/home", req.session.autenticado);
+router.get("/sair", limparSessao, function (req, res) {
+    res.redirect("/");
   });
+
+
+
+  router.get("/", async function(req, res){
+    try {
+
+        let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+          
+        inicio = parseInt(pagina - 1) * 10
+        results = await produtosDAL.FindPage(inicio, 10);
+        totReg = await produtosDAL.TotalReg();
+        console.log(results)
+    
+        totPaginas = Math.ceil(totReg[0].total / 10);
+    
+        var paginador = totReg[0].total <= 10 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
+    
+        console.log("auth --> ")
+        console.log(req.session.autenticado)
+        res.render("pages/home",{ produtos: results, paginador: paginador, autenticado:req.session.autenticado} );
+      } catch (e) {
+        console.log(e); // console log the error so we can see it in the console
+        res.json({ erro: "Falha ao acessar dados" });
+      }
+    
+    
+//    res.render("pages/adm", {usuarios: results, retorno: null, erros: null, autenticado: req.session.autenticado})
+} );
 
 // ,{ retorno: null, erros: null, }
 router.get('/cadastro', (req, res) => {
@@ -50,19 +93,16 @@ router.get('/cadastro', (req, res) => {
 });
 
 router.get("/home", verificarUsuAutenticado, function(req, res){
-    res.render("pages/home", req.session.autenticado,{retorno: null, erros: null})}
+    res.render("pages/home",{produtos: results, paginador: paginador, autenticado:req.session.autenticado})}
 );
-
-router.get("/sair", limparSessao, function(req,res){
-    res.redirect("/");
-})
 
 router.get("/login", verificarUsuAutenticado, function(req, res){
     res.render("pages/login", {listaErros:null, retorno: null, erros: null,  valores: {"senha":"","email":""}})}
 );
 
-router.get("/usuario", verificarUsuAutenticado, function(req, res){
+router.get("/usuario", verificarUsuAutenticado, async function(req, res){
     req.session.autenticado.login = req.query.login;
+    
     res.render("pages/usuario",{autenticado: req.session.autenticado, retorno: null, erros: null})}
 );
 
@@ -127,8 +167,9 @@ router.get("/excluir/:id", function (req, res) {
         if (error) throw error;
       }
     );  
-  
-    res.redirect("/adm");
+
+
+    res.redirect("/");
   });
   
 
@@ -260,10 +301,42 @@ router.post("/cadastrar",
       
 
       setTimeout(function () {
-        res.render("pages/formenviado", { email: dadosForm.email });
+        res.render("pages/login", { email: dadosForm.email });
       }, 1000); 
 
       console.log(dadosForm)    
+})
+
+router.post("/publicarproduto", 
+    async function(req, res){
+        const formProduto = {
+            nome_produto: req.body.nome_produto,
+            descricao_produto: req.body.descricao_produto,
+            quantidade_produto: req.body.quantidade_produto,
+            cores_produto: req.body.cores_produto,
+            preco_produto: req.body.preco_produto,
+            img_produto_banco: null,
+        }
+        if (!formProduto.nome_produto || !formProduto.descricao_produto) {
+            return res.status(400).send('Por favor, preencha todos os campos.');
+        }
+        const id_produto = uuid.v4();
+
+        const query = 'INSERT INTO produtos (id_produto, nome_produto, descricao_produto, quantidade_produto, cores_produto, preco_produto) VALUES (?, ?, ?, ?, ?, ?)';
+        const values = [id_produto, formProduto.nome_produto, formProduto.descricao_produto, formProduto.quantidade_produto, formProduto.cores_produto, formProduto.preco_produto];
+
+        db.query(query, values, (err, result) => {
+            if (err) {
+              console.error('Erro ao inserir dados no banco de dados:', err);
+            } else {
+              console.log('Dados inseridos com sucesso!');
+            }
+          });
+
+          res.render("pages/usuario",{autenticado: req.session.autenticado, retorno: null, erros: null})
+    
+          console.log(formProduto)    
+
 })
 
 // router.post(
@@ -356,15 +429,26 @@ router.post("/cadastrar",
       
         gravarUsuAutenticado(usuarioDAL, bcrypt),
         
-        function (req, res) {
+        async function (req, res) {
           const erros = validationResult(req);
           if (!erros.isEmpty()) {
             
             return res.render("pages/login", { listaErros: erros, dadosNotificacao: null, autenticado: null })
           }
           if (req.session.autenticado != null) {
+            let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+          
+        inicio = parseInt(pagina - 1) * 10
+        results = await produtosDAL.FindPage(inicio, 10);
+        totReg = await produtosDAL.TotalReg();
+        console.log(results)
+    
+        totPaginas = Math.ceil(totReg[0].total / 10);
+    
+        var paginador = totReg[0].total <= 10 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
+    
             //mudar para página de perfil quando existir
-            res.redirect("/?login=logado");
+            res.redirect("/?login=logado", {produtos: results, paginador: paginador, autenticado:req.session.autenticado});
           } else {
             res.render("pages/login", { listaErros: erros, autenticado: req.session.autenticado, dadosNotificacao: { titulo: "Erro ao logar!", mensagem: "E-mail e/ou senha inválidos!", tipo: "error" } })
           }
