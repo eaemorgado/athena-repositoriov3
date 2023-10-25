@@ -1,3 +1,25 @@
-body {
-    font-family: 'Outfit', sans-serif;
+@media (min-width: 320px) and (max-width: 375px) {
+
+    body {
+        font-family: 'Outfit', sans-serif;
+        background-color: #e0e0e0;
+    }
+
+    .sec-all {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #imageForm {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    main h1 {
+        text-align: start;
+        margin-left: 10px;
+    }
 }

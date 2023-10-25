@@ -1,8 +1,83 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
 
 /* --PARTE SUPERIOR-- */
-@media (min-width: 320px) and (max-width: 375px){
+@media (min-width: 320px) and (max-width: 375px) {
+
+    header {
+        background-color: #7A29FF;
+        margin: 0;
+        height: 65px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        width: 100%;
+        /*position: fixed; POSSIVEL AJUSTE*/
+    }
+
+    #icon-profile-perfil {
+        width: 70px;
+
+    }
+
+    .user-name-profile {
+        color: #630a96;
+        font-family: 'Outfit', sans-serif;
+        font-size: 120%;
+        font-weight: bold;
+
+    }
+
+    #search-bar-header {
+        width: 50%;
+        height: 30px;
+        max-width: 200px;
+        border-radius: 8px;
+        border: 0px;
+        border-style: solid;
+        font-family: 'Outfit', sans-serif;
+    }
+
+    #profile-user {
+        font-size: 35px;
+        color: white;
+    }
+
+
+
+    .logo-athena {
+        height: 35px;
+    }
+
+    #v-menu ul {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        background-color: #ffff;
+        padding: 1rem;
+
+
+    }
+
+    #v-menu ul li a {
+        text-decoration: none;
+        font-family: 'Outfit', sans-serif;
+        color: #000;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+
+
+}
+
+@media (min-width: 375px) and (max-width: 425px) {
+
+    * {
+        font-family: 'Outfit', sans-serif;
+
+    }
 
     header {
         background-color: #7A29FF;
@@ -13,202 +88,129 @@
         justify-content: space-around;
         align-items: center;
         width: 100%;
-        /*position: fixed; POSSIVEL AJUSTE*/  }
-          
-          #icon-profile-perfil {
-              width: 70px;
-    
-          }
-          
-          .user-name-profile {
-              color: #630a96;
-              font-family: 'Outfit', sans-serif;
-              font-size:120% ;
-              font-weight: bold;
-    
-          }
-          
-          #search-bar-header {
-              width: 50%;
-              height: 30px;
-              max-width: 200px;
-              border-radius: 8px;
-              border: 0px;
-              border-style: solid;
-              font-family: 'Outfit', sans-serif;
-          }
-          
-          #profile-user {
-              width: 40px;
-              height: 40px;
-          }
-          
-          
-          
-          .logo-athena {
-              height: 40px;
-          }
-          
-          #v-menu ul{
-            display: flex;
-            justify-content: space-between;
-            flex-direction: row;
-            background-color: #ffff;
-            padding: 1rem;
-    
-            
-          }
-    
-          #v-menu ul li a {
-            text-decoration: none;
-            font-family: 'Outfit', sans-serif;
-            color: #000;
-            font-weight: 600;
-            font-size: 14px;
-          }
+        /*position: fixed; POSSIVEL AJUSTE*/
+    }
 
-          
-
-          }
-
-@media (min-width: 375px) and (max-width: 425px){
-
-    * {
-        font-family: 'Outfit', sans-serif;
+    #icon-profile-perfil {
+        width: 70px;
 
     }
 
-header {
-    background-color: #7A29FF;
-    margin: 0;
-    height: 65px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    /*position: fixed; POSSIVEL AJUSTE*/  }
-      
-      #icon-profile-perfil {
-          width: 70px;
 
-      }
+    .user-name-profile {
+        color: #630a96;
+        font-family: 'Outfit', sans-serif;
+        font-size: 120%;
+        font-weight: bold;
 
-      
-      .user-name-profile {
-          color: #630a96;
-          font-family: 'Outfit', sans-serif;
-          font-size:120% ;
-          font-weight: bold;
+    }
 
-      }
-      
-      #search-bar-header {
-          width: 50%;
-          height: 30px;
-          border-radius: 8px;
-          border: 0px;
-          border-style: solid;
-      }
-      
-      #profile-user {
-          width: 40px;
-          height: 40px;
-      }
-      
-      
-      .logo-athena {
-          height: 40px;
-      }
+    #search-bar-header {
+        width: 50%;
+        height: 30px;
+        border-radius: 8px;
+        border: 0px;
+        border-style: solid;
+    }
 
-      #v-menu ul{
+    #profile-user {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .logo-athena {
+        height: 40px;
+    }
+
+    #v-menu ul {
         display: flex;
         justify-content: space-between;
         flex-direction: row;
         background-color: #ffff;
         padding: 1rem;
 
-        
-      }
 
-      #v-menu ul li a {
+    }
+
+    #v-menu ul li a {
         text-decoration: none;
         font-family: 'Outfit', sans-serif;
         color: #000;
         font-weight: 600;
-      }
-
-      
-      
-      }
+    }
 
 
-@media (min-width: 425px) and (max-width: 768px){
 
-header {
-  background-color: #7A29FF;
-  margin: 0;
-  height: 65px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  /*position: fixed; POSSIVEL AJUSTE*/
-}
-
-#icon-profile-perfil {
-    width: 70px;
-    margin-left: 110px;
-}
-
-.user-name-profile {
-    color: #630a96;
-    font-family: 'Outfit', sans-serif;
-    font-size:120% ;
-    font-weight: bold;
-    margin-left: 112px;
-    margin-top: 10px;
-}
-
-#search-bar-header {
-    width: 100%;
-    height: 30px;
-    border-radius: 8px;
-    border: 0px;
-    border-style: solid;
-    
-}
-
-#profile-user {
-    width: 40px;
-    height: 40px;
-    margin-left: 5vw;
-    margin-right: 5vw;
 }
 
 
-.logo-athena {
-    height: 40px;
-    margin-right: 40px;
-    margin-left: 10%;
-    margin-top: 5px;
-}
+@media (min-width: 425px) and (max-width: 768px) {
 
-#v-menu ul{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    background-color: #ffff;
-    padding: 1rem;
+    header {
+        background-color: #7A29FF;
+        margin: 0;
+        height: 65px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        /*position: fixed; POSSIVEL AJUSTE*/
+    }
 
-    
-  }
+    #icon-profile-perfil {
+        width: 70px;
+        margin-left: 110px;
+    }
 
-  #v-menu ul li a {
-    text-decoration: none;
-    font-family: 'Outfit', sans-serif;
-    color: #000;
-    font-weight: 600;
-  }
+    .user-name-profile {
+        color: #630a96;
+        font-family: 'Outfit', sans-serif;
+        font-size: 120%;
+        font-weight: bold;
+        margin-left: 112px;
+        margin-top: 10px;
+    }
+
+    #search-bar-header {
+        width: 100%;
+        height: 30px;
+        border-radius: 8px;
+        border: 0px;
+        border-style: solid;
+
+    }
+
+    #profile-user {
+        width: 40px;
+        height: 40px;
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+
+
+    .logo-athena {
+        height: 40px;
+        margin-right: 40px;
+        margin-left: 10%;
+        margin-top: 5px;
+    }
+
+    #v-menu ul {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        background-color: #ffff;
+        padding: 1rem;
+
+
+    }
+
+    #v-menu ul li a {
+        text-decoration: none;
+        font-family: 'Outfit', sans-serif;
+        color: #000;
+        font-weight: 600;
+    }
 
 }

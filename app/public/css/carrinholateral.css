@@ -3,10 +3,9 @@
 }
 
 #cart-icon {
-    font-size: 2.5rem;
+    font-size: 35px;
     cursor: pointer;
     color: #ffff;
-    margin-left: 10px;
 }
 
 .cart {

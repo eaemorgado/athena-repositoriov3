@@ -4,14 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/carrinholateral.css">
+    <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/anunciar.css">
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <title>Anunciar - Athena Shop</title>
 </head>
 
 <body>
+
     <header>
+
+        <a href="/">
+
+            <picture>
+
+                <source media="(max-width: 390px)" srcset="img/logo-icon.png">
+                <source media="(max-width: 479px)" srcset="img/logo-icon.png">
+                <img src="img/logo-letreiro.png" alt="logo-athena" class="logo-athena">
+
+            </picture>
+        </a>
+
+        <input type="search" name="" id="search-bar-header">
+
+        <!--<div class="menu-button" id="cart-icon">&#9776;</div>-->
+        <i class='bx bx-cart' id="cart-icon"></i>
+
+        <!--id="cart-icon"-->
+
+        <a href="/usuario"><i class='bx bxs-user-circle' id="profile-user"></i></a>
+
+        
+
+        </div>
 
     </header>
 
@@ -42,7 +72,6 @@
                         <div>
                             <h4>Quantidade disponivel</h4>
                             <input type="number" value="0" name="quantidade_produto">
-                            <p>(Vender produtos que estão fora de estoque é crime)</p>
                         </div>
 
                     </section>
@@ -75,8 +104,8 @@
                         </div>
 
                     </section>
-                    
-                    <input type="submit" value="Publicar"> 
+
+                    <input type="submit" value="Publicar">
                 </form>
             </div>
         </section>
