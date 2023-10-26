@@ -51,13 +51,20 @@
         <section class="sec-img-add">
 
             <div>
-                <form action="/carregarimg" method="post">
-                    <input type="file" name="imagem-perfil_usu" id="imagem-perfil_usu" onchange="loadImg()">
-                    <img class="img-perfil"  id="img-preview" src="<%= arquivo.imagem %>">
-                </form>
+                <!-- <form action="/carregarimg" method="post">
+                    <input type="file" name="img_produto" id="img_produto" onchange="loadImg()">
+                    <input type="submit" value="carregar" >
+
+                </form> -->
+
+                <form action="/uploud" method="post" enctype="multipart/form-data">
+                    <input type="file" name="img_produto" />
+                    <input type="submit" name="uploud" id="up">
+                  </form> 
                 <form action="/publicarproduto" method="post" enctype="multipart/form-data">
 
                     <section class="sec1-desc">
+                        <input type="file" name="img_produto" />
 
                         <div>
                             <h4>Nome</h4>

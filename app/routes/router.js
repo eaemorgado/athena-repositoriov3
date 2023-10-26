@@ -10,10 +10,18 @@ const app = require('express')
 var fabricaDeConexao = require("../../config/connection-factory");
 var conexao = fabricaDeConexao();
 
+// const db = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "@ITB123456",
+//   database: "athenashop",
+//   port: 3306
+// });
+
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "127.0.0.1",
     user: "root",
-    password: "@ITB123456",
+    password: "",
     database: "athenashop",
     port: 3306
   });
@@ -42,18 +50,9 @@ var { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuA
 
 const { body, validationResult } = require("express-validator");
 
-var storagePasta = multer.diskStorage({
-    destination: (req, file, callBack) => {
-      callBack(null, './app/public/imagem/produtos/') // diretório de destino  
-    },
-    filename: (req, file, callBack) => {
-      callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-      //renomeando o arquivo para evitar duplicidade de nomes
-    }
-  })
-  
-  var upload = multer({ storage: storagePasta });
-  
+const upload = multer({dest: '../public/img/produtos/'});
+
+
 
 router.get("/sair", limparSessao, function (req, res) {
     res.redirect("/");
@@ -376,7 +375,8 @@ router.post("/cadastrar",
       console.log(dadosForm)    
 })
 
-router.post("/publicarproduto", 
+router.post("/publicarproduto",
+    upload.single('file'),
     async function(req, res){
         const formProduto = {
             nome_produto: req.body.nome_produto,
@@ -395,6 +395,7 @@ router.post("/publicarproduto",
           } else {
             caminhoArquivo = "img/produto/" + req.file.filename;
             formProduto.img_produto = caminhoArquivo
+            console.log(req.file)
           }
 
         const id_produto = uuid.v4();
