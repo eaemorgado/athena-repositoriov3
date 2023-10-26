@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="css/usuario.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/carrinholateral.css">
     <link rel="stylesheet" href="css/footer.css">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -16,138 +18,166 @@
 
     <title>Usuário - Athena Shop</title>
 </head>
+
 <body>
-    <% if(autenticado.autenticado){
-        if(autenticado.login){%>
-       <h3>Login efetuado com sucesso, Olá <%= autenticado.autenticado%></h3>
-       <% }
-    } %>  
-    
-    <header>
+    <% if(autenticado.autenticado){ if(autenticado.login){%>
+        <h3>Login efetuado com sucesso, Olá <%= autenticado.autenticado%>
+        </h3>
+        <% } } %>
 
-        <a href="/">
-            
-            <picture>
+            <header>
 
-                <source media="(max-width: 390px)" srcset="img/logo-icon.png">
-                <source media="(max-width: 479px)" srcset="img/logo-icon.png">
-                <img src="img/logo-letreiro.png" alt="logo-athena" class="logo-athena">
-        
-            </picture>
-        </a>
+                <a href="/">
 
-        <input type="search" name="" id="search-bar-header">
+                    <picture>
 
-        
-        
-        <img src="img/profile-user_white.png" alt="perfil" id="profile-user">
+                        <source media="(max-width: 390px)" srcset="img/logo-icon.png">
+                        <source media="(max-width: 479px)" srcset="img/logo-icon.png">
+                        <img src="img/logo-letreiro.png" alt="logo-athena" class="logo-athena">
 
-
-    </header>
-
-    <main>
-
-
-        
-            <div class="username-area">
-
-                <picture>
-
-                    <img src="img/profile-user.png" alt="foto de perfil" id="profile-photo">
-
-                </picture>
-
-                <h3><%= autenticado.autenticado%></h3>
-                
-
-            </div>
-
-        <section class="sec-venda-area">
-            <div>
-                <p>Anuncie em nossa plataforma</p>
-
-                <h4>Anuncie seu produto e comece a vender agora.</h4>
-            </div>
-            <a href="/anunciar">
-                <button> <i class='bx bx-package'></i><span>Anunciar agora</span></button>
-            </a>
-        </section>
-
-        <section class="sec-buttons-area">
-
-            <div class="buttons-area">
-                <a href="/painelvendedor">
-                    <button>
-                        <i class='bx bxs-user-circle' ></i>
-                        <p>Painel do vendedor</p>
-                        <i class='bx bxs-chevron-right' ></i>
-                    </button>
+                    </picture>
                 </a>
-                
-                <button>
-                    <i class='bx bxs-user-circle' ></i>
-                    <p>Meus dados</p>
-                    <i class='bx bxs-chevron-right' ></i>
-                </button>
-                <button>
-                    <i class='bx bx-history' ></i>
-                    <p>Histórico de compras</p>
-                    <i class='bx bxs-chevron-right' ></i>
-                </button>
-                <button>
-                    <i class='bx bxs-check-shield' ></i>
-                    <p>Segurança</p>
-                    <i class='bx bxs-chevron-right' ></i>
-                </button>
-                <button>
-                    <i class='bx bxs-credit-card-alt' ></i>
-                    <p>Cartões</p>
-                    <i class='bx bxs-chevron-right' ></i>
-                </button>
-                <button>
-                    <i class='bx bxs-map-pin' ></i>
-                    <p>Endereço</p>
-                    <i class='bx bxs-chevron-right' ></i>
-                </button>
-                <button>
-                    <i class='bx bxs-lock'></i>
-                    <p>Privacidade</p>
-                    <i class='bx bxs-chevron-right' ></i>
-                </button>
-                <button>
-                    <i class='bx bxs-message-dots' ></i>
-                    <p>Comunicação</p>
-                    <i class='bx bxs-chevron-right' ></i>
-                </button>
 
-            </div>
-                    
-        </section>
+                <input type="search" name="" id="search-bar-header">
 
-    </main>
+                <i class='bx bx-cart' id="cart-icon"></i>
 
-    <footer>
+                <i class='bx bxs-user-circle' id="profile-user"></i>
 
-        <section class="section-1">
-            <p><a href=""  class="p4">Trabalhe conosco</a></p>
-            <p><a href="" class="p4">Termos e condições</a></p>
-            <p><a href="" class="p4">Como cuidamos da sua privacidade</a></p>
-        </section>
+            </header>
 
-        <section class="section-2">
-            <p><a href="" class="p4">Acessibilidade</a></p>
-            <p><a href="" class="p4">Contato</a></p>
-            <p><a href="" class="p4">Informações sobre seguro</a></p>
-            <p>
-                <a href="/adm">Administrador</a>
-            </p>
-            <p><a href="/sair" class="p4">Sair</a></p>
-            <p><a href="" class="p4">Deletar Conta</a></p>
-            
+            <main>
 
-        </section>
+                <section class="sec-user">
 
-    </footer>
+                    <div class="username-area">
+
+                        <picture>
+
+                            <img src="img/profile-user.png" alt="foto de perfil" id="profile-photo">
+
+                        </picture>
+
+                        <h3>
+                            <%= autenticado.autenticado%>
+                        </h3>
+
+                    </div>
+
+                    <button>
+                        <a href="">
+                            <i class='bx bx-log-out'></i>
+                            <h1>Sair</h1>
+                        </a>
+                    </button>
+
+                </section>
+
+                <section class="sec-venda-area">
+                    <div>
+                        <p>Anuncie em nossa plataforma</p>
+
+                        <h4>Anuncie seu produto e comece a vender agora.</h4>
+                    </div>
+                    <a href="/anunciar">
+                        <button> <i class='bx bx-package'></i><span>Anunciar agora</span></button>
+                    </a>
+                </section>
+
+                <section class="sec-buttons-area">
+
+                    <div class="buttons-area">
+
+                        <button>
+                            <a href="/painelvendedor">
+                                <i class='bx bxs-store'></i>
+                                <p>Painel do vendedor</p>
+                                <i class='bx bxs-chevron-right'></i>
+                            </a>
+                        </button>
+
+                        <button>
+                            <a href="">
+                                <i class='bx bxs-user-circle'></i>
+                                <p>Meus dados</p>
+                                <i class='bx bxs-chevron-right'></i>
+                            </a>
+                        </button>
+
+                        <button>
+                            <a href="">
+                                <i class='bx bx-history'></i>
+                                <p>Histórico de compras</p>
+                                <i class='bx bxs-chevron-right'></i>
+                            </a>
+                        </button>
+
+                        <button>
+                            <a href="">
+                                <i class='bx bxs-check-shield'></i>
+                                <p>Segurança</p>
+                                <i class='bx bxs-chevron-right'></i>
+                            </a>
+                        </button>
+
+                        <button>
+                            <a href="">
+                                <i class='bx bxs-credit-card-alt'></i>
+                                <p>Cartões</p>
+                                <i class='bx bxs-chevron-right'></i>
+                            </a>
+                        </button>
+
+                        <button>
+                            <a href="">
+                                <i class='bx bxs-map-pin'></i>
+                                <p>Endereço</p>
+                                <i class='bx bxs-chevron-right'></i>
+                            </a>
+                        </button>
+
+                        <button>
+                            <a href="">
+                                <i class='bx bxs-lock'></i>
+                                <p>Privacidade</p>
+                                <i class='bx bxs-chevron-right'></i>
+                            </a>
+                        </button>
+
+                        <button>
+                            <a href="">
+                                <i class='bx bxs-message-dots'></i>
+                                <p>Comunicação</p>
+                                <i class='bx bxs-chevron-right'></i>
+                            </a>
+                        </button>
+
+
+                    </div>
+
+                </section>
+
+            </main>
+
+            <footer>
+
+                <section class="section-1">
+                    <p><a href="" class="p4">Trabalhe conosco</a></p>
+                    <p><a href="" class="p4">Termos e condições</a></p>
+                    <p><a href="" class="p4">Como cuidamos da sua privacidade</a></p>
+                </section>
+
+                <section class="section-2">
+                    <p><a href="" class="p4">Acessibilidade</a></p>
+                    <p><a href="" class="p4">Contato</a></p>
+                    <p><a href="" class="p4">Informações sobre seguro</a></p>
+                    <p> <a href="/adm">Administrador</a> </p>
+
+
+                </section>
+
+            </footer>
 
 </body>
+
 </html>

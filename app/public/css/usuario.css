@@ -15,6 +15,16 @@
 
     }
 
+    .sec-user {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        width: 100%;
+        height: 100%;
+        margin-top: 6%;
+    }
+
     .username-area {
         background-color: white;
         display: flex;
@@ -22,17 +32,43 @@
         flex-wrap: nowrap;
         align-items: center;
         font-family: 'Outfit', sans-serif;
-        width: 90%;
+        width: 70%;
         height: 80px;
         border-radius: 10px;
-        margin-top: 30px;
     }
 
-    
+    .sec-user button{
+        width: 20%;
+        height: 80px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: white;
+        margin-left: 5px;
+        padding: 0;
+    }
+
+    .sec-user button a {
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .sec-user button a h1 {
+        color: #ff4141;
+        font-size: 15px;
+    }
+
+    .sec-user button a i {
+        font-size: 25px;
+        color: #ff4141;
+    }
 
     #profile-photo {
+        border-radius: 50%;
         width: 50px;
-        margin-left: 10px;
     }
 
     .username-area span {
@@ -105,6 +141,16 @@
         margin-top: 20px;
     }
 
+    .buttons-area a{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-decoration: none;
+        width: 100%;
+        color: #7A29FF;
+    }
+
     .buttons-area {
         display: flex;
         flex-direction: column;
@@ -135,7 +181,7 @@
         border-radius: 10px 10px 0 0;
     }
 
-    .buttons-area button:nth-child(7) {
+    .buttons-area button:nth-child(8) {
         border-radius: 0px 0px 10px 10px;
     }
 
@@ -160,6 +206,16 @@
         flex-direction: column;
     }
 
+    .sec-user {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        width: 100%;
+        height: 100%;
+        margin-top: 6%;
+    }
+
     .username-area {
         background-color: white;
         display: flex;
@@ -173,6 +229,34 @@
         margin-top: 30px;
     }
 
+    .sec-user button{
+        width: 20%;
+        height: 80px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: white;
+        margin-left: 5px;
+        padding: 0;
+    }
+
+    .sec-user button a {
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .sec-user button a h1 {
+        color: #ff4141;
+        font-size: 15px;
+    }
+
+    .sec-user button a i {
+        font-size: 25px;
+        color: #ff4141;
+    }
 
     #profile-photo {
         width: 50px;

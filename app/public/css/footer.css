@@ -17,11 +17,21 @@ footer {
     font-size: medium;
     height: 20px;
 }
+
+.footer-1 {
+    width: 100%;
+}
+
 .footer-1 a{ 
     color: white;
     text-decoration: underline;
     font-family: 'Outfit', sans-serif;
 }
+
+.footer-2 {
+    width: 100%;
+}
+
 .footer-2 a{ 
     color: white;
     text-decoration: underline;
