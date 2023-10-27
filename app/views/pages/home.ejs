@@ -23,13 +23,11 @@
 </head>
 
 <body>
-    <% if(autenticado){
-        if(login){%>
-            <script>
-                notify("Login efetuado com sucesso", "Olá <%= autenticado%>", "success", "center")                        
-            </script>
-       <% }
-    } %>  
+    <% if(autenticado){ if(login){%>
+        <script>
+            notify("Login efetuado com sucesso", "Olá <%= autenticado%>", "success", "center")                        
+        </script>
+        <% } } %>
 
             <header>
 
@@ -51,7 +49,7 @@
 
                 <!--id="cart-icon"-->
 
-                <a href="/usuario"><img src="img/profile-user_white.png" alt="perfil" id="profile-user"></a>
+                <a href="/usuario"><i class='bx bxs-user-circle' id="profile-user"></i></a>
 
                 <div class="cart" id="cart">
                     <h2 class="cart-title">Carrinho</h2>
@@ -77,18 +75,14 @@
 
             </header>
 
-            <nav id="v-menu">
+            <!-- <nav id="v-menu">
                 <ul>
                     <li id="active"><a href="#">Para Você</a></li>
                     <li><a href="#">Uniformes</a></li>
                     <li><a href="#">Materiais</a></li>
                     <li><a href="#">Mochilas</a></li>
                 </ul>
-
-            </nav>
-
-
-
+            </nav> -->
 
             <main>
 
