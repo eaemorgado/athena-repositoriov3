@@ -290,6 +290,10 @@ router.get("/contato", function(req, res){
   res.render("pages/contato", {retorno: null, erros: null})}
 );
 
+router.get("/user_dados", async function(req, res){
+  results = await usuarioDAL.findID
+  res.render("pages/user_dados", {retorno: null, erros: null, autenticado: req.session.autenticado, usuarios: results})}
+);
 // Defina o sal para o bcrypt
 const saltRounds = 10;
 
