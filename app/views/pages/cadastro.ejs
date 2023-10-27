@@ -18,7 +18,13 @@
 <body>
 
     <header>
-        <img src="img/logo-letreiro.png" alt="logo maior e texto Athena Shop" class="logo">
+        <picture>
+
+            <source media="(max-width: 390px)" srcset="img/logo-icon.png">
+            <source media="(max-width: 479px)" srcset="img/logo-icon.png">
+            <img src="img/logo-letreiro.png" alt="logo-athena" class="logo">
+
+        </picture>
     </header>
 
     <main>
@@ -37,15 +43,17 @@
                 <input type="checkbox" name="Lembrar" class="checkbox-dd">
                 <h4 id="h5-c">Lembrar conta</h4>
             </div>
-            <div class="button-cadastro">
-                <button type="submit" id="button-home">Cadastrar</button>
-            </div>
-        </form>
 
-        <div class="button">
             <div class="button-logar">
                 <button onclick="window.location='/login' " type="button" id="button-login">Logar</button>
             </div>
+            
+            <div class="button-cadastro">
+                <button type="submit" id="button-home">Cadastrar</button>
+            </div>
+                
+        </form>
+
 
         </div>
         
