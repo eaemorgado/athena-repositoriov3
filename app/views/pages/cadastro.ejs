@@ -29,7 +29,7 @@
 
     <main>
         <form action="/cadastrar" method="post">
-            <h2 class="txt">Cadastrar</h2>
+            <h1 class="txt">Cadastrar</h1>
             <label for="nome"></label>
             <input type="text" name="nome" id="nome" value="" placeholder="Nome" required>
 
@@ -39,19 +39,12 @@
             <label for="senha"></label>
             <input type="password" name="senha" id="senha" value="" placeholder="Senha" required>
 
-            <div id="checkbox">
-                <label for="">
-                    <input type="checkbox" name="Lembrar" class="checkbox-button" placeholder="Lembrar senha">
-                    Lembrar senha
-                </label>
-            </div>
-
             <div class="buttons">
                 <div class="button-logar">
                     <button onclick="window.location='/login' " type="button" id="button-login">Logar</button>
                 </div>
 
-                <div class="button-cadastro">
+                <div class="button-home">
                     <button type="submit" id="button-home">Cadastrar</button>
                 </div>
             </div>
