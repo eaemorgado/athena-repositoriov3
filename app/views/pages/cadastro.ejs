@@ -35,28 +35,31 @@
 
             <label for="email"></label>
             <input type="email" name="email" id="email" value="" placeholder="E-mail" required>
-            
+
             <label for="senha"></label>
             <input type="password" name="senha" id="senha" value="" placeholder="Senha" required>
-            
-            <div id="checkbox-d">
-                <input type="checkbox" name="Lembrar" class="checkbox-dd">
-                <h4 id="h5-c">Lembrar conta</h4>
+
+            <div id="checkbox">
+                <label for="">
+                    <input type="checkbox" name="Lembrar" class="checkbox-button" placeholder="Lembrar senha">
+                    Lembrar senha
+                </label>
             </div>
 
-            <div class="button-logar">
-                <button onclick="window.location='/login' " type="button" id="button-login">Logar</button>
+            <div class="buttons">
+                <div class="button-logar">
+                    <button onclick="window.location='/login' " type="button" id="button-login">Logar</button>
+                </div>
+
+                <div class="button-cadastro">
+                    <button type="submit" id="button-home">Cadastrar</button>
+                </div>
             </div>
-            
-            <div class="button-cadastro">
-                <button type="submit" id="button-home">Cadastrar</button>
-            </div>
-                
         </form>
 
 
         </div>
-        
+
 
 
     </main>
