@@ -39,84 +39,80 @@
 
         <a href="/usuario"><i class='bx bxs-user-circle' id="profile-user"></i></a>
 
-        
-
-        </div>
+        <!-- </div> -->
 
     </header>
 
     <main>
-        <h1></h1>
 
-        <section class="sec-img-add">
+        <form action="/publicarproduto" method="post" enctype="multipart/form-data" class="sec-all">
+            <div class="up-img">
 
-            <div>
-                <!-- <form action="/carregarimg" method="post">
-                    <input type="file" name="img_produto" id="img_produto" onchange="loadImg()">
-                    <input type="submit" value="carregar" >
+                <i class='bx bxs-image-add' id="add-img-icon"></i>
+                <input type="file" name="img_produto" />
 
-                </form> -->
-
-                <form action="/uploud" method="post" enctype="multipart/form-data">
-                    <input type="file" name="img_produto" />
-                    <input type="submit" name="uploud" id="up">
-                  </form> 
-                <form action="/publicarproduto" method="post" enctype="multipart/form-data">
-
-                    <section class="sec1-desc">
-                        <input type="file" name="img_produto" />
-
-                        <div>
-                            <h4>Nome</h4>
-                            <input type="text" name="nome_produto">
-                        </div>
-
-                        <div>
-                            <h4>Descrição</h4>
-                            <input type="text" name="descricao_produto">
-                        </div>
-
-                        <div>
-                            <h4>Quantidade disponivel</h4>
-                            <input type="number" value="0" name="quantidade_produto">
-                        </div>
-
-                    </section>
-                    <section class="sec2-desc">
-
-                        <div>
-                            <h4>Cores</h4>
-                            <select id="Cores" name="cores_produto">
-                                <option value="Vermelho">Vermelho</option>
-                                <option value="Vermelho-alaranjado">Vermelho-alaranjado</option>
-                                <option value="Laranja">Laranja</option>
-                                <option value="Laranja-amarelado">Laranja-amarelado</option>
-                                <option value="Amarelo">Amarelo</option>
-                                <option value="Amarelo-verde">Amarelo-verde</option>
-                                <option value="Verde">Verde</option>
-                                <option value="Verde-azulado">Verde-azulado</option>
-                                <option value="Azul">Azul</option>
-                                <option value="Azul">Azul-roxo</option>
-                                <option value="Roxo">Roxo</option>
-                                <option value="Violeta">Violeta</option>
-                                <option value="Rosa">Rosa</option>
-                                <option value="Preto">Preto</option>
-                                <option value="Branco">Branco</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <h4>Preço</h4>
-                            <input type="text" name="preco_produto">
-                        </div>
-
-                    </section>
-
-                    <input type="submit" value="Publicar">
-                </form>
             </div>
-        </section>
 
+
+            <div class="desc">
+
+                <div>
+                    <h4>Nome</h4>
+                    <input type="text" name="nome_produto">
+                </div>
+
+                <div>
+                    <h4>Descrição</h4>
+                    <textarea name="descricao-produto" id="" cols="30" rows="10"></textarea>
+                </div>
+
+                <div>
+                    <h4>Quantidade disponivel</h4>
+                    <input type="number" value="0" name="quantidade_produto">
+                </div>
+
+                <div>
+                    <h4>Cores</h4>
+                    <select id="cores" name="cores_produto">
+                        <option value="Vermelho">Vermelho</option>
+                        <option value="Vermelho-alaranjado">Vermelho-alaranjado</option>
+                        <option value="Laranja">Laranja</option>
+                        <option value="Laranja-amarelado">Laranja-amarelado</option>
+                        <option value="Amarelo">Amarelo</option>
+                        <option value="Amarelo-verde">Amarelo-verde</option>
+                        <option value="Verde">Verde</option>
+                        <option value="Verde-azulado">Verde-azulado</option>
+                        <option value="Azul">Azul</option>
+                        <option value="Azul">Azul-roxo</option>
+                        <option value="Roxo">Roxo</option>
+                        <option value="Violeta">Violeta</option>
+                        <option value="Rosa">Rosa</option>
+                        <option value="Preto">Preto</option>
+                        <option value="Branco">Branco</option>
+                    </select>
+                </div>
+
+                <div>
+                    <h4>Preço</h4>
+                    <input type="text" id="reais" oninput="formatCurrency(this)" placeholder="R$" />
+                </div>
+                
+                <script>
+                    function formatCurrency(input) {
+                        // Remove qualquer caractere não numérico
+                        let value = input.value.replace(/\D/g, '');
+
+                        // Se o valor não for vazio, formate-o como moeda
+                        if (value !== '') {
+                            value = parseFloat(value) / 100; // Divida por 100 para trazer as casas decimais
+                            input.value = 'R$ ' + value.toFixed(2).replace('.', ','); // Formate como moeda brasileira
+                        }
+                    }
+                </script>
+
+                <button type="submit">Publicar</button>
+        </form>
+        </div>
     </main>
 </body>
 
