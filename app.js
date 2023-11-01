@@ -3,13 +3,14 @@ const app = express();
 const port = 2022
 const flash  =require("express-flash")
 
-var session = require("express-session");
-
 app.use(express.static("app/public"));
 
 app.set("view engine", "ejs");
 app.set("views", "./app/views");
 
+
+
+var session = require("express-session");
 
 app.use(express.urlencoded({ extended: true }));
 

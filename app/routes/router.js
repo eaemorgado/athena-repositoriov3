@@ -3,7 +3,7 @@ var router = express.Router();
 var bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(10);
 const uuid = require('uuid');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const flash = require('express-flash');
 const app = require('express')
 
@@ -19,7 +19,7 @@ var conexao = fabricaDeConexao();
 // });
 
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "127.0.0.1",
     user: "root",
     password: "@ITB123456",
     database: "athenashop",
