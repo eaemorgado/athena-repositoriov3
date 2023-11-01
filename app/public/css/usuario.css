@@ -34,6 +34,12 @@ main {
     border-radius: 10px;
 }
 
+@media (min-width: 320px) and (max-width: 375px) {
+.username-area h3 {
+    width: 140px;
+}
+}
+
 .sec-user button {
     width: 25%;
     height: 80px;
@@ -65,7 +71,7 @@ main {
 
 #profile-photo {
     border-radius: 50%;
-    width: 50px;
+    width: 40px;
 }
 
 .username-area span {

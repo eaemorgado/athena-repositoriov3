@@ -65,6 +65,10 @@ main h1 {
     }
 }
 
+@media (min-width: 450px) {
+    
+}
+
 .desc {
     display: flex;
     flex-direction: column;
@@ -89,13 +93,16 @@ main h1 {
     text-align: start;
 }
 
+.desc div:nth-child(4) {
+    margin-bottom: 10px;
+}
+
 .desc div h4 {
     align-self: flex-start;
     margin-left: 10%;
 }
 
 #cores {
-    max-width: 210px;
     width: 100%;
     background-color: #dcdcdc;
     height: 35px;
