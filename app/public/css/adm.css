@@ -1,36 +1,17 @@
-body{
+body {
     background: linear-gradient(to bottom, #7A29FF, #361270);
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        font-family: 'Outfit', sans-serif;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Outfit', sans-serif;
 }
 
-
-table {
-    width: 50%;
-    border-collapse: collapse;
-    margin: 20px auto;
-}
-
-table, th, td {
-    border: 1px solid black;
-}
-
-th, td {
+main span {
     padding: 10px;
-    text-align: left;
+    font-size: 20px;
+    color: white;
 }
 
-.delete-button {
-    background-color: #ff0000;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-h1{
-        color: white;
-        text-align: center;
-
+main span h2 {
+    padding: 10px;
+    font-size: 15px;
 }

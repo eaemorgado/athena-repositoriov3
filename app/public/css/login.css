@@ -1,7 +1,10 @@
 @media (min-width: 320px) and (max-width: 375px) {
 
     body {
-        background-color: #7A29FF;
+        background: linear-gradient(to bottom, #7A29FF, #361270);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: 'Outfit', sans-serif;
     }
 
     header {
@@ -114,7 +117,10 @@
 @media (min-width: 375px) and (max-width: 425px) {
 
     body {
-        background-color: #7A29FF;
+        background: linear-gradient(to bottom, #7A29FF, #361270);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: 'Outfit', sans-serif;
     }
 
     header {
@@ -227,7 +233,10 @@
 @media (min-width: 425px) and (max-width: 768px) {
 
     body {
-        background-color: #7A29FF;
+        background: linear-gradient(to bottom, #7A29FF, #361270);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: 'Outfit', sans-serif;
     }
 
     header {
@@ -239,7 +248,8 @@
     }
 
     .logo {
-        width: 80%;
+        width: 100%;
+        max-width: 300px;
         margin-top: 100px;
     }
 

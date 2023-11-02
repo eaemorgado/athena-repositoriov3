@@ -130,3 +130,36 @@ main h1 {
 .desc textarea:focus {
     border: 2px #7A29FF solid;
 }
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+}
+
+.button-publi, .button-cancel {
+    width: 45%;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.button-cancel {
+    border: 2px red solid;
+    color: red;
+    margin-right: 10px;
+}
+
+.button-publi {
+    border: 2px #7A29FF solid;
+    color: white;
+    background-color: #7A29FF;
+}
+
+.button-cancel:focus {
+    transform: scale(105%);
+    background-color: red;
+    color: white;
+}
