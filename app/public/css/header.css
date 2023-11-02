@@ -29,6 +29,8 @@ header {
     border: 0px;
     border-style: solid;
     font-family: 'Outfit', sans-serif;
+    outline: 0;
+    padding: 5px;
 }
 
 #profile-user {

@@ -1,14 +1,12 @@
 body {
-    background: linear-gradient(to bottom, #7A29FF, #361270);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-color: #e0e0e0;
+    height: 100%;
     font-family: 'Outfit', sans-serif;
 }
 
 main span {
     padding: 10px;
-    font-size: 20px;
-    color: white;
+    font-size: 15px;
 }
 
 main span h2 {
