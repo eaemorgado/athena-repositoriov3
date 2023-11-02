@@ -18,13 +18,21 @@ var conexao = fabricaDeConexao();
 //   port: 3306
 // });
 
-const db = mysql.createConnection({
-  host:   "viaduct.proxy.rlwy.net",
-  user:   "root",
-  password:   "c1D5BfbbgEh54Faa6bhEbd45GC5D3CGf",
-  database:   "railway",
-  port:   "33808"
-  });
+// const db = mysql.createConnection({
+//   host:   "viaduct.proxy.rlwy.net",
+//   user:   "root",
+//   password:   "c1D5BfbbgEh54Faa6bhEbd45GC5D3CGf",
+//   database:   "railway",
+//   port:   "33808"
+//   });
+
+  const db = mysql.createConnection({
+    host:   "127.0.0.1",
+    user:   "root",
+    password:   "@ITB123456",
+    database:   "athenashop",
+    port:   "3306"
+    });
 
   db.connect((err) => {
     if (err) {
