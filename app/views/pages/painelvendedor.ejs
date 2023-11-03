@@ -7,9 +7,10 @@
 
     <title>Painel do vendedor - Athena Shop</title>
 
+    <link rel="stylesheet" href="css/painel.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/adm.css">
+
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -39,11 +40,26 @@
 
     <main>
 
-        <span>Olá, <%= autenticado.autenticado %>!
-                <h2>Bem vindo ao seu painel do vendedor, olhe todos os seu produtos
-                    anunciados.
-                </h2></span>
+        <section class="all-prod">
 
+            <div>
+                <span>Olá, <%= autenticado.autenticado %>!
+                        <h2>Bem vindo ao seu painel do vendedor, 
+                            analise todos os seus produtos.
+                        </h2>
+                </span>
+
+            </div>
+
+            <div class="prod">
+                <img src="img/foto.jpg" alt="imagem do produto">
+                <span>nome do pruduto</span>
+                <span>descrição</span>
+                <span>R$ preço</span>
+                <button>Excluir</button>
+            </div>
+
+        </section>
 
     </main>
 
