@@ -31,17 +31,17 @@
         <form action="/cadastrar" method="post">
             <h1 class="txt">Cadastrar</h1>
             <label for="nome"></label>
-            <input type="text" name="nome" id="nome" value="" placeholder="Nome" required>
+            <input type="text" name="nome" id="nome" value="" autocomplete="off" placeholder="Nome" required>
 
             <label for="email"></label>
-            <input type="email" name="email" id="email" value="" placeholder="E-mail" required>
+            <input type="email" name="email" id="email" value="" autocomplete="off" placeholder="E-mail" required>
 
             <label for="senha"></label>
-            <input type="password" name="senha" id="senha" value="" placeholder="Senha" required>
+            <input type="password" name="senha" id="senha" value="" autocomplete="off" placeholder="Senha" required>
 
             <div class="buttons">
                 <div class="button-logar">
-                    <button onclick="window.location='/login' " type="button" id="button-login">Logar</button>
+                    <button onclick="window.location='/login' " type="button"  id="button-login">Logar</button>
                 </div>
 
                 <div class="button-home">
