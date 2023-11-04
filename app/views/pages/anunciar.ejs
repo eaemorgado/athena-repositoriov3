@@ -96,7 +96,7 @@
                     <h4>Preço</h4>
                     <input type="text" id="reais" oninput="formatCurrency(this)" placeholder="R$" />
                 </div>
-                
+
                 <script>
                     function formatCurrency(input) {
                         // Remove qualquer caractere não numérico
@@ -109,8 +109,12 @@
                         }
                     }
                 </script>
+                <section class="buttons">
 
-                <button type="submit">Publicar</button>
+                    <button type="submit" class="button-cancel">Cancelar</button>
+                    <button class="button-publi">Publicar</button> <!-- voltar a pagina user -->
+
+                </section>
         </form>
         </div>
     </main>

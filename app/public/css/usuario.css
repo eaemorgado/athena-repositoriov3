@@ -41,6 +41,7 @@ main {
 }
 
 .sec-user button {
+    text-align: center;
     width: 25%;
     height: 80px;
     border-radius: 10px;

@@ -1,95 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Athena Shop</title>
+
+    <title>Painel do vendedor - Athena Shop</title>
+
+    <link rel="stylesheet" href="css/painel.css">
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/adm.css">
+
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="shortcut icon" href="img/logo-icon.png" type="image/x-icon">
 </head>
 
 <header>
 
     <a href="/">
-        
+
         <picture>
 
             <source media="(max-width: 390px)" srcset="img/logo-icon.png">
             <source media="(max-width: 479px)" srcset="img/logo-icon.png">
             <img src="img/logo-letreiro.png" alt="logo-athena" class="logo-athena">
-    
+
         </picture>
     </a>
 
     <input type="search" name="" id="search-bar-header">
 
-    
-    
-    <a href="/usuario"><img src="img/profile-user_white.png" alt="perfil" id="profile-user"></a>
+    <a href="/usuario"><i class='bx bxs-user-circle' id="profile-user"></i></a>
 
 </header>
 
-
 <body>
-    <span>Olá <%= autenticado.autenticado %>!</span><br>
-    <h1>Painel do vendedor</h1>
-    <table>
-        <thead>
-            <tr>
-               
-                <th>imagem</th>
-                <th>nome</th>
-                <th>Quantidade</th>
-                <th>Preço</th>
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% produtos.forEach(function(produto){ %>
 
-            <tr> 
-                <td><%=produto.img_produto %></td>
-                <td><%=produto.nome_produto%></td>
-                <td><%=produto.quantidade_produto %></td>
-                td><%=produto.preco_produto %></td>
-                <td>
-                    <button onclick="<%=" window.location='/excluirproduto/"+ produto.id_produto %>'" >
-                        delete
-                    </button>
-                </td>
-                
-            
-                
-            </tr>
-           <% }); %>
-        </tbody>
-    </table>
+    <main>
 
-    <% 
-    if(paginador){ 
-        %>
+        <section class="all-prod">
 
-        <div class="notificador">
-            <ul>
-                <%
-        for(var i=1; i <= paginador.total_paginas; i++){ 
-            if(paginador.pagina_atual==i){ 
-                %>
-                <li><a class="atual" href="?pagina=<%= i %>"> <%= i %> </a></li>
-            <%
-            } else {
-            %>    
-                <li><a href="?pagina=<%= i %>"> <%= i %> </a></li>
-            <%
-            }
-        }
-        %>
-    </ul>
-</div>
-<%
-    }
-        %>
+            <div>
+                <span>Olá, <%= autenticado.autenticado %>!
+                        <h2>Bem vindo ao seu painel do vendedor,
+                            analise todos os seus produtos.
+                        </h2>
+                </span>
 
-    <script>
-    
-</script>
+            </div>
+
+            <div class="prod">
+                <img src="img/foto.jpg" alt="imagem do produto">
+                <span>Nome Nome Nome Nome</span>
+                <span>Descrição Descrição Descrição Descrição </span>
+
+                <div>
+                    <span>R$ 00,00</span>
+                    <button>Excluir</button>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
