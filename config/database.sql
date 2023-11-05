@@ -42,3 +42,4 @@ INSERT INTO `athenashop`.`tipo_usuario` (`id_tipo_usuario`, `tipo_usuario`, `ins
 INSERT INTO `athenashop`.`tipo_usuario` (`id_tipo_usuario`, `tipo_usuario`, `inscricao_usuario`, `status_tipo_usuario`) VALUES ('3', 'adm', 'adm', '1');
 
 
+  
