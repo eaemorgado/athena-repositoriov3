@@ -17,13 +17,21 @@ body {
 }
 
 .sec1 div {
+    width: 90%;
+    max-width: 600px;
+    height: 45px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sec1 div form{
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    justify-content: space-between;
-    background-color: white;
-    width: 95%;
-    height: 50px;
+    width: 100%;
 }
 
 .sec1 div:nth-child(2){
@@ -33,6 +41,7 @@ body {
 .sec1 div:nth-child(3){
     border-radius: 0 0 10px 10px;
 }
+
 
 .sec1 div input {
     outline: 0;
@@ -62,22 +71,33 @@ body {
     margin-top: 20px;
 }
 
-.sec2 div {
+.sec2 div form{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     background-color: white;
     width: 95%;
-    height: 50px;
+    max-width: 600px;
+    height: 45px;
 }
 
-.sec2 div:nth-child(2){
-    border-radius: 10px 10px 0 0;
+.sec2 div {
+    width: 90%;
+    max-width: 600px;
+    height: 45px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.sec2 div:nth-child(4){
-    border-radius: 0 0 10px 10px;
+.sec2 div form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
 }
 
 .sec2 div input {
