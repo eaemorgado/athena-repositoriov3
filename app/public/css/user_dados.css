@@ -64,6 +64,15 @@ body {
     justify-content: center;
 }
 
+.name {
+    border-radius: 10px 10px 0 0;
+}
+
+.number {
+    border-radius: 0 0 10px 10px;
+}
+
+
 .sec2 h1 {
     align-self: stretch;
     font-size: 20px;
