@@ -27,7 +27,7 @@ var conexao = fabricaDeConexao();
 //   });
 
   const db = mysql.createConnection({
-    host:   "127.0.0.1",
+    host:   "localhost",
     user:   "root",
     password:   "@ITB123456",
     database:   "athenashop",
