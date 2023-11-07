@@ -116,7 +116,7 @@ router.get("/produto", async function(req, res){
       try {
         result = await produtosDAL.findID(req.body.id_produto);
         console.log(result);
-        console.log("auth -->");
+        console.log("prod -->");
         console.log(req.session.autenticado);
         res.render("pages/produto", {produtos: result, autenticado:req.session.autenticado, login:req.res.autenticado});
       } catch (e) {
@@ -458,84 +458,7 @@ router.post("/publicarproduto",
 
 })
 
-// router.post(
-//     "/login",
-//     body("email")
-//         .isEmail({min:5, max:50})
-//         .withMessage("O email deve ser válido"),
-//     body("senha")
-//         .isStrongPassword()
-//         .withMessage("A senha deve ser válida"),
 
-
-
-//     // gravarUsuAutenticado(usuarioDAL, bcrypt),
-//     function(req, res){
-
-//         const dadosForm = {
-//             email: req.body.email,
-//             senha: req.body.senha
-//         }
-//         if (!dadosForm.email || !dadosForm.senha) {
-            
-//             return res.status(400).send('Por favor, preencha todos os campos.');
-//         }
-//          const errors = validationResult(req)
-//          if(!errors.isEmpty()){
-//             req.body.errorMessage = 'Senha incorreta! Tente novamente.';
-//              console.log(errors);    
-//              return res.render("pages/login", {retorno: null, listaErros: errors, valores: req.body});
-//          }
-//         // if(req.session.autenticado != null) {
-//         //    res.redirect("/");
-//         // } else {
-//         //      res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
-//         //  }
-
-//         setTimeout(function () {
-//              res.render("pages/home", { email: dadosForm.email });
-//            }, 1000); 
-//     });
-
-
-    // router.post(
-    //     "/login",
-    //     body("email")
-    //       .isEmail()
-    //       .withMessage("O email deve ser válido")
-    //       .isLength({ min: 5, max: 50 })
-    //       .withMessage("O email deve ter entre 5 e 50 caracteres"),
-    //     body("senha")
-    //       .isStrongPassword()
-    //       .withMessage("A senha deve ser válida"),
-      
-    //     function (req, res) {
-    //       const dadosForm = {
-    //         email: req.body.email,
-    //         senha: req.body.senha,
-    //       };
-      
-    //       if (!dadosForm.email || !dadosForm.senha) {
-    //         return res.status(400).send('Por favor, preencha todos os campos.');
-    //       }
-    //       const errors = validationResult(req)
-    //       if(!errors.isEmpty()){
-    //          req.body.errorMessage = 'Senha incorreta! Tente novamente.';
-    //           console.log(errors);    
-    //           return res.render("pages/login", {retorno: null, listaErros: errors, valores: req.body});
-    //       }    
-          
-    //       if(req.session.autenticado != null) {
-    //            res.redirect("/");
-    //         } else {
-    //               res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
-    //           }
-         
-    //       setTimeout(function () {
-    //         res.render("pages/home", { email: dadosForm.email });
-    //       }, 1000);
-    //     }
-    //   );
 
     router.post(
         "/login",
@@ -562,28 +485,6 @@ router.post("/publicarproduto",
           }
     });
       
-
-    //   router.get('/usuario', verificarUsuAutorizado([1, 2, 3], verificarUsuAutenticado,"pages/restrito"), async function (req, res) {
-    //     try {
-    //       req.session.autenticado.login = req.query.login
-    //       let results = await usuarioDAL.findID(req.session.autenticado.id);
-    //       console.log(results);
-    //       let campos = {
-    //         nome: results[0].nome, email: results[0].email,
-    //         senha: ""
-    //       }
-    //       res.render("pages/perfilUsuario", { listaErros: null, dadosNotificacao: null, valores: campos, autenticado: req.session.autenticado })
-    //     } catch (e) {
-    //       res.render("pages/perfilUsuario", {
-    //         listaErros: null, dadosNotificacao: null, valores: {
-    //           nome: "", email: "", senha: ""
-    //         }
-    //       })
-    //       console.log(e)
-    //     }
-    //   });
-
-
 
 
 

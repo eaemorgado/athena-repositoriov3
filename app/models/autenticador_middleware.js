@@ -17,37 +17,6 @@ function limparSessao(req, res, next) {
     next()
 }
 
-// function gravarUsuAutenticado(usuarioDAL, bcrypt) {
-//     return async (req, res, next) => {
-//         erros = validationResult(req)
-//         if (erros.isEmpty()) {
-//             var dadosForm = {
-//                 email: req.body.email,
-//                 senha: req.body.senha
-//             };
-//             var results = await usuarioDAL.findUserEmail(dadosForm);
-//             var total = Object.keys(results).length;
-//             if (total == 1) {
-//                 if (bcrypt.compareSync(dadosForm.senha, results[0].senha)){
-//                     var autenticado = {
-//                         autenticado: results[0].nome,
-//                         id: results[0].id,
-//                         email: results[0].email,
-//                         img_perfil_pasta:"../public/img/delivery.png"
-//                         // tipo: results[0].tipo_us,
-//                     };
-//                 }
-//             } else {
-//                 var autenticado = null;
-//             }
-//         } else {
-//             var autenticado = null;
-//         }
-//         req.session.autenticado = autenticado;
-//         next()
-//     }
-// }
-
 function gravarUsuAutenticado(usuarioDAL, bcrypt) {
     return async (req, res, next) => {
         erros = validationResult(req)
@@ -63,6 +32,8 @@ function gravarUsuAutenticado(usuarioDAL, bcrypt) {
                     var autenticado = {
                         autenticado: results[0].nome,
                         id: results[0].id_usuario,
+                        email: results[0].email,
+                        senha: results[0].senha,
                         tipo: results[0].id_tipo_usuario,
                         img_perfil_pasta:"../public/img/profile-user.png"
                     };
