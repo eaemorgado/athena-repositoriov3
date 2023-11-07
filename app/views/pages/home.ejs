@@ -94,9 +94,9 @@
                     <div class="shop-content">
                         <% produtos.forEach(function(produto){ %>
                             <!--Box 1-->
-                            <a href="">
+                            <a href="/produto">
                                 <div class="product-box">
-                                    <img src="img/mochila1.webp" alt="" class="product-img">
+                                    <img src="<%=produto.img_produto %>" alt="" class="product-img">
                                     <h2 class="product-title">
                                         <%=produto.nome_produto %>
                                     </h2>

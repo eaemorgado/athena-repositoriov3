@@ -7,6 +7,23 @@ const mysql = require('mysql2');
 const flash = require('express-flash');
 const app = require('express')
 
+const multer = require('multer');
+const path = require('path');
+// ****************** Versão com armazenamento em diretório
+// Definindo o diretório de armazenamento das imagens
+var storagePasta = multer.diskStorage({
+  destination: (req, file, callBack) => {
+    callBack(null, './app/public/img/produtos/') // diretório de destino  
+  },
+  filename: (req, file, callBack) => {
+    callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    //renomeando o arquivo para evitar duplicidade de nomes
+  }
+})
+
+var upload = multer({ storage: storagePasta });
+
+
 var fabricaDeConexao = require("../../config/connection-factory");
 var conexao = fabricaDeConexao();
 
@@ -49,16 +66,16 @@ var usuarioDAL = new UsuarioDAL(conexao);
 var ProdutosDAL = require("../models/ProdutosDAL");
 var produtosDAL = new ProdutosDAL(conexao);
 
-const path = require('path');
-const e = require('express')
-const multer = require('multer');
+// const path = require('path');
+// const e = require('express')
+// const multer = require('multer');
 
 
 var { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuAutorizado } = require("../models/autenticador_middleware");
 
 const { body, validationResult } = require("express-validator");
 
-const upload = multer({dest: '../public/img/produtos/'});
+
 
 
 
@@ -93,6 +110,21 @@ router.get("/sair", limparSessao, function (req, res) {
     
 //    res.render("pages/adm", {usuarios: results, retorno: null, erros: null, autenticado: req.session.autenticado})
 } );
+
+
+router.get("/produto", async function(req, res){
+      try {
+        result = await produtosDAL.findID(req.body.id_produto);
+        console.log(result);
+        console.log("auth -->");
+        console.log(req.session.autenticado);
+        res.render("pages/produto", {produtos: result, autenticado:req.session.autenticado, login:req.res.autenticado});
+      } catch (e) {
+        console.log(e); // console log the error so we can see it in the console
+        res.json({ erro: "Falha ao acessar dados" });
+      }
+}
+);
 
 // router.get("/?login=logado", verificarUsuAutorizado([1, 2, 3], "pages/restrito"), async function(req, res){
 //     try {
@@ -145,9 +177,6 @@ router.get("/usuario", verificarUsuAutenticado, async function(req, res){
 );
 
 
-router.get("/produto", function(req, res){
-    res.render("pages/produto", {retorno: null, erros: null})}
-);
 
 // router.get("/usuario", verificarUsuAutenticado, function(req, res){
 //     req.session.autenticado.login = req.query.login;
@@ -388,7 +417,7 @@ router.post("/cadastrar",
 })
 
 router.post("/publicarproduto",
-    upload.single('file'),
+    upload.single('img_produto'),
     async function(req, res){
         const formProduto = {
             nome_produto: req.body.nome_produto,
