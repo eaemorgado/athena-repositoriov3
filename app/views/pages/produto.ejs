@@ -8,6 +8,7 @@
     
     <link rel="stylesheet" href="css/produto.css">
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/carrinholateral.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <script src="js/produto.js" defer></script>
@@ -26,21 +27,21 @@
     <header>
 
         <a href="/">
-            
+
             <picture>
 
                 <source media="(max-width: 390px)" srcset="img/logo-icon.png">
                 <source media="(max-width: 479px)" srcset="img/logo-icon.png">
                 <img src="img/logo-letreiro.png" alt="logo-athena" class="logo-athena">
-        
+
             </picture>
         </a>
 
-        <input type="search" name="" id="search-bar-header">
+        <input type="search" name="" id="search-bar-header" placeholder="Pesquisar...">
 
-        
-        
-        <a href="/usuario"><img src="img/profile-user_white.png" alt="perfil" id="profile-user"></a>
+        <i class='bx bx-cart' id="cart-icon"></i>
+
+        <a href="/usuario"><i class='bx bxs-user-circle' id="profile-user"></i></a>
 
     </header>
    

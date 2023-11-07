@@ -12,13 +12,13 @@ var mysql = require("mysql2")
 
 // };
 
-module.exports = function(){
+module.exports = function () {
     return mysql.createConnection({
-        host:   "127.0.0.1",
-    user:   "root",
-    password:   "@ITB123456",
-    database:   "athenashop",
-    port:   "3306"
+        host: "localhost",
+        user: "root",
+        password: "@ITB123456",
+        database: "athenashop",
+        port: "3306"
     });
 
 };

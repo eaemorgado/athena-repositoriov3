@@ -1,11 +1,118 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dados - Athena Shop</title>
+
+    <link rel="stylesheet" href="css/user_dados.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/carrinholateral.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="shortcut icon" href="img/logo-icon.png" type="image/x-icon">
+
 </head>
+
 <body>
+
+    <header>
+
+        <a href="/">
+
+            <picture>
+
+                <source media="(max-width: 390px)" srcset="img/logo-icon.png">
+                <source media="(max-width: 479px)" srcset="img/logo-icon.png">
+                <img src="img/logo-letreiro.png" alt="logo-athena" class="logo-athena">
+
+            </picture>
+        </a>
+
+        <input type="search" name="" id="search-bar-header" placeholder="Pesquisar...">
+
+        <i class='bx bx-cart' id="cart-icon"></i>
+
+        <a href="/usuario"><i class='bx bxs-user-circle' id="profile-user"></i></a>
+
+    </header>
+
+    <main>
+
+
+        <section class="sec1">
+
+            <h1>Dados da dados</h1>
+
+            <div>
+                <h2>E-mail</h2>
+                <form action="">
+                    <input type="email" placeholder="" autocomplete="off">
+                    <button type="submit">Alterar</button>
+                </form>
+            </div>
+
+            <div>
+                <h2>Senha</h2>
+                <form action="">
+                    <input type="password" placeholder="**********" autocomplete="off">
+                    <button type="submit">Alterar</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="sec2">
+            <h1>Dados pessoais</h1>
+
+            <div>
+                <h2>Nome</h2>
+                <form action="">
+                    <input type="text" placeholder="<%= autenticado.autenticado%>" autocomplete="off">
+                    <button type="submit">Alterar</button>
+                </form>
+            </div>
+
+            <div>
+                <h2>CPF</h2>
+                <form action="">
+                    <input type="number" name="cpf" autocomplete="off">
+                    <button type="submit">Alterar</button>
+                </form>
+            </div>
+
+            <div>
+                <h2>Número</h2>
+                <form action="">
+                    <input type="number" placeholder="" autocomplete="off">
+                    <button type="submit">Alterar</button>
+                </form>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+
+        <section class="footer-1">
+            <p><a href="" class="p4">Trabalhe conosco</a></p>
+            <p><a href="/politica">Politica de Privacidade</a></p>
+            <p><a href="/termos">Termos de Uso</a></p>
+        </section>
+
+        <section class="footer-2">
+            <p><a href="/contato" class="p4">Contato</a></p>
+            <p><a href="" class="p4">Informações sobre seguro</a></p>
+            <p>
+                <a href="/adm">Administrador</a>
+            </p>
+        </section>
+    </footer>
+
 </body>
+
 </html>

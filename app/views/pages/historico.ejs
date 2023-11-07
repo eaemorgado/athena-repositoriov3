@@ -5,12 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico - Athena Shop</title>
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/carrinholateral.css">
+    <link rel="stylesheet" href="css/header.css">
+
 </head>
 <body>
     <header>
-        <div>
-            <img src="img/logo-letreiro.png" alt="logo maior e texto Athena Shop" class="logo-2">
-        </div>
+
+        <a href="/">
+
+            <picture>
+
+                <source media="(max-width: 390px)" srcset="img/logo-icon.png">
+                <source media="(max-width: 479px)" srcset="img/logo-icon.png">
+                <img src="img/logo-letreiro.png" alt="logo-athena" class="logo-athena">
+
+            </picture>
+        </a>
+
+        <input type="search" name="" id="search-bar-header" placeholder="Pesquisar...">
+
+        <i class='bx bx-cart' id="cart-icon"></i>
+
+        <a href="/usuario"><i class='bx bxs-user-circle' id="profile-user"></i></a>
+
     </header>
     <footer>
         <section class="section-1">
