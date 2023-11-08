@@ -302,7 +302,7 @@ router.get("/produto", function(req, res){
 });
 
 router.get("/anunciar", function(req, res){
-    res.render("pages/anunciar", {retorno:null, erros:null})
+    res.render("pages/anunciar", {listaErros: null, dadosNotificacao: null})
 });
 
 router.get("/pagaconcluido", function(req, res){
@@ -374,47 +374,85 @@ router.post("/cadastrar",
     }
   });
 
-router.post("/publicarproduto",
-    upload.single('img_produto'),
-    async function(req, res){
-        const formProduto = {
-            nome_produto: req.body.nome_produto,
-            descricao_produto: req.body.descricao_produto,
-            quantidade_produto: req.body.quantidade_produto,
-            cores_produto: req.body.cores_produto,
-            preco_produto: req.body.preco_produto,
-            img_produto: req.body.img_produto
-        }
-        if (!formProduto.nome_produto || !formProduto.descricao_produto) {
-            return res.status(400).send('Por favor, preencha todos os campos.');
-        }
 
-        if (!req.file) {
-            console.log("Falha no carregamento");
-          } else {
-            caminhoArquivo = "img/produto/" + req.file.filename;
-            formProduto.img_produto = caminhoArquivo
-            console.log(req.file)
-          }
+  router.post("/publicarproduto",
+  upload.single('img_produto'),
+  async function(req, res){
+    const formProduto = {
+        nome_produto: req.body.nome_produto,
+        descricao_produto: req.body.descricao_produto,
+        quantidade_produto: req.body.quantidade_produto,
+        cores_produto: req.body.cores_produto,
+        preco_produto: req.body.preco_produto,
+        img_produto: req.body.img_produto
+    }
+    if (!req.file) {
+      console.log("Falha no carregamento");
+    } else {
+      caminhoArquivo = "img/produto/" + req.file.filename;
+      formProduto.img_produto = caminhoArquivo
+      console.log(req.file)
+    }
+    try {
+      let insert = await produtosDAL.create(formProduto);
+      console.log(insert);
+      res.render("pages/anunciar", {
+        listaErros: null, dadosNotificacao: {
+          titulo: "Produto Publicado!", mensagem: "Produto publicado com o id " + insert.insertId + "!", tipo: "success"
+        }, valores: req.body
+      })
+    } catch (e) {
+      res.render("pages/anunciar", {
+        listaErros: erros, dadosNotificacao: {
+          titulo: "Erro ao publicar!", mensagem: "Verifique os valores digitados!", tipo: "error"
+        }, valores: req.body
+      })
+    }
+  }
+  
+  )
 
-        const id_produto = uuid.v4();
+// router.post("/publicarproduto",
+//     upload.single('img_produto'),
+//     async function(req, res){
+//         const formProduto = {
+//             nome_produto: req.body.nome_produto,
+//             descricao_produto: req.body.descricao_produto,
+//             quantidade_produto: req.body.quantidade_produto,
+//             cores_produto: req.body.cores_produto,
+//             preco_produto: req.body.preco_produto,
+//             img_produto: req.body.img_produto
+//         }
+//         if (!formProduto.nome_produto || !formProduto.descricao_produto) {
+//             return res.status(400).send('Por favor, preencha todos os campos.');
+//         }
 
-        const query = 'INSERT INTO produtos (id_produto, nome_produto, descricao_produto, quantidade_produto, cores_produto, preco_produto, img_produto) VALUES (?, ?, ?, ?, ?, ?, ?)';
-        const values = [id_produto, formProduto.nome_produto, formProduto.descricao_produto, formProduto.quantidade_produto, formProduto.cores_produto, formProduto.preco_produto, formProduto.img_produto];
+//         if (!req.file) {
+//             console.log("Falha no carregamento");
+//           } else {
+//             caminhoArquivo = "img/produto/" + req.file.filename;
+//             formProduto.img_produto = caminhoArquivo
+//             console.log(req.file)
+//           }
 
-        db.query(query, values, (err, result) => {
-            if (err) {
-              console.error('Erro ao inserir dados no banco de dados:', err);
-            } else {
-              console.log('Dados inseridos com sucesso!');
-            }
-          });
+//         const id_produto = uuid.v4();
 
-          res.render("pages/usuario",{autenticado: req.session.autenticado, retorno: null, erros: null})
+//         const query = 'INSERT INTO produtos (id_produto, nome_produto, descricao_produto, quantidade_produto, cores_produto, preco_produto, img_produto) VALUES (?, ?, ?, ?, ?, ?, ?)';
+//         const values = [id_produto, formProduto.nome_produto, formProduto.descricao_produto, formProduto.quantidade_produto, formProduto.cores_produto, formProduto.preco_produto, formProduto.img_produto];
+
+//         db.query(query, values, (err, result) => {
+//             if (err) {
+//               console.error('Erro ao inserir dados no banco de dados:', err);
+//             } else {
+//               console.log('Dados inseridos com sucesso!');
+//             }
+//           });
+
+//           res.render("pages/usuario",{autenticado: req.session.autenticado, retorno: null, erros: null})
     
-          console.log(formProduto)    
+//           console.log(formProduto)    
 
-})
+// })
 
 
 
@@ -435,8 +473,11 @@ router.post("/publicarproduto",
           return res.render("pages/login", { listaErros: erros, dadosNotificacao: null })
         }
         if (req.session.autenticado != null) {
-          //mudar para página de perfil quando existir
-          res.redirect("/");
+          res.render("pages/login", {
+            listaErros: null, dadosNotificacao: {
+              titulo: "Login realizado!", mensagem: "Usuário logado com sucesso", tipo: "success"
+            }, valores: req.body
+          })
         } else {
           res.render("pages/login", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } })
         }

@@ -53,13 +53,13 @@
 
             <% produtos.forEach(function(produto){ %>
             <div class="prod">
-                <img src="img/foto.jpg" alt="imagem do produto">
-                <span><%=produto.nome %></span>
-                <span><%=produto.descricao %></span>
+                <img src="<%=produto.img_produto%>" alt="imagem do produto">
+                <span><%=produto.nome_produto %></span>
+                <span><%=produto.descricao_produto %></span>
 
                 <div>
-                    <span>R$ <%=produto.preco %></span>
-                    <button onclick="<%=" window.location='/excluir/"+ produto.id %>'" >
+                    <span>R$ <%=produto.preco_produto %></span>
+                    <button onclick="<%=" window.location='/excluirproduto/"+ produto.id_produto %>'" >
                         delete
                     </button>
                 </div>

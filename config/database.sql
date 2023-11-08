@@ -14,14 +14,17 @@ CREATE TABLE usuarios (
   primary key (`id`)
 );
 
+drop table produtos;
+
 CREATE TABLE produtos (
-  id_produto varchar(200) primary key,
+  id_produto int not null auto_increment,
   nome_produto varchar(255) NOT NULL,
   descricao_produto varchar(255) NOT NULL,
   quantidade_produto varchar (60),
   cores_produto varchar (60),
   preco_produto varchar (60),
-  img_produto varchar (255)
+  img_produto varchar (255),
+  primary key (`id_produto`)
 );
 
 create table `tipo_usuario` (

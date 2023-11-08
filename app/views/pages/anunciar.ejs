@@ -11,11 +11,51 @@
     <link rel="stylesheet" href="css/anunciar.css">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="js/notify.js"></script>
+    <!-- CSS -->
+    <!-- https://github.com/simple-notify/simple-notify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.css" />
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.js"></script>
 
     <title>Anunciar - Athena Shop</title>
 </head>
 
 <body>
+    <% 
+    let msgErro = {"nome_produto":"", "descricao_produto":""};
+    let avisoErro = {"nome_produto":"", "descricao_produto":""};
+    if(listaErros){
+        listaErros.errors.forEach(function(itemErro){
+            if(itemErro.path == "nome_produto"){
+                avisoErro.nome_produto = "erro";
+                msgErro.nome_produto += " "+itemErro.msg;
+                %>
+                <script>
+                    notify("Erro no preenchimento","Verifique o campo Nome<br><%= itemErro.msg%>", "error", "center")                        
+                </script>
+                <%
+            }
+            if(itemErro.path == "descricao_produto"){
+                avisoErro.descricao_produto = "erro";
+                msgErro.descricao_produto = itemErro.msg;
+                %>
+                <script>
+                    notify("Erro no preenchimento","Verifique o campo descrição<br><%= itemErro.msg%>", "error", "center")                        
+                </script>
+                <%                
+            }
+            
+        })
+    }
+    if (dadosNotificacao) { %>
+        <script>
+                notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+                if("<%= dadosNotificacao.tipo %>" == "success"){
+                    setTimeout(function(){window.location="/anunciar"}, 3000)
+                }                        
+        </script>
+    <% } %>
 
     <header>
 
