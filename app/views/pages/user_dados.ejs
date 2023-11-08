@@ -17,6 +17,8 @@
 
     <link rel="shortcut icon" href="img/logo-icon.png" type="image/x-icon">
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
 </head>
 
 <body>
@@ -50,19 +52,19 @@
             <h1>Dados da dados</h1>
 
             <div>
-                
+
                 <form action="">
-                    <h2>E-mail</h2>
+                    <label for="">E-mail</label>
                     <input type="email" placeholder="<%=autenticado.email%>" autocomplete="off">
                     <button type="submit">Alterar</button>
                 </form>
             </div>
 
             <div>
-                
+
                 <form action="">
-                    <h2>Senha</h2>
-                    <input type="password" placeholder="**********" autocomplete="off">
+                    <label for="">Senha</label>
+                    <input type="password" placeholder="************" autocomplete="off">
                     <button type="submit">Alterar</button>
                 </form>
             </div>
@@ -73,7 +75,7 @@
 
             <div class="name">
                 <form action="" class="name">
-                    <h2>Nome</h2>
+                    <label for="">Nome</label>
                     <input type="text" placeholder="<%= autenticado.autenticado%>" autocomplete="off">
                     <button type="submit">Alterar</button>
                 </form>
@@ -81,18 +83,27 @@
 
             <div>
                 <form action="">
-                    <h2>CPF</h2>
-                    <input type="number" name="cpf" autocomplete="off">
+                    <label for="">CPF</label>
+                    <input type="text" id="cpf" name="cpf" autocomplete="off" maxlength="14">
                     <button type="submit">Alterar</button>
                 </form>
+
+                <script>
+                    $('#cpf').mask('000.000.000-00', {reverse: true});
+                </script>
             </div>
 
             <div class="number">
                 <form action="" class="number">
-                    <h2>Número</h2>
-                    <input type="number" placeholder="" autocomplete="off">
+                    <label for="">Telefone</label>
+                    <input type="text" id="phone" placeholder="" autocomplete="off">
                     <button type="submit">Alterar</button>
                 </form>
+                
+                <script>
+                    $('#phone').mask('(00) 00000-0000');
+                </script>
+
             </div>
 
         </section>

@@ -2,6 +2,10 @@ body {
     background-color: #e0e0e0;
 }
 
+main {
+    height: 900px;
+}
+
 .sec1 {
     display: flex;
     flex-direction: column;
@@ -32,6 +36,18 @@ body {
     justify-content: space-around;
     align-items: center;
     width: 100%;
+}
+
+.sec1 div form input {
+    width: 50%;
+}
+
+.sec1 div form label {
+    width: 15%;
+}
+
+.sec1 div form button {
+    width: 15%;
 }
 
 .sec1 div:nth-child(2){
@@ -89,6 +105,18 @@ body {
     width: 95%;
     max-width: 600px;
     height: 45px;
+}
+
+.sec2 div form input {
+    width: 50%;
+}
+
+.sec2 div form label {
+    width: 15%;
+}
+
+.sec2 div form button {
+    width: 15%;
 }
 
 .sec2 div {
