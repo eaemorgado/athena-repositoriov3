@@ -18,6 +18,7 @@ main {
     align-items: center;
     align-content: center;
     width: 90%;
+    max-width: 650px;
     height: 100%;
     margin-top: 6%;
 }
@@ -85,6 +86,7 @@ main {
     flex-direction: row;
     justify-content: center;
     width: 90%;
+    max-width: 650px;
     margin-top: 20px;
 }
 
@@ -142,6 +144,7 @@ main {
 
 .sec-buttons-area {
     width: 90%;
+    max-width: 650px;
     margin-top: 20px;
 }
 
