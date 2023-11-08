@@ -1,0 +1,70 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.add-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-color: #404040;
+    width: 90%;
+    min-width: 288px;
+    max-width: 320px;
+    height: 160px;
+    color: white;
+    border-radius: 10px 10px 0 0;
+    
+}
+
+.ultimo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.add-card a {
+    width: 100%;
+    width: 100%;
+    text-decoration: none;
+    padding: 10px;
+    
+}
+
+.add-card p, h2, i {
+    color: white;
+}
+
+.add-card img {
+    width: 25px;
+    margin-left: 5%;
+}
+
+
+
+#signal {
+    text-align: end;
+    transform: rotate(90deg);
+    font-size: 20px;
+
+    margin-left: 90%;
+}
+
+#mastercard {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-button {
+    width: 90%;
+    height: 40px;
+    background-color: #363636;
+    border: 0;
+    border-radius: 0 0 10px 10px;
+    color: white;
+}
