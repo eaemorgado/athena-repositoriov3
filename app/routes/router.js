@@ -334,87 +334,7 @@ router.get("/user_dados", async function(req, res){
 // Defina o sal para o bcrypt
 const saltRounds = 10;
 
-// router.post(
-//   '/cadastrar',
-//   async function (req, res) {
-//     const erros = validationResult(req);
 
-//     if (!erros.isEmpty()) {
-//       return res.render('pages/cadastro', {
-//         retorno: null,
-//         listaErros: erros.array(),
-//         valors: req.body,
-//       });
-//     }
-
-//     try {
-//       const dadosForm = {
-//         nome: req.body.nome,
-//         email: req.body.email,
-//         senha: bcrypt.hashSync(req.body.senha, saltRounds)
-//       };
-
-//         // Supondo que "usuarioDAL.create" seja a função que insere os dados no banco de dados.
-//         // Certifique-se de tratá-la adequadamente no seu código.
-
-//         // const create = await usuarioDAL.create(dadosForm);
-
-//         // Após inserir os dados no banco de dados, você pode redirecionar o usuário para outra página.
-
-//         //   Cadastrar o usuário
-//         const create = await usuarioDAL.create(dadosForm);
-
-//       res.redirect('/');
-//     } catch (e) {
-//       res.render('pages/cadastro', {
-//         listaErros: null,
-//         retorno: null,
-//         valors: req.body,
-//       });
-//     }
-//   }
-// );
-
-
-// router.post("/cadastrar", 
-//     body("email")
-//     .isEmail({min:5, max:50})
-//     .withMessage("O email deve ser válido"),
-//     body("senha")
-//     .isStrongPassword()
-//     .withMessage("A senha deve ser válida"),
-
-//     async function(req, res){
-    
-//     const dadosForm = {
-//         nome: req.body.nome,
-//         email: req.body.email,
-//         senha: bcrypt.hashSync(req.body.senha, salt)
-//     }
-//     if (!dadosForm.email || !dadosForm.senha) {
-//         return res.status(400).send('Por favor, preencha todos os campos.');
-//     }
-//     const id = uuid.v4();
-
-//     const query = 'INSERT INTO usuarios (id, nome, email, senha) VALUES (?, ?, ?, ?)';
-//     const values = [id, dadosForm.nome, dadosForm.email, dadosForm.senha];
-
-//     db.query(query, values, (err, result) => {
-//         if (err) {
-//           console.error('Erro ao inserir dados no banco de dados:', err);
-//         } else {
-//           console.log('Dados inseridos com sucesso!');
-//         }
-//       });
-
-      
-
-//       setTimeout(function () {
-//         res.render("pages/login", { email: dadosForm.email });
-//       }, 1000); 
-
-//       console.log(dadosForm)    
-// })
 
 router.post("/cadastrar",
   body("nome")
@@ -495,30 +415,6 @@ router.post("/publicarproduto",
 
 
 
-    // router.post(
-    //     "/login",
-    //     body("email")
-    //       .isLength({ min: 4, max: 45 })
-    //       .withMessage("O nome de usuário/e-mail esta incorreto!"),
-    //     body("senha")
-    //       .isStrongPassword()
-    //       .withMessage("A senha digitada é invalida, tente novamente!"),
-      
-    //     gravarUsuAutenticado(usuarioDAL, bcrypt),
-        
-    //     function (req, res) {
-    //       const erros = validationResult(req);
-    //       if (!erros.isEmpty()) {
-            
-    //         return res.render("pages/login", { listaErros: erros, dadosNotificacao: null, autenticado: null })
-    //       }
-    //       if (req.session.autenticado != null) {
-    //         //mudar para página de perfil quando existir
-    //         res.redirect("/");
-    //       } else {
-    //         res.render("pages/login", { listaErros: erros, autenticado: req.session.autenticado, dadosNotificacao: { titulo: "Erro ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } })
-    //       }
-    // });
 
     router.post(
       "/login",
