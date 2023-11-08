@@ -9,6 +9,10 @@ body{
     height: 100%;
 }
 
+main {
+    height: 900px;
+}
+
 body main h3 {
     margin-left: 25px;
     margin-top: 25px;

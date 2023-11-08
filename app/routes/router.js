@@ -277,6 +277,9 @@ router.get("/excluir/:id", function (req, res) {
   });
   
   
+router.get("/cartao", function(req,res){
+  res.render("pages/cartao", {retorno: null, erros: null})
+});
 
 router.get("/carrinho", function(req,res){
     res.render("pages/carrinho", {retorno: null, erros: null})
