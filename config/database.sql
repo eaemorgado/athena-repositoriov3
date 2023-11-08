@@ -6,11 +6,12 @@ USE `athenashop`;
 DROP TABLE IF EXISTS `usuarios`;
 use `athenashop`;
 CREATE TABLE usuarios (
-  id varchar(200) primary key,
+  id int not null auto_increment,
   nome varchar(255) NOT NULL,
   email varchar(60) NOT NULL,
   senha longtext NOT NULL,
-  id_tipo_usuario int not null default '1'
+  id_tipo_usuario int not null default '1',
+  primary key (`id`)
 );
 
 CREATE TABLE produtos (

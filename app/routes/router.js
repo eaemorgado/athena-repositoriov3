@@ -13,7 +13,7 @@ const path = require('path');
 // Definindo o diretório de armazenamento das imagens
 var storagePasta = multer.diskStorage({
   destination: (req, file, callBack) => {
-    callBack(null, './app/public/img/produtos/') // diretório de destino  
+    callBack(null, './app/public/img/produto/') // diretório de destino  
   },
   filename: (req, file, callBack) => {
     callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
