@@ -1,3 +1,11 @@
+
+.erro{
+    background-color: rgb(251, 223, 223);
+    border: 2px solid red;
+    border-radius: 30PX;
+  }
+  
+
 @media (min-width: 320px) and (max-width: 375px) {
 
     body {

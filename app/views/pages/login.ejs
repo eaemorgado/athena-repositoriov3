@@ -12,17 +12,20 @@
     <link rel="stylesheet" href="js/bdDados.js">
 
     <link rel="shortcut icon" href="img/logo-icon.png" type="image/x-icon">
+    <script src="js/notify.js"></script>
+    <!-- CSS -->
+    <!-- https://github.com/simple-notify/simple-notify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.css" />
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.js"></script>
 
     <title>Login - Athena Shop</title>
 
 </head>
 
 <body>
-    <div class="alert"></div>
 
-    <% if (typeof errorMessage !== 'undefined') { %>
-        <p class="error"><%= errorMessage %></p>
-    <% } %>
+
     <header>
         <picture>
 
@@ -33,12 +36,55 @@
         </picture>
     </header>
 
+    <% 
+    let msgErro = {"email":"", "senha":""};
+    let avisoErro = {"email":"", "senha":""};
+    if(listaErros){
+        listaErros.errors.forEach(function(itemErro){
+            if(itemErro.path == "email"){
+                avisoErro.nome_usu = "erro";
+                msgErro.nome_usu += " "+itemErro.msg;
+                %>
+                <script>
+                    notify("Erro no preenchimento","Verifique o campo email<br><%= itemErro.msg%>", "error", "center")                        
+                </script>
+                <%
+            }
+            if(itemErro.path == "senha"){
+                avisoErro.senha_usu = "erro";
+                msgErro.senha_usu = itemErro.msg;
+                %>
+                <script>
+                    notify("Erro no preenchimento","Verifique o campo senha<br><%= itemErro.msg%>", "error", "center")                        
+                </script>
+                <%                
+            }
+            
+        })
+    }
+    if (dadosNotificacao) { %>
+        <script>
+                notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+                if("<%= dadosNotificacao.tipo %>" == "success"){
+                    setTimeout(function(){window.location="/"}, 3000)
+                }                        
+        </script>
+    <% } %>
     <main>
+        
 
     <form action="/login" method="post">
         <h1 class="txt">Login</h1>
-        <input type="text" name="email" id="email" autocomplete="off" placeholder="Nome de usuáio ou e-mail"/>
-        <input type="password" name="senha" id="senha" autocomplete="off" placeholder="senha" />
+        <input type="text" name="email" id="email" autocomplete="off" placeholder="Nome de usuáio ou e-mail"
+        class="<%= avisoErro.email %>"/>
+        <span>
+            <%= msgErro.email %>
+        </span>
+        <input type="password" name="senha" id="senha" autocomplete="off" placeholder="senha"  
+        class="<%= avisoErro.senha %>"/>
+        <span>
+            <%= msgErro.senha %>
+        </span>
         <div class="buttons">
                 <div class="button-logar">
                     <button onclick="window.location='/cadastro' " type="button" id="button-login">Cadastrar</button>

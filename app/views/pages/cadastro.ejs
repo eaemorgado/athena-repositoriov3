@@ -8,9 +8,16 @@
     <link rel="stylesheet" href="css/cadastro.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="js/bdDados.js">
-    <script src="js/notify.js"></script>
     <link rel="stylesheet" href="">
     <link rel="shortcut icon" href="img/logo-icon.png" type="image/x-icon">
+
+    <script src="js/notify.js"></script>
+    <!-- CSS -->
+    <!-- https://github.com/simple-notify/simple-notify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.css" />
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.js"></script>
+
 
     <title>Cadastro - Athena Shop</title>
 </head>
@@ -26,19 +33,60 @@
 
         </picture>
     </header>
-
+    <% 
+    let msgErro = {"nome":"", "email":"",senha:""};
+    let avisoErro = {"nome":"", "email":"",senha:""};
+    if(listaErros){
+        listaErros.errors.forEach(function(itemErro){
+            if(itemErro.path == "nome"){
+                avisoErro.nome = "erro";
+                msgErro.nome += " "+itemErro.msg;
+                %>
+                <script>
+                    notify("Erro no preenchimento","Verifique o campo nome<br><%= itemErro.msg%>", "error", "center")                        
+                </script>
+                <%
+            }
+            if(itemErro.path == "senha"){
+                avisoErro.senha = "erro";
+                msgErro.senha = itemErro.msg;
+                %>
+                <script>
+                    notify("Erro no preenchimento","Verifique o campo senha<br><%= itemErro.msg%>", "error", "center")                        
+                </script>
+                <%                
+            }
+            if(itemErro.path == "email"){
+                avisoErro.email = "erro";
+                msgErro.email = itemErro.msg;
+                %>
+                <script>
+                    notify("Erro no preenchimento","Verifique o campo e-mail<br><%= itemErro.msg%>", "error", "center")                        
+                </script>
+                <%
+            }
+        })
+    }
+    if (dadosNotificacao) { %>
+        <script>
+                notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+                if("<%= dadosNotificacao.tipo %>" == "success"){
+                    setTimeout(function(){window.location="/"}, 3000)
+                }                        
+        </script>
+    <% } %>
     <main>
         <form action="/cadastrar" method="post">
             <h1 class="txt">Cadastrar</h1>
             <label for="nome"></label>
-            <input type="text" name="nome" id="nome" value="" autocomplete="off" placeholder="Nome" required>
-
+            <input type="text" name="nome" id="nome" value="" class="<%= avisoErro.nome_usu %>" autocomplete="off" placeholder="Nome" required>
+            <span> <%= msgErro.nome %> </span> 
             <label for="email"></label>
-            <input type="email" name="email" id="email" value="" autocomplete="off" placeholder="E-mail" required>
-
+            <input type="email" name="email" id="email" value="" class="<%= avisoErro.nome_usu %>" autocomplete="off" placeholder="E-mail" required>
+            <span> <%= msgErro.email %> </span> 
             <label for="senha"></label>
-            <input type="password" name="senha" id="senha" value="" autocomplete="off" placeholder="Senha" required>
-
+            <input type="password" name="senha" id="senha" value="" class="<%= avisoErro.nome_usu %>" autocomplete="off" placeholder="Senha" required>
+            <span> <%= msgErro.senha %> </span> 
             <div class="buttons">
                 <div class="button-logar">
                     <button onclick="window.location='/login' " type="button"  id="button-login">Logar</button>
