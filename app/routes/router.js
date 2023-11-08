@@ -524,10 +524,10 @@ router.post("/publicarproduto",
       "/login",
       body("email")
         .isLength({ min: 4, max: 45 })
-        .withMessage("O nome de usuário/e-mail deve ter de 8 a 45 caracteres"),
+        .withMessage("O nome de usuário/e-mail esta incorreto!"),
       body("senha")
         .isStrongPassword()
-        .withMessage("A senha deve ter no mínimo 8 caracteres (mínimo 1 letra maiúscula, 1 caractere especial e 1 número)"),
+        .withMessage("Verifique novamente a senha digitada!"),
     
       gravarUsuAutenticado(usuarioDAL, bcrypt),
       function (req, res) {
