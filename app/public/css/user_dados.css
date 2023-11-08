@@ -48,6 +48,7 @@ main {
 
 .sec1 div form button {
     width: 15%;
+    background-color: white;
 }
 
 .sec1 div:nth-child(2){
@@ -117,6 +118,7 @@ main {
 
 .sec2 div form button {
     width: 15%;
+    background-color: white;
 }
 
 .sec2 div {
