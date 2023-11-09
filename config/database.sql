@@ -14,7 +14,6 @@ CREATE TABLE usuarios (
   primary key (`id`)
 );
 
-drop table produtos;
 
 CREATE TABLE produtos (
   id_produto int not null auto_increment,

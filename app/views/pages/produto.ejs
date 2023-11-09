@@ -46,15 +46,17 @@
     </header>
    
     <main>
+
+        <% produtos.forEach(function(produto){ %>
+        <h3><%=produto.nome_produto%></h3>
         
-       
-       
+    
 
 
         <div class="container-slider">
             <button id="prev-button"><img src="img/horiz-arrow.png" alt="prev-button"></button>
             <div class="container-img">
-                
+                <img src="<%= produto.img_produto %>" alt="" class="product-img">
             </div>
             <button id="next-button"><img src="img/horiz-arrow.png" alt="next-button"></button>
         </div>
@@ -68,7 +70,7 @@
             </div>
             
 
- 
+            <% }); %>
     </main>
 
     <footer>

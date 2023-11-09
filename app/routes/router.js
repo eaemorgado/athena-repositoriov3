@@ -44,9 +44,9 @@ var conexao = fabricaDeConexao();
 //   });
 
   const db = mysql.createConnection({
-    host:   "localhost",
+    host:   "127.0.0.1",
     user:   "root",
-    password:   "@ITB123456",
+    password:   "",
     database:   "athenashop",
     port:   "3306"
     });
@@ -93,14 +93,14 @@ router.get("/sair", limparSessao, function (req, res) {
         inicio = parseInt(pagina - 1) * 10
         results = await produtosDAL.FindPage(inicio, 10);
         totReg = await produtosDAL.TotalReg();
-        console.log(results)
+        // console.log(results)
     
         totPaginas = Math.ceil(totReg[0].total / 10);
     
         var paginador = totReg[0].total <= 10 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
     
-        console.log("auth --> ")
-        console.log(req.session.autenticado)
+        // console.log("auth --> ")
+        // console.log(req.session.autenticado)
         res.render("pages/home",{ produtos: results, paginador: paginador, autenticado:req.session.autenticado, login: req.res.autenticado} );
       } catch (e) {
         console.log(e); // console log the error so we can see it in the console
@@ -126,13 +126,62 @@ router.get("/sair", limparSessao, function (req, res) {
 // }
 // );
 
-router.get("/produto/:nome_produto", function (req, res) {
-  try {
-    results = await produtosDAL.findID
-    res.render("pages/produto", {autenticado:req.session.autenticado, login:req.res.autenticado})
-  }
+// router.get("/produto/:nome_produto", function (req, res, next) {
   
-});
+//     var nome_produto = req.params.nome_produto;
+//     var query   = `SELECT * FROM produtos WHERE nome_produto = "${nome_produto}"`;
+//     db.query(query, function(error, produto){
+//       res.render('pages/produto', {title: "Produto aberto", action: "prod", produto:nome_produto[0]})
+//     })
+  
+  
+// });
+
+
+
+
+router.get("/produto/:id_produto", async function(req, res){
+  try {
+    result = await produtosDAL.findID(req.params.id_produto)
+    console.log(result)
+    res.render("pages/produto", {produtos: result, autenticado:req.session.autenticado, login: req.res.autenticado})
+
+  }catch{
+    res.redirect("/")
+  }
+})
+
+
+// router.get("/produto/:id_produto", async function(req, res){
+//   // console.log(req.params.id_produto)
+//   try {
+//     var id_produto = req.params.id_produto;
+//     console.log(id_produto)
+//     var query = `SELECT * FROM produtos WHERE id_produto = "${id_produto}"`;
+//     db.query(query, function(error, produto){
+//       res.render("pages/produto", {produ})
+//     })
+//   } catch {
+
+//   }
+
+// })
+
+
+// router.get("/produto/:id_produto", async function(req, res){
+//   var id_produto = req.params.id_produto;
+//   var query = db.query(
+//     "SELECT id_produto, nome_produto, descricao_produto, " +
+//     `quantidade_produto, cores_produto, preco_produto, img_produto FROM produtos WHERE id_produto = ${id_produto}` ,
+//   )
+
+//     res.render("pages/produto", {produtos: query})
+    
+// })
+
+
+
+
 
 // router.get("/?login=logado", verificarUsuAutorizado([1, 2, 3], "pages/restrito"), async function(req, res){
 //     try {

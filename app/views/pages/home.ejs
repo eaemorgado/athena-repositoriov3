@@ -93,8 +93,9 @@
                     <!--Shop container-->
                     <div class="shop-content">
                         <% produtos.forEach(function(produto){ %>
+
                             <!--Box 1-->
-                            <a href="/produto/<%=produto.nome_produto%>">
+                            <a href="/produto/<%=produto.id_produto%>">
                                 <div class="product-box">
                                     <img src="<%= produto.img_produto %>" alt="" class="product-img">
                                     <h2 class="product-title">

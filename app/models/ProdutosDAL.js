@@ -29,9 +29,9 @@ module.exports = class ProdutosDAL {
          });
      };
 
-    findID(id) {
+     findID(id) {
         return new Promise((resolve, reject) => {
-            this.athenashop.query('SELECT * FROM produtos WHERE  id_produto = ?', [id], function (error, elements) {
+            this.athenashop.query("SELECT * FROM produtos WHERE id_produto = ?", [id], function (error, elements) {
                     if (error) {
                         return reject(error);
                     }
