@@ -176,6 +176,105 @@ router.get("/usuario", verificarUsuAutenticado, async function(req, res){
     
 );
 
+router.post("/perfil", upload.single('img_usuario'),
+  body("nome")
+    .isLength({ min: 3, max: 50 }).withMessage("Mínimo de 3 letras e máximo de 50!"),
+    body("email")
+    .isEmail().withMessage("Digite um e-mail válido!"),
+  body("cpf")
+    .isLength({ min: 6, max: 20 }).withMessage("Cpf invalido"),
+  body("telefone")
+    .isLength({ min: 6, max: 20 }).withMessage("Digite um telefone válido!"),
+  verificarUsuAutorizado([1, 2, 3], "pages/login"),
+  async function (req, res) {
+    const erros = validationResult(req);
+    console.log(erros)
+    if (!erros.isEmpty()) {
+      return res.render("pages/login", { listaErros: erros, dadosNotificacao: null, valores: req.body })
+    }
+    try {
+      var dadosForm = {
+        nome: req.body.nome,
+        email: req.body.email,
+        id_tipo_usuario: 1,
+        cpf: req.body.cpf,
+        telefone: req.body.telefone,
+        img_usuario: null
+      };
+      console.log("senha: " + req.body.senha)
+      if (req.body.senha != "") {
+        dadosForm.senha = bcrypt.hashSync(req.body.senha, salt);
+      }
+      if (!req.file) {
+        console.log("Falha no carregamento");
+      } else {
+        caminhoArquivo = "img/perfil/" + req.file.filename;
+        dadosForm.img_usuario = caminhoArquivo
+      }
+      console.log(dadosForm);
+
+      let resultUpdate = await usuarioDAL.update(dadosForm, req.session.autenticado.id);
+      if (!resultUpdate.isEmpty) {
+        if (resultUpdate.changedRows == 1) {
+          var result = await usuarioDAL.findID(req.session.autenticado.id);
+          var autenticado = {
+            autenticado: result[0].nome,
+            id: result[0].id,
+            tipo: result[0].id_tipo_usuario,
+            img_usuario: result[0].img_usuario
+          };
+          req.session.autenticado = autenticado;
+          var campos = {
+            nome: result[0].nome, email: result[0].email, img_usuario: result[0].img_usuario,
+            cpf: result[0].cpf,
+            telefone: result[0].telefone, senha: ""
+          }
+          res.render("pages/user_dados", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "", tipo: "success" }, valores: campos, autenticado: req.session.autenticado });
+        }
+      }
+    } catch (e) {
+      console.log(e)
+      res.render("pages/user_dados", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body })
+    }
+
+  });
+
+// router.post("/atcpf", 
+//   body("cpf")
+//   .isLength({ min: 6, max: 20 }).withMessage("Digite um CPF válido!"),
+//   async function(req, res){
+//   const erros = validationResult(req);
+//   console.log(erros)
+//   if (!erros.isEmpty()) {
+//     return res.render("pages/user_dados", { listaErros: erros, dadosNotificacao: null, valores: req.body, autenticado: req.session.autenticado })
+//   }
+//   try {
+//     var dadosForm = {
+//       cpf: req.body.cpf
+//     }
+//     console.log(dadosForm)
+//     let resultUpdate = await usuarioDAL.update(dadosForm, req.session.autenticado.id);
+//     if (!resultUpdate.isEmpty) {
+//       if (resultUpdate.changeRows == 1) {
+//         var result = await usuarioDAL.findID(req.session.autenticado.id);
+//         var autenticado = {
+//           cpf: result[0].cpf
+//         };
+//         req.session.autenticado = autenticado;
+//         var campos = {
+//           cpf: result[0].cpf
+//         }
+//         // res.render("pages/user_dados", { listaErros: null, dadosNotificacao: { titulo: "CPF atualizado com sucesso!", mensagem: "", tipo: "success" }, valores: campos , autenticado: req.session.autenticado});
+
+//       }
+//     }
+//   }catch (e) {
+//     console.log(e)
+//     // req.redirect("/")
+//     // res.render("pages/user_dados", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body, autenticado: req.session.autenticado })
+//   }
+// })
+
 
 
 // router.get("/usuario", verificarUsuAutenticado, function(req, res){
