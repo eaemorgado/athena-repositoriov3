@@ -112,19 +112,23 @@ router.get("/sair", limparSessao, function (req, res) {
 } );
 
 
-router.get("/produto", async function(req, res){
-      try {
-        result = await produtosDAL.findID(req.body.id_produto);
-        console.log(result);
-        console.log("prod -->");
-        console.log(req.session.autenticado);
-        res.render("pages/produto", {produtos: result, autenticado:req.session.autenticado, login:req.res.autenticado});
-      } catch (e) {
-        console.log(e); // console log the error so we can see it in the console
-        res.json({ erro: "Falha ao acessar dados" });
-      }
-}
-);
+// router.get("/produto/:id_produto", async function(req, res){
+//       try {
+//         result = await produtosDAL.findID(1);
+//         console.log(result);
+//         console.log("prod -->");
+//         console.log(req.session.autenticado);
+//         res.render("pages/produto", {produtos: result, autenticado:req.session.autenticado, login:req.res.autenticado});
+//       } catch (e) {
+//         console.log(e); // console log the error so we can see it in the console
+//         res.json({ erro: "Falha ao acessar dados" });
+//       }
+// }
+// );
+
+router.get("/produto/:nome_produto", function (req, res) {
+  res.render("pages/produto", {autenticado:req.session.autenticado, login:req.res.autenticado})
+});
 
 // router.get("/?login=logado", verificarUsuAutorizado([1, 2, 3], "pages/restrito"), async function(req, res){
 //     try {
@@ -392,13 +396,7 @@ router.get("/dados", function(req, res){
     res.render("pages/dados", {retorno: null, erros: null})
 });
 
-router.post("/produto", function(req, res){
-    res.json(req.body)
-});
 
-router.get("/produto", function(req, res){
-    res.render("pages/produto", {retorno: null, erros: null})
-});
 
 router.get("/anunciar", function(req, res){
     res.render("pages/anunciar", {listaErros: null, dadosNotificacao: null})

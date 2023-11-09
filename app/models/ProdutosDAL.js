@@ -15,19 +15,19 @@ module.exports = class ProdutosDAL {
         });
     };
 
-    // findUserEmail(camposForm) {
-    //     return new Promise((resolve, reject) => {
-    //         this.athenashop.query("SELECT * FROM produtos WHERE email = ?",
-    //         [camposForm.email],
-    //             function (error, elements) {
-    //                 if (error) {
-    //                     return reject(error);
-    //                 }
+     findUserEmail(camposForm) {
+         return new Promise((resolve, reject) => {
+             this.athenashop.query("SELECT * FROM produtos WHERE email = ?",
+             [camposForm.email],
+                 function (error, elements) {
+                     if (error) {
+                         return reject(error);
+                     }
 
-    //                 return resolve(elements);
-    //             });
-    //     });
-    // };
+                     return resolve(elements);
+                });
+         });
+     };
 
     findID(id) {
         return new Promise((resolve, reject) => {
