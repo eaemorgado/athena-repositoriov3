@@ -31,11 +31,7 @@ module.exports = class UsuarioDAL {
 
     findID(id) {
         return new Promise((resolve, reject) => {
-            this.conexao.query("SELECT u.id_usuario, u.nome_usuario, u.user_usuario, " +
-                "u.senha_usuario, u.email_usuario, u.fone_usuario, u.tipo_usuario," +
-                "u.img_perfil_pasta, u.img_perfil_banco, " +
-                " u.status_usuario, t.tipo_usuario, t.descricao_usuario FROM usuario u, tipo_usuario t where u.status_usuario = 1 and " +
-                " u.tipo_usuario = t.id_tipo_usuario and u.id_usuario = ?", [id], function (error, elements) {
+            this.athenashop.query("SELECT * FROM usuarios WHERE id = ?", [id], function (error, elements) {
                     if (error) {
                         return reject(error);
                     }
