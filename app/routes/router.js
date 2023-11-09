@@ -127,7 +127,11 @@ router.get("/sair", limparSessao, function (req, res) {
 // );
 
 router.get("/produto/:nome_produto", function (req, res) {
-  res.render("pages/produto", {autenticado:req.session.autenticado, login:req.res.autenticado})
+  try {
+    results = await produtosDAL.findID
+    res.render("pages/produto", {autenticado:req.session.autenticado, login:req.res.autenticado})
+  }
+  
 });
 
 // router.get("/?login=logado", verificarUsuAutorizado([1, 2, 3], "pages/restrito"), async function(req, res){

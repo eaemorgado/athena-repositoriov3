@@ -15,10 +15,10 @@ module.exports = class ProdutosDAL {
         });
     };
 
-     findUserEmail(camposForm) {
+     findProdName(camposForm) {
          return new Promise((resolve, reject) => {
-             this.athenashop.query("SELECT * FROM produtos WHERE email = ?",
-             [camposForm.email],
+             this.athenashop.query("SELECT * FROM produtos WHERE nome_produto = ?",
+             [camposForm.nome_produto],
                  function (error, elements) {
                      if (error) {
                          return reject(error);
