@@ -43,20 +43,20 @@ var conexao = fabricaDeConexao();
 //   port:   "33808"
 //   });
 
-  const db = mysql.createConnection({
-    host:   "127.0.0.1",
-    user:   "root",
-    password:   "",
-    database:   "athenashop",
-    port:   "3306"
-    });
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "@ITB123456",
+  database: "athenashop",
+  port: "3306"
+});
 
-  db.connect((err) => {
-    if (err) {
-      throw err;
-    }
-    console.log('Conectado ao MySQL');
-  });
+db.connect((err) => {
+  if (err) {
+    throw err;
+  }
+  console.log('Conectado ao MySQL');
+});
 
 
 
@@ -80,36 +80,36 @@ const { body, validationResult } = require("express-validator");
 
 
 router.get("/sair", limparSessao, function (req, res) {
-    res.redirect("/");
-  });
+  res.redirect("/");
+});
 
 
 
-  router.get("/", async function(req, res){
-    try {
+router.get("/", async function (req, res) {
+  try {
 
-        let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
-          
-        inicio = parseInt(pagina - 1) * 10
-        results = await produtosDAL.FindPage(inicio, 10);
-        totReg = await produtosDAL.TotalReg();
-        // console.log(results)
-    
-        totPaginas = Math.ceil(totReg[0].total / 10);
-    
-        var paginador = totReg[0].total <= 10 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
-    
-        // console.log("auth --> ")
-        // console.log(req.session.autenticado)
-        res.render("pages/home",{ produtos: results, paginador: paginador, autenticado:req.session.autenticado, login: req.res.autenticado} );
-      } catch (e) {
-        console.log(e); // console log the error so we can see it in the console
-        res.json({ erro: "Falha ao acessar dados" });
-      }
-    
-    
-//    res.render("pages/adm", {usuarios: results, retorno: null, erros: null, autenticado: req.session.autenticado})
-} );
+    let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+
+    inicio = parseInt(pagina - 1) * 10
+    results = await produtosDAL.FindPage(inicio, 10);
+    totReg = await produtosDAL.TotalReg();
+    // console.log(results)
+
+    totPaginas = Math.ceil(totReg[0].total / 10);
+
+    var paginador = totReg[0].total <= 10 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
+
+    // console.log("auth --> ")
+    // console.log(req.session.autenticado)
+    res.render("pages/home", { produtos: results, paginador: paginador, autenticado: req.session.autenticado, login: req.res.autenticado });
+  } catch (e) {
+    console.log(e); // console log the error so we can see it in the console
+    res.json({ erro: "Falha ao acessar dados" });
+  }
+
+
+  //    res.render("pages/adm", {usuarios: results, retorno: null, erros: null, autenticado: req.session.autenticado})
+});
 
 
 // router.get("/produto/:id_produto", async function(req, res){
@@ -127,26 +127,26 @@ router.get("/sair", limparSessao, function (req, res) {
 // );
 
 // router.get("/produto/:nome_produto", function (req, res, next) {
-  
+
 //     var nome_produto = req.params.nome_produto;
 //     var query   = `SELECT * FROM produtos WHERE nome_produto = "${nome_produto}"`;
 //     db.query(query, function(error, produto){
 //       res.render('pages/produto', {title: "Produto aberto", action: "prod", produto:nome_produto[0]})
 //     })
-  
-  
+
+
 // });
 
 
 
 
-router.get("/produto/:id_produto", async function(req, res){
+router.get("/produto/:id_produto", async function (req, res) {
   try {
     result = await produtosDAL.findID(req.params.id_produto)
     console.log(result)
-    res.render("pages/produto", {produtos: result, autenticado:req.session.autenticado, login: req.res.autenticado})
+    res.render("pages/produto", { produtos: result, autenticado: req.session.autenticado, login: req.res.autenticado })
 
-  }catch{
+  } catch {
     res.redirect("/")
   }
 })
@@ -176,7 +176,7 @@ router.get("/produto/:id_produto", async function(req, res){
 //   )
 
 //     res.render("pages/produto", {produtos: query})
-    
+
 // })
 
 
@@ -187,16 +187,16 @@ router.get("/produto/:id_produto", async function(req, res){
 //     try {
 
 //         let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
-          
+
 //         inicio = parseInt(pagina - 1) * 10
 //         results = await produtosDAL.FindPage(inicio, 10);
 //         totReg = await produtosDAL.TotalReg();
 //         console.log(results)
-    
+
 //         totPaginas = Math.ceil(totReg[0].total / 10);
-    
+
 //         var paginador = totReg[0].total <= 10 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
-    
+
 //         console.log("auth --> ")
 //         console.log(req.session.autenticado)
 //         res.render("pages/home",{ produtos: results, paginador: paginador, autenticado:req.session.autenticado} );
@@ -204,39 +204,43 @@ router.get("/produto/:id_produto", async function(req, res){
 //         console.log(e); // console log the error so we can see it in the console
 //         res.json({ erro: "Falha ao acessar dados" });
 //       }
-    
-    
+
+
 // //    res.render("pages/adm", {usuarios: results, retorno: null, erros: null, autenticado: req.session.autenticado})
 // } );
 
 // ,{ retorno: null, erros: null, }
 router.get('/cadastro', (req, res) => {
-    // Lógica para renderizar a página de cadastro
-    res.locals.erroLogin = null;
-    res.render('pages/cadastro', { listaErros: null, dadosNotificacao: null, valors: { "nome":"", "senha":"", "email":""} }); // Passe erros ou null, dependendo do seu caso
+  // Lógica para renderizar a página de cadastro
+  res.locals.erroLogin = null;
+  res.render('pages/cadastro', { listaErros: null, dadosNotificacao: null, valors: { "nome": "", "senha": "", "email": "" } }); // Passe erros ou null, dependendo do seu caso
 });
 
-router.get("/home", verificarUsuAutenticado, function(req, res){
-    res.render("pages/home",{produtos: results, paginador: paginador, autenticado:req.session.autenticado})}
+router.get("/home", verificarUsuAutenticado, function (req, res) {
+  res.render("pages/home", { produtos: results, paginador: paginador, autenticado: req.session.autenticado })
+}
 );
 
-router.get("/login", verificarUsuAutenticado, function(req, res){ res.locals.erroLogin = null
-  res.render("pages/login", { listaErros: null, dadosNotificacao: null});}
+router.get("/login", verificarUsuAutenticado, function (req, res) {
+  res.locals.erroLogin = null
+  res.render("pages/login", { listaErros: null, dadosNotificacao: null });
+}
 );
 
-router.get("/usuario", verificarUsuAutenticado, async function(req, res){
-    if (req.session.autenticado.autenticado == null) {
-        res.redirect("/login")
-    } else {
-        res.render("pages/usuario",{autenticado: req.session.autenticado, retorno: null, erros: null})}
-    }
-    
+router.get("/usuario", verificarUsuAutenticado, async function (req, res) {
+  if (req.session.autenticado.autenticado == null) {
+    res.redirect("/login")
+  } else {
+    res.render("pages/usuario", { autenticado: req.session.autenticado, retorno: null, erros: null })
+  }
+}
+
 );
 
 router.post("/perfil", upload.single('img_usuario'),
   body("nome")
     .isLength({ min: 3, max: 50 }).withMessage("Mínimo de 3 letras e máximo de 50!"),
-    body("email")
+  body("email")
     .isEmail().withMessage("Digite um e-mail válido!"),
   body("cpf")
     .isLength({ min: 6, max: 20 }).withMessage("Cpf invalido"),
@@ -339,150 +343,159 @@ router.post("/perfil", upload.single('img_usuario'),
 //     res.render("pages/usuario", {retorno: null, erros: null})}
 // );
 
-router.get("/notifi", function(req, res){
-    res.render("pages/notifi", {retorno: null, erros: null})}
+router.get("/notifi", function (req, res) {
+  res.render("pages/notifi", { retorno: null, erros: null })
+}
 );
 
-router.get("/compras", function(req, res){
-    res.render("pages/compras", {retorno: null, erros: null})}
+router.get("/compras", function (req, res) {
+  res.render("pages/compras", { retorno: null, erros: null })
+}
 );
 
-router.get("/favoritos", function(req, res){
-    res.render("pages/favoritos", {retorno: null, erros: null})}
+router.get("/favoritos", function (req, res) {
+  res.render("pages/favoritos", { retorno: null, erros: null })
+}
 );
 
-router.get("/config", function(req, res){
-    res.render("pages/config", {retorno: null, erros: null})}
+router.get("/config", function (req, res) {
+  res.render("pages/config", { retorno: null, erros: null })
+}
 );
 
- router.get("/adm", verificarUsuAutorizado([3], "pages/restrito"), async function(req, res){
-    try {
+router.get("/adm", verificarUsuAutorizado([3], "pages/restrito"), async function (req, res) {
+  try {
 
-        let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
-          
-        inicio = parseInt(pagina - 1) * 5
-        results = await usuarioDAL.FindPage(inicio, 5);
-        totReg = await usuarioDAL.TotalReg();
-        console.log(results)
-    
-        totPaginas = Math.ceil(totReg[0].total / 5);
-    
-        var paginador = totReg[0].total <= 5 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
-    
-        console.log("auth --> ")
-        console.log(req.session.autenticado)
-        res.render("pages/adm",{ usuarios: results, paginador: paginador, autenticado:req.session.autenticado} );
-      } catch (e) {
-        console.log(e); // console log the error so we can see it in the console
-        res.json({ erro: "Falha ao acessar dados" });
-      }
-    
-    
-//    res.render("pages/adm", {usuarios: results, retorno: null, erros: null, autenticado: req.session.autenticado})
-} );
+    let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+
+    inicio = parseInt(pagina - 1) * 5
+    results = await usuarioDAL.FindPage(inicio, 5);
+    totReg = await usuarioDAL.TotalReg();
+    console.log(results)
+
+    totPaginas = Math.ceil(totReg[0].total / 5);
+
+    var paginador = totReg[0].total <= 5 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
+
+    console.log("auth --> ")
+    console.log(req.session.autenticado)
+    res.render("pages/adm", { usuarios: results, paginador: paginador, autenticado: req.session.autenticado });
+  } catch (e) {
+    console.log(e); // console log the error so we can see it in the console
+    res.json({ erro: "Falha ao acessar dados" });
+  }
 
 
+  //    res.render("pages/adm", {usuarios: results, retorno: null, erros: null, autenticado: req.session.autenticado})
+});
 
-router.get("/painelvendedor", verificarUsuAutorizado([2, 3], "pages/restrito"), async function(req, res){
-    try {
 
-        let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
-          
-        inicio = parseInt(pagina - 1) * 10
-        results = await produtosDAL.FindPage(inicio, 10);
-        totReg = await produtosDAL.TotalReg();
-        console.log(results)
-    
-        totPaginas = Math.ceil(totReg[0].total / 10);
-    
-        var paginador = totReg[0].total <= 10 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
-    
-        console.log("auth --> ")
-        console.log(req.session.autenticado)
-        res.render("pages/painelvendedor",{ produtos: results, paginador: paginador, autenticado:req.session.autenticado, login: req.res.autenticado} );
-      } catch (e) {
-        console.log(e); // console log the error so we can see it in the console
-        res.json({ erro: "Falha ao acessar dados" });
-      }
-    
-    
-//    res.render("pages/adm", {usuarios: results, retorno: null, erros: null, autenticado: req.session.autenticado})
-} );
+
+router.get("/painelvendedor", verificarUsuAutorizado([2, 3], "pages/restrito"), async function (req, res) {
+  try {
+
+    let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+
+    inicio = parseInt(pagina - 1) * 10
+    results = await produtosDAL.FindPage(inicio, 10);
+    totReg = await produtosDAL.TotalReg();
+    console.log(results)
+
+    totPaginas = Math.ceil(totReg[0].total / 10);
+
+    var paginador = totReg[0].total <= 10 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
+
+    console.log("auth --> ")
+    console.log(req.session.autenticado)
+    res.render("pages/painelvendedor", { produtos: results, paginador: paginador, autenticado: req.session.autenticado, login: req.res.autenticado });
+  } catch (e) {
+    console.log(e); // console log the error so we can see it in the console
+    res.json({ erro: "Falha ao acessar dados" });
+  }
+
+
+  //    res.render("pages/adm", {usuarios: results, retorno: null, erros: null, autenticado: req.session.autenticado})
+});
 
 
 router.get("/excluir/:id", function (req, res) {
-    var query = db.query(
-      "DELETE FROM usuarios WHERE ?",
-      { id: req.params.id },
-      function (error, results, fields) {
-        if (error) throw error;
-      }
-    );  
-    res.redirect("/");
-  });
-  
-  router.get("/excluirproduto/:id", function (req, res) {
-    var query = db.query(
-      "DELETE FROM produtos WHERE ?",
-      { id_produto: req.params.id },
-      function (error, results, fields) {
-        if (error) throw error;
-      }
-    );  
-    res.redirect("/");
-  });
-  
-  
-router.get("/cartao", function(req,res){
-  res.render("pages/cartao", {retorno: null, erros: null})
+  var query = db.query(
+    "DELETE FROM usuarios WHERE ?",
+    { id: req.params.id },
+    function (error, results, fields) {
+      if (error) throw error;
+    }
+  );
+  res.redirect("/");
 });
 
-router.get("/carrinho", function(req,res){
-    res.render("pages/carrinho", {retorno: null, erros: null})
-});
-
-router.get("/historico", function(req, res){
-    res.render("pages/historico", {retorno: null, erros: null})
-});
-
-router.get("/dados", function(req, res){
-    res.render("pages/dados", {retorno: null, erros: null})
+router.get("/excluirproduto/:id", function (req, res) {
+  var query = db.query(
+    "DELETE FROM produtos WHERE ?",
+    { id_produto: req.params.id },
+    function (error, results, fields) {
+      if (error) throw error;
+    }
+  );
+  res.redirect("/");
 });
 
 
-
-router.get("/anunciar", function(req, res){
-    res.render("pages/anunciar", {listaErros: null, dadosNotificacao: null})
+router.get("/cartao", function (req, res) {
+  res.render("pages/cartao", { retorno: null, erros: null })
 });
 
-router.get("/pagaconcluido", function(req, res){
-    res.render("pages/pagaconcluido", {retorno: null, erros: null})
+router.get("/carrinho", function (req, res) {
+  res.render("pages/carrinho", { retorno: null, erros: null })
 });
 
-router.get("/pagacancelado", function(req, res){
-    res.render("pages/pagacancelado", {retorno: null, erros: null})
+router.get("/historico", function (req, res) {
+  res.render("pages/historico", { retorno: null, erros: null })
 });
 
-router.get("/addprod", function(req, res){
-    res.render("pages/addprod", {retorno: null, erros: null})
+router.get("/dados", function (req, res) {
+  res.render("pages/dados", { retorno: null, erros: null })
 });
 
-router.get("/formenviado", function(req, res){
-    res.render("pages/formenviado", {retorno: null, erros: null})}
+
+
+router.get("/anunciar", function (req, res) {
+  res.render("pages/anunciar", { listaErros: null, dadosNotificacao: null })
+});
+
+router.get("/pagaconcluido", function (req, res) {
+  res.render("pages/pagaconcluido", { retorno: null, erros: null })
+});
+
+router.get("/pagacancelado", function (req, res) {
+  res.render("pages/pagacancelado", { retorno: null, erros: null })
+});
+
+router.get("/addprod", function (req, res) {
+  res.render("pages/addprod", { retorno: null, erros: null })
+});
+
+router.get("/formenviado", function (req, res) {
+  res.render("pages/formenviado", { retorno: null, erros: null })
+}
 );
-router.get("/politica", function(req, res){
-    res.render("pages/politica", {retorno: null, erros: null})}
+router.get("/politica", function (req, res) {
+  res.render("pages/politica", { retorno: null, erros: null })
+}
 );
-router.get("/termos", function(req, res){
-  res.render("pages/termos", {retorno: null, erros: null})}
+router.get("/termos", function (req, res) {
+  res.render("pages/termos", { retorno: null, erros: null })
+}
 );
-router.get("/contato", function(req, res){
-  res.render("pages/contato", {retorno: null, erros: null})}
+router.get("/contato", function (req, res) {
+  res.render("pages/contato", { retorno: null, erros: null })
+}
 );
 
-router.get("/user_dados", async function(req, res){
+router.get("/user_dados", async function (req, res) {
   results = await usuarioDAL.findID
-  res.render("pages/user_dados", {retorno: null, erros: null, autenticado: req.session.autenticado, usuarios: results})}
+  res.render("pages/user_dados", { retorno: null, erros: null, autenticado: req.session.autenticado, usuarios: results })
+}
 );
 // Defina o sal para o bcrypt
 const saltRounds = 10;
@@ -525,16 +538,16 @@ router.post("/cadastrar",
   });
 
 
-  router.post("/publicarproduto",
+router.post("/publicarproduto",
   upload.single('img_produto'),
-  async function(req, res){
+  async function (req, res) {
     const formProduto = {
-        nome_produto: req.body.nome_produto,
-        descricao_produto: req.body.descricao_produto,
-        quantidade_produto: req.body.quantidade_produto,
-        cores_produto: req.body.cores_produto,
-        preco_produto: req.body.preco_produto,
-        img_produto: req.body.img_produto
+      nome_produto: req.body.nome_produto,
+      descricao_produto: req.body.descricao_produto,
+      quantidade_produto: req.body.quantidade_produto,
+      cores_produto: req.body.cores_produto,
+      preco_produto: req.body.preco_produto,
+      img_produto: req.body.img_produto
     }
     if (!req.file) {
       console.log("Falha no carregamento");
@@ -559,8 +572,8 @@ router.post("/cadastrar",
       })
     }
   }
-  
-  )
+
+)
 
 // router.post("/publicarproduto",
 //     upload.single('img_produto'),
@@ -599,7 +612,7 @@ router.post("/cadastrar",
 //           });
 
 //           res.render("pages/usuario",{autenticado: req.session.autenticado, retorno: null, erros: null})
-    
+
 //           console.log(formProduto)    
 
 // })
@@ -607,33 +620,33 @@ router.post("/cadastrar",
 
 
 
-    router.post(
-      "/login",
-      body("email")
-        .isLength({ min: 4, max: 45 })
-        .withMessage("O nome de usuário/e-mail esta incorreto!"),
-      body("senha")
-        .isStrongPassword()
-        .withMessage("Verifique novamente a senha digitada!"),
-    
-      gravarUsuAutenticado(usuarioDAL, bcrypt),
-      function (req, res) {
-        const erros = validationResult(req);
-        if (!erros.isEmpty()) {
-          return res.render("pages/login", { listaErros: erros, dadosNotificacao: null })
-        }
-        if (req.session.autenticado != null) {
-          res.render("pages/login", {
-            listaErros: null, dadosNotificacao: {
-              titulo: "Login realizado!", mensagem: "Usuário logado com sucesso", tipo: "success"
-            }, valores: req.body
-          })
-        } else {
-          res.render("pages/login", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } })
-        }
-      });
-    
-      
+router.post(
+  "/login",
+  body("email")
+    .isLength({ min: 4, max: 45 })
+    .withMessage("O nome de usuário/e-mail esta incorreto!"),
+  body("senha")
+    .isStrongPassword()
+    .withMessage("Verifique novamente a senha digitada!"),
+
+  gravarUsuAutenticado(usuarioDAL, bcrypt),
+  function (req, res) {
+    const erros = validationResult(req);
+    if (!erros.isEmpty()) {
+      return res.render("pages/login", { listaErros: erros, dadosNotificacao: null })
+    }
+    if (req.session.autenticado != null) {
+      res.render("pages/login", {
+        listaErros: null, dadosNotificacao: {
+          titulo: "Login realizado!", mensagem: "Usuário logado com sucesso", tipo: "success"
+        }, valores: req.body
+      })
+    } else {
+      res.render("pages/login", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } })
+    }
+  });
+
+
 
 
 

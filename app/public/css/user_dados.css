@@ -30,7 +30,7 @@ main {
     align-items: center;
 }
 
-.sec1 div form{
+.sec1 div form {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -51,22 +51,31 @@ main {
     background-color: white;
 }
 
-.sec1 div:nth-child(2){
+.sec1 div:nth-child(n+1) {
     border-radius: 10px 10px 0 0;
 }
 
-.sec1 div:nth-child(3){
+.sec1 div:nth-last-child(1) {
     border-radius: 0 0 10px 10px;
 }
 
+.sec1 div:nth-last-child(2) {
+    border-radius: 0px;
+}
 
 .sec1 div input {
+    width: 60%;
     outline: 0;
     border: none;
     text-align: center;
 }
 
+.sec1 div label {
+    width: 15%;
+}
+
 .sec1 div button {
+    width: 15%;
     outline: 0;
     border: 0;
     color: #7A29FF;
@@ -97,7 +106,7 @@ main {
     margin-top: 20px;
 }
 
-.sec2 div form{
+.sec2 div form {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -106,19 +115,6 @@ main {
     width: 95%;
     max-width: 600px;
     height: 45px;
-}
-
-.sec2 div form input {
-    width: 50%;
-}
-
-.sec2 div form label {
-    width: 15%;
-}
-
-.sec2 div form button {
-    width: 15%;
-    background-color: white;
 }
 
 .sec2 div {
@@ -131,7 +127,7 @@ main {
     align-items: center;
 }
 
-.sec2 div form{
+.sec2 div form {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -139,14 +135,21 @@ main {
     width: 100%;
 }
 
+.sec2 div label {
+    width: 15%;
+}
+
 .sec2 div input {
+    width: 60%;
     outline: 0;
     border: none;
     text-align: center;
 }
 
 .sec2 div button {
+    width: 15%;
     outline: 0;
     border: 0;
+    background-color: white;
     color: #7A29FF;
 }
