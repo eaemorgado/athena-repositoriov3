@@ -38,7 +38,7 @@ section form {
     flex-direction: column;
 }
 
-#all-in label{
+#all-in label, #all-in p{
     align-self: flex-start;
     margin-left: 10px;
     color: #7A29FF;
@@ -87,9 +87,48 @@ span.aviso {
     border-radius: 10px;
     border: none;
     margin-top: 10px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.button-sub:hover {
+    transform: scale(105%);
+
 }
 
 #img-preview {
     max-width: 250px;
     border-radius: 50%;
 }
+
+
+.a-del {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: red;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 2px red solid;
+    width: 20%;
+    height: 40px;
+    align-items: center;
+    transition: 0.2s ease-in-out;
+}
+
+.a-del:hover {
+    background-color: red;
+    color: white;
+    transform: scale(105%);
+}
+
+.del {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* input foto */

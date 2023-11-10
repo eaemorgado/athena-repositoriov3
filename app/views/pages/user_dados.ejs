@@ -47,7 +47,7 @@
 
                 <div class="img-up" id="all-in">
                     <label for="">Foto de perfil</label>
-                    <input type="file" name="img_usuario" id="img_usuario" onchange="loadImg()">
+                    <input type="file" accept="image/jpg,image/jpeg" name="img_usuario" id="img_usuario" onchange="loadImg()">
                     <img class="img-perfil" id="img-preview" src="<%= autenticado.img_usuario %>">
                 </div>
 
@@ -80,13 +80,17 @@
                     <span class="aviso">(Não preencher para manter a senha atual)</span>
                 </div>
 
-                <input class="button-sub" type="submit" value="Alterar dados"/>
+                <input class="button-sub" type="submit" value="Alterar dados" />
+
 
             </form>
 
-            <a href="/excluirusu/<%=autenticado.id%>">
-                <button>Deletar Conta</button>
-            </a>
+            <section class="del">
+                <a href="/excluirusu/<%=autenticado.id%>" class="a-del">
+                    Deletar Conta
+                </a>
+            </section>
+
         </section>
 
     </main>
