@@ -326,14 +326,14 @@ router.post("/perfil", upload.single('img_usuario'),
       if (!resultUpdate.isEmpty) {
         if (resultUpdate.changedRows == 1) {
           var result = await usuarioDAL.findID(req.session.autenticado.id);
-          var autenticado = {
-            autenticado: result[0].nome,
-            id: result[0].id,
-            tipo: result[0].id_tipo_usuario,
-            img_usuario: result[0].img_usuario,
-            telefone: result[0].telefone
-          };
-          req.session.autenticado = autenticado;
+          // var autenticado = {
+          //   autenticado: result[0].nome,
+          //   id: result[0].id,
+          //   tipo: result[0].id_tipo_usuario,
+          //   img_usuario: result[0].img_usuario,
+          //   telefone: result[0].telefone
+          // };
+          // req.session.autenticado = autenticado;
           var campos = {
             telefone: result[0].telefone
           }
