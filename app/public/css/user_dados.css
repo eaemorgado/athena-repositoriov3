@@ -79,6 +79,9 @@ main h1 {
     text-align: start;
     margin-left: 20%;
     color: #7A29FF;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .email-x span,
@@ -113,7 +116,9 @@ main h1 {
     border-radius: 10px 10px 0 0;
 }
 
-.senha-att, .cpf-att, .tel-att {
+.senha-att,
+.cpf-att,
+.tel-att {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,18 +133,30 @@ main h1 {
     border-radius: 0 0 10px 10px;
 }
 
-.email-att form, .senha-att form, .cpf-att form, .tel-att form {
+.email-att form,
+.senha-att form,
+.cpf-att form,
+.tel-att form {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
 }
 
-.email-att label, .senha-att label, .cpf-att label, .tel-att label{
+.email-att label,
+.senha-att label,
+.cpf-att label,
+.tel-att label {
     color: #7A29FF;
     width: 15%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
-.email-att input, .senha-att input, .cpf-att input, .tel-att input {
+.email-att input,
+.senha-att input,
+.cpf-att input,
+.tel-att input {
     width: 50%;
     outline: 0;
     padding: 5px;
@@ -148,7 +165,10 @@ main h1 {
     border-radius: 5px;
 }
 
-.email-att button, .senha-att button, .cpf-att button, .tel-att button {
+.email-att button,
+.senha-att button,
+.cpf-att button,
+.tel-att button {
     background-color: transparent;
     color: #7A29FF;
     border: 0;
