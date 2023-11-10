@@ -6,6 +6,11 @@ main {
     position: relative;
 }
 
+main h1 {
+    font-size: 25px;
+    margin-top: 10px;
+}
+
 .add-card {
     display: flex;
     justify-content: center;
@@ -18,7 +23,7 @@ main {
     height: 160px;
     color: white;
     border-radius: 10px 10px 0 0;
-    
+    margin-top: 20px;
 }
 
 .ultimo {
@@ -62,6 +67,7 @@ main {
 
 .add-button {
     width: 90%;
+    max-width: 320px;
     height: 40px;
     background-color: #363636;
     border: 0;
