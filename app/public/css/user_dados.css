@@ -87,5 +87,6 @@ span.aviso {
 }
 
 #img-preview {
-    max-width: 300px;
+    max-width: 250px;
+    border-radius: 50%;
 }
