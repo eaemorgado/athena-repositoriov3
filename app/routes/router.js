@@ -534,6 +534,17 @@ router.get("/excluir/:id", function (req, res) {
   res.redirect("/");
 });
 
+router.get("/excluirusu/:id", function (req, res) {
+  var query = db.query(
+    "DELETE FROM usuarios WHERE ?",
+    { id: req.params.id },
+    function (error, results, fields) {
+      if (error) throw error;
+    }
+  );
+  res.redirect("/sair");
+});
+
 router.get("/excluirproduto/:id", function (req, res) {
   var query = db.query(
     "DELETE FROM produtos WHERE ?",
