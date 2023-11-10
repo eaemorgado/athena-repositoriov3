@@ -237,16 +237,23 @@ router.get("/usuario", verificarUsuAutenticado, async function (req, res) {
 
 );
 
+
+router.get("/user_dados2", function(req, res){
+  res.render("pages/user_dados2", {autenticado: req.session.autenticado})
+}
+  
+)
+
 router.post("/perfil", upload.single('img_usuario'),
-  body("nome")
-    .isLength({ min: 3, max: 50 }).withMessage("Mínimo de 3 letras e máximo de 50!"),
-  body("email")
-    .isEmail().withMessage("Digite um e-mail válido!"),
-  body("cpf")
-    .isLength({ min: 6, max: 20 }).withMessage("Cpf invalido"),
-  body("telefone")
-    .isLength({ min: 6, max: 20 }).withMessage("Digite um telefone válido!"),
-  verificarUsuAutorizado([1, 2, 3], "pages/login"),
+  // body("nome")
+  //   .isLength({ min: 3, max: 50 }).withMessage("Mínimo de 3 letras e máximo de 50!"),
+  // body("email")
+  //   .isEmail().withMessage("Digite um e-mail válido!"),
+  // body("cpf")
+  //   .isLength({ min: 6, max: 20 }).withMessage("Cpf invalido"),
+  // body("telefone")
+  //   .isLength({ min: 6, max: 20 }).withMessage("Digite um telefone válido!"),
+  // verificarUsuAutorizado([1, 2, 3], "pages/login"),
   async function (req, res) {
     const erros = validationResult(req);
     console.log(erros)
@@ -273,6 +280,7 @@ router.post("/perfil", upload.single('img_usuario'),
         dadosForm.img_usuario = caminhoArquivo
       }
       console.log(dadosForm);
+      console.log(autenticado);
 
       let resultUpdate = await usuarioDAL.update(dadosForm, req.session.autenticado.id);
       if (!resultUpdate.isEmpty) {
@@ -295,7 +303,7 @@ router.post("/perfil", upload.single('img_usuario'),
       }
     } catch (e) {
       console.log(e)
-      res.render("pages/user_dados", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body })
+      res.render("pages/user_dados", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body, autenticado: req.session.autenticado })
     }
 
   });
