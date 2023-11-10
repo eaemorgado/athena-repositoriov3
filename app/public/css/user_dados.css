@@ -6,172 +6,86 @@ main {
     height: 900px;
 }
 
-main section {
+main h1 {
+    font-size: 20px;
+    margin: 20px;
+    margin-bottom: 0;
+}
+
+main h2 {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    color: rgb(163, 163, 163);
+}
+
+section form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
-main h1 {
-    font-size: 20px;
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
-.img-view {
+#all-in {
     background-color: white;
-    width: 90%;
-    max-width: 500px;
-    height: 288px;
+    width: 85%;
+    padding: 10px;
     display: flex;
-    justify-self: center;
+    justify-content: center;
     align-items: center;
-    align-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#all-in label{
+    align-self: flex-start;
+    margin-left: 10px;
+    color: #7A29FF;
+}
+
+#all-in:nth-child(2) {
+    border-radius: 10px 10px 0 0;
+}
+
+.senha {
+    border-radius: 0 0 10px 10px;
+}
+
+#all-in input {
+    width: 90%;
+    height: 20px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
     text-align: center;
+    outline: 0;
+    margin-bottom: 5px;
+    background-color: #e7e7e7;
+}
+
+.img-up {
     border-radius: 10px;
-    margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.img-view img {
-    width: 100%;
-}
-
-.email-x {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    background-color: white;
-    border-radius: 10px 10px 0 0;
-    width: 87%;
-    max-width: 500px;
-    height: 40px;
-    padding: 5px;
-}
-
-.nome-x,
-.cpf-x,
-.tel-x {
-    background-color: white;
-    width: 87%;
-    max-width: 500px;
-    height: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    padding: 5px;
-}
-
-.tel-x {
-    border-radius: 0 0 10px 10px;
-}
-
-.email-x label,
-.nome-x label,
-.cpf-x label,
-.tel-x label {
-    width: 100%;
-    text-align: start;
-    margin-left: 20%;
-    color: #7A29FF;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.email-x span,
-.nome-x span,
-.cpf-x span,
-.tel-x span {
-    margin-top: 5px;
-    width: 100%;
-    text-align: center;
-}
-
-/* INPUTS E ATUALIZAÇÕES DE DADOS */
-
-.sec-att {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-}
-
-.email-att {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    padding: 5px;
-    width: 87%;
-    max-width: 500px;
-    height: 40px;
-    margin-top: 20px;
-    border-radius: 10px 10px 0 0;
-}
-
-.senha-att,
-.cpf-att,
-.tel-att {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    padding: 5px;
-    width: 87%;
-    max-width: 500px;
-    height: 40px;
-}
-
-.tel-att {
-    border-radius: 0 0 10px 10px;
-}
-
-.email-att form,
-.senha-att form,
-.cpf-att form,
-.tel-att form {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-}
-
-.email-att label,
-.senha-att label,
-.cpf-att label,
-.tel-att label {
-    color: #7A29FF;
-    width: 15%;
-    display: flex
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.email-att input,
-.senha-att input,
-.cpf-att input,
-.tel-att input {
-    width: 50%;
-    height: 20px;
-    outline: 0;
-    padding: 5px;
-    border: none;
-    background-color: #dcdcdc;
-    border-radius: 5px;
-}
-
-.email-att button,
-.senha-att button,
-.cpf-att button,
-.tel-att button {
+input#img_usuario {
     background-color: transparent;
-    color: #7A29FF;
-    border: 0;
-    cursor: pointer;
+}
+
+span.aviso {
+    font-size: 15px;
+}
+
+.button-sub {
+    height: 40px;
+    background-color: #7A29FF;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 10px;
+}
+
+#img-preview {
+    max-width: 300px;
 }

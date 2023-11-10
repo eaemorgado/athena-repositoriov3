@@ -37,40 +37,49 @@
     </header>
 
     <main>
+
+        <h1>Meu Perfil</h1>
+        <h2>(clique para alterar dados)</h2>
+
         <section>
+
             <form action="/perfil" method="post" enctype="multipart/form-data">
 
-                <h1>Meu Perfil</h1>
-
-                <div class="nome">
-                    <input type="text" name="nome" id="nome" placeholder="Nome"
-                        value="<%= autenticado.autenticado %>" />
-                </div>
-
-                <div class="email">
-                    <input type="text" name="email" id="email" placeholder="E-mail" value="<%= autenticado.email %>" />
-                </div>
-
-                <div class="cpf">
-                    <input type="text" name="cpf" id="cpf" placeholder="CPF" value="<%= autenticado.cpf %>" />
-                </div>
-
-                <div class="tel">
-                    <input type="text" name="telefone" id="telefone" placeholder="Telefone"
-                        value="<%= autenticado.telefone %>" />
-                </div>
-
-                <div class="img-up">
+                <div class="img-up" id="all-in">
+                    <label for="">Foto de perfil</label>
                     <input type="file" name="img_usuario" id="img_usuario" onchange="loadImg()">
                     <img class="img-perfil" id="img-preview" src="<%= autenticado.img_usuario %>">
                 </div>
 
-                <div class="senha">
-                    <input type="password" name="senha" id="senha" placeholder="Alterar">
-                    <span class="aviso">Não preencha este campo para manter a senha atual</span>
+                <div class="nome" id="all-in">
+                    <label for="">Nome</label>
+                    <input type="text" name="nome" id="nome" placeholder="Nome"
+                        value="<%= autenticado.autenticado %>" />
                 </div>
 
-                <input type="submit" value="Alterar dados perfil" />
+                <div class="email" id="all-in">
+                    <label for="">E-mail</label>
+                    <input type="text" name="email" id="email" placeholder="E-mail" value="<%= autenticado.email %>" />
+                </div>
+
+                <div class="cpf" id="all-in">
+                    <label for="">Cpf</label>
+                    <input type="text" name="cpf" id="cpf" placeholder="CPF" value="<%= autenticado.cpf %>" />
+                </div>
+
+                <div class="tel" id="all-in">
+                    <label for="">Telefone</label>
+                    <input type="text" name="telefone" id="telefone" placeholder="Telefone"
+                        value="<%= autenticado.telefone %>" />
+                </div>
+
+                <div class="senha" id="all-in">
+                    <label for="">Senha</label>
+                    <input type="password" name="senha" id="senha" placeholder="Alterar senha">
+                    <span class="aviso">(Não preencha este campo para manter a senha atual)</span>
+                </div>
+
+                <input class="button-sub" type="submit" value="Alterar dados"/>
 
             </form>
         </section>
