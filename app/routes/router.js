@@ -375,35 +375,35 @@ router.post("/perfil", upload.single('img_usuario'),
 
   });
 
-  router.post("/attelefone",
-  async function (req, res) {
-    const erros = validationResult(req);
-    console.log(erros)
-    if (!erros.isEmpty()) {
-      return res.render("pages/login", { listaErros: erros, dadosNotificacao: null, valores: req.body })
-    }
-    try {
-      var dadosForm = {
-        telefone: req.body.telefone,
-      };
-      console.log(dadosForm);
+//   router.post("/attelefone",
+//   async function (req, res) {
+//     const erros = validationResult(req);
+//     console.log(erros)
+//     if (!erros.isEmpty()) {
+//       return res.render("pages/login", { listaErros: erros, dadosNotificacao: null, valores: req.body })
+//     }
+//     try {
+//       var dadosForm = {
+//         telefone: req.body.telefone,
+//       };
+//       console.log(dadosForm);
   
 
-      let resultUpdate = await usuarioDAL.update(dadosForm, req.session.autenticado.id);
-      if (!resultUpdate.isEmpty) {
-        if (resultUpdate.changedRows == 1) {
-          var result = await usuarioDAL.findID(req.session.autenticado.id);
-          var campos = {
-            telefone: result[0].telefone
-          }
-res.redirect("/usuario")        }
-      }
-    } catch (e) {
-      console.log(e)
-      res.render("pages/user_dados", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body, autenticado: req.session.autenticado })
-    }
+//       let resultUpdate = await usuarioDAL.update(dadosForm, req.session.autenticado.id);
+//       if (!resultUpdate.isEmpty) {
+//         if (resultUpdate.changedRows == 1) {
+//           var result = await usuarioDAL.findID(req.session.autenticado.id);
+//           var campos = {
+//             telefone: result[0].telefone
+//           }
+// res.redirect("/usuario")        }
+//       }
+//     } catch (e) {
+//       console.log(e)
+//       res.render("pages/user_dados", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body, autenticado: req.session.autenticado })
+//     }
 
-  });
+//   });
 
 // router.post("/atcpf", 
 //   body("cpf")
