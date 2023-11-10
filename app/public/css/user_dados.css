@@ -148,7 +148,7 @@ main h1 {
 .tel-att label {
     color: #7A29FF;
     width: 15%;
-    display: flex;
+    display: flex
     justify-content: flex-start;
     align-items: center;
 }
