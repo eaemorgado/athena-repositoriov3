@@ -22,9 +22,11 @@ main div:nth-child(1) span h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .prod {
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,6 +37,11 @@ main div:nth-child(1) span h2 {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    transition: 0.2s ease-in-out;
+}
+
+.prod:hover {
+    transform: scale(105%);
 }
 
 .prod img {
