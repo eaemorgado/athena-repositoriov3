@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat com o Site</title>
+    <link rel="stylesheet" href="css/comunicacao.css">
+</head>
+    <header>
+
+        <a href="/">
+            
+            <picture>
+    
+                <source media="(max-width: 390px)" srcset="img/logo-icon.png">
+                <source media="(max-width: 479px)" srcset="img/logo-icon.png">
+                <img src="img/logo-letreiro.png" alt="logo-athena" class="logo-athena">
+        
+            </picture>
+        </a>
+    
+    
+    </header>
+    <body>
+     <header>
+        <h1>Bem-vindo ao Chat</h1>
+    </header>
+
+    <main>
+        <section id="chat-container">
+            <h2>Chat</h2>
+            <div id="chat-messages"></div>
+            <div id="user-input">
+                <input type="text" id="message-input" placeholder="Digite sua mensagem...">
+                <button id="send-btn">Enviar</button>
+            </div>
+        </section>
+
+        <section class="sugestoes">
+            <h2>Sugestões</h2>
+            <div class="sugestoes-messages"></div>
+            <div class="user-input-sugestoes">
+                <input type="text" id="sugestao-input" placeholder="Digite sua sugestão...">
+                <button id="sugestao-btn">Enviar</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

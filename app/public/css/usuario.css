@@ -197,3 +197,11 @@ main {
 .buttons-area button:hover {
     transform: scale(10px);
 }
+.section-2 a{
+    font-family: Arial, sans-serif;
+    color: white;
+    text-decoration: underline;
+    
+    
+    
+}
