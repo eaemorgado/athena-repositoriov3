@@ -46,7 +46,7 @@ var conexao = fabricaDeConexao();
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "@ITB123456",
+  password: "R29112005@",
   database: "athenashop",
   port: "3306"
 });
@@ -489,6 +489,10 @@ router.get("/termos", function (req, res) {
 );
 router.get("/contato", function (req, res) {
   res.render("pages/contato", { retorno: null, erros: null })
+}
+);
+router.get("/comunicacao", function (req, res) {
+  res.render("pages/comunicacao", { retorno: null, erros: null })
 }
 );
 
