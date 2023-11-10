@@ -38,9 +38,9 @@ module.exports = function(){
     return mysql.createConnection({
         host: "monorail.proxy.rlwy.net",
         user: "root",
-        database: "railway",
         password: "aEg3e4HcD5B14bA3bHAGF6254A5g-Cdc",
-        port: 34180
+        database: "railway",
+        port: "34180"
     });
 
 };
