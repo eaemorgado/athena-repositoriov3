@@ -9,7 +9,10 @@ CREATE TABLE usuarios (
   id int not null auto_increment,
   nome varchar(255) NOT NULL,
   email varchar(60) NOT NULL,
+  cpf varchar (255),
+  telefone varchar (255),
   senha longtext NOT NULL,
+  img_usuario varchar (255),
   id_tipo_usuario int not null default '1',
   primary key (`id`)
 );
