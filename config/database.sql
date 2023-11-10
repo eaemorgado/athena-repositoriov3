@@ -12,7 +12,7 @@ CREATE TABLE usuarios (
   cpf varchar (255),
   telefone varchar (255),
   senha longtext NOT NULL,
-  img_usuario varchar (255),
+  img_usuario varchar (255) default 'img/profile-user.png',
   id_tipo_usuario int not null default '1',
   primary key (`id`)
 );
