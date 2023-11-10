@@ -6,150 +6,69 @@ main {
     height: 900px;
 }
 
-.sec1 {
+main section {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
-.sec1 h1 {
-    align-self: stretch;
-    font-size: 20px;
-    margin: 10px;
-    margin-top: 20px;
-}
-
-.sec1 div {
-    width: 90%;
-    max-width: 600px;
-    height: 45px;
+.img-view {
     background-color: white;
+    width: 90%;
+    height: 288px;
     display: flex;
-    justify-content: center;
+    justify-self: center;
     align-items: center;
+    align-content: center;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.sec1 div form {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+.img-view img {
     width: 100%;
 }
 
-.sec1 div form input {
-    width: 50%;
-}
-
-.sec1 div form label {
-    width: 15%;
-}
-
-.sec1 div form button {
-    width: 15%;
-    background-color: white;
-}
-
-.sec1 div:nth-child(n+1) {
-    border-radius: 10px 10px 0 0;
-}
-
-.sec1 div:nth-last-child(1) {
-    border-radius: 0 0 10px 10px;
-}
-
-.sec1 div:nth-last-child(2) {
-    border-radius: 0px;
-}
-
-.sec1 div input {
-    width: 60%;
-    outline: 0;
-    border: none;
-    text-align: center;
-}
-
-.sec1 div label {
-    width: 15%;
-}
-
-.sec1 div button {
-    width: 15%;
-    outline: 0;
-    border: 0;
-    color: #7A29FF;
-}
-
-/* seção 2 */
-
-.sec2 {
+.email-x {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-}
-
-.name {
+    align-items: center;
+    align-content: center;
+    background-color: white;
     border-radius: 10px 10px 0 0;
+    width: 87%;
+    height: 40px;
+    padding: 5px;
 }
 
-.number {
-    border-radius: 0 0 10px 10px;
-}
-
-
-.sec2 h1 {
-    align-self: stretch;
-    font-size: 20px;
-    margin: 10px;
-    margin-top: 20px;
-}
-
-.sec2 div form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+.nome-x, .cpf-x {
     background-color: white;
-    width: 95%;
-    max-width: 600px;
-    height: 45px;
-}
-
-.sec2 div {
-    width: 90%;
-    max-width: 600px;
-    height: 45px;
-    background-color: white;
+    width: 87%;
+    height: 40px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    align-content: center;
+    padding: 5px;
 }
 
-.sec2 div form {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+
+.email-x label,
+.nome-x label, .cpf-x label {
     width: 100%;
+    text-align: start;
+    margin-left: 20%;
+    font-weight: bold;
+    color: #7A29FF;
 }
 
-.sec2 div label {
-    width: 15%;
-}
-
-.sec2 div input {
-    width: 60%;
-    outline: 0;
-    border: none;
+.email-x span,
+.nome-x span, .cpf-x span {
+    width: 100%;
     text-align: center;
 }
 
-.sec2 div button {
-    width: 15%;
-    outline: 0;
-    border: 0;
-    background-color: white;
-    color: #7A29FF;
-}
