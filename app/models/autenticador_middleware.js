@@ -31,11 +31,13 @@ function gravarUsuAutenticado(usuarioDAL, bcrypt) {
                 if (bcrypt.compareSync(dadosForm.senha, results[0].senha)) {
                     var autenticado = {
                         autenticado: results[0].nome,
-                        id: results[0].id_usuario,
+                        id: results[0].id,
                         email: results[0].email,
                         senha: results[0].senha,
+                        cpf: results[0].cpf,
+                        telefone: results[0].telefone,
                         tipo: results[0].id_tipo_usuario,
-                        img_perfil_pasta:"../public/img/profile-user.png"
+                        img_usuario: results[0].img_usuario
                     };
                 }
             } else {
