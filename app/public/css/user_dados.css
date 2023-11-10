@@ -56,9 +56,21 @@ main section {
     padding: 5px;
 }
 
+.tel-x {
+    background-color: white;
+    width: 87%;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 5px;
+    border-radius: 0 0 10px 10px;
+}
 
 .email-x label,
-.nome-x label, .cpf-x label {
+.nome-x label, .cpf-x label, .tel-x label {
     width: 100%;
     text-align: start;
     margin-left: 20%;
@@ -67,7 +79,7 @@ main section {
 }
 
 .email-x span,
-.nome-x span, .cpf-x span {
+.nome-x span, .cpf-x span, .tel-x span {
     width: 100%;
     text-align: center;
 }
