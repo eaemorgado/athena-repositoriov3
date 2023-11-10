@@ -29,6 +29,7 @@ section form {
 #all-in {
     background-color: white;
     width: 85%;
+    max-width: 600px;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -78,6 +79,8 @@ span.aviso {
 
 .button-sub {
     height: 40px;
+    width: 70%;
+    max-width: 500px;
     background-color: #7A29FF;
     color: white;
     padding: 10px;

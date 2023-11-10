@@ -46,7 +46,7 @@ var conexao = fabricaDeConexao();
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
+  password: "@ITB123456",
   database: "athenashop",
   port: "3306"
 });
