@@ -46,7 +46,7 @@ var conexao = fabricaDeConexao();
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "@ITB123456",
+  password: "",
   database: "athenashop",
   port: "3306"
 });
@@ -244,6 +244,73 @@ router.get("/user_dados2", function(req, res){
   
 )
 
+
+router.post("/perfil", upload.single('img_usuario'),
+  // body("nome")
+  //   .isLength({ min: 3, max: 50 }).withMessage("Mínimo de 3 letras e máximo de 50!"),
+  // body("cpf")
+  //   .isLength({ min: 8, max: 30 }).withMessage("8 a 30 caracteres!"),
+  // body("email")
+  //   .isEmail().withMessage("Digite um e-mail válido!"),
+  // body("telefone")
+  //   .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
+  // verificarUsuAutorizado([1, 2, 3], "pages/login"),
+  async function (req, res) {
+    const erros = validationResult(req);
+    console.log(erros)
+    if (!erros.isEmpty()) {
+      return res.render("pages/usuario", { listaErros: erros, dadosNotificacao: null, valores: req.body, autenticado: req.body.autenticado})
+    }
+    try {
+      var dadosForm = {
+        nome: req.body.nome,
+        email: req.body.email,
+        cpf: req.body.cpf,
+        telefone: req.body.telefone,
+        img_usuario: req.body.img_usuario,
+        id_tipo_usuario: 1
+      };
+      console.log("senha: " + req.body.senha)
+      if (req.body.senha != "") {
+        dadosForm.senha = bcrypt.hashSync(req.body.senha, salt);
+      }
+      if (!req.file) {
+        console.log("Falha no carregamento");
+      } else {
+        caminhoArquivo = "img/produto/" + req.file.filename;
+        dadosForm.img_usuario = caminhoArquivo
+      }
+      console.log(dadosForm);
+
+      let resultUpdate = await usuarioDAL.update(dadosForm, req.session.autenticado.id);
+      if (!resultUpdate.isEmpty) {
+        if (resultUpdate.changedRows == 1) {
+          var result = await usuarioDAL.findID(req.session.autenticado.id);
+          var autenticado = {
+            autenticado: result[0].nome,
+            id: result[0].id,
+            email: result[0].email,
+            cpf: result[0].cpf,
+            telefone: result[0].telefone,
+            id_tipo_usuario: result[0].id_tipo_usuario,
+            img_usuario: result[0].img_usuario
+          };
+          req.session.autenticado = autenticado;
+          var campos = {
+            autenticado: result[0].nome, email: result[0].email,
+            img_usuario: result[0].img_usuario,
+            cpf: result[0].cpf, telefone: result[0].telefone, senha: ""
+          }
+          res.render("pages/user_dados", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "", tipo: "success" }, autenticado: campos });
+        }
+      }
+    } catch (e) {
+      console.log(e)
+      res.render("pages/user_dados", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, autenticado: req.body })
+    }
+
+  });
+
 router.post("/perfil", upload.single('img_usuario'),
   // body("nome")
   //   .isLength({ min: 3, max: 50 }).withMessage("Mínimo de 3 letras e máximo de 50!"),
@@ -320,25 +387,16 @@ router.post("/perfil", upload.single('img_usuario'),
         telefone: req.body.telefone,
       };
       console.log(dadosForm);
-      console.log(autenticado);
+  
 
       let resultUpdate = await usuarioDAL.update(dadosForm, req.session.autenticado.id);
       if (!resultUpdate.isEmpty) {
         if (resultUpdate.changedRows == 1) {
           var result = await usuarioDAL.findID(req.session.autenticado.id);
-          // var autenticado = {
-          //   autenticado: result[0].nome,
-          //   id: result[0].id,
-          //   tipo: result[0].id_tipo_usuario,
-          //   img_usuario: result[0].img_usuario,
-          //   telefone: result[0].telefone
-          // };
-          // req.session.autenticado = autenticado;
           var campos = {
             telefone: result[0].telefone
           }
-          res.render("pages/user_dados", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "", tipo: "success" }, valores: campos, autenticado: req.session.autenticado });
-        }
+res.redirect("/usuario")        }
       }
     } catch (e) {
       console.log(e)
@@ -544,8 +602,7 @@ router.get("/comunicacao", function (req, res) {
 );
 
 router.get("/user_dados", async function (req, res) {
-  results = await usuarioDAL.findID
-  res.render("pages/user_dados", { retorno: null, erros: null, autenticado: req.session.autenticado, usuarios: results })
+  res.render("pages/user_dados", { retorno: null, erros: null, autenticado: req.session.autenticado })
 }
 );
 // Defina o sal para o bcrypt
