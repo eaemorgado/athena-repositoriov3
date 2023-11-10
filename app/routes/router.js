@@ -491,6 +491,10 @@ router.get("/contato", function (req, res) {
   res.render("pages/contato", { retorno: null, erros: null })
 }
 );
+router.get("/comunicacao", function (req, res) {
+  res.render("pages/comunicacao", { retorno: null, erros: null })
+}
+);
 
 router.get("/user_dados", async function (req, res) {
   results = await usuarioDAL.findID
