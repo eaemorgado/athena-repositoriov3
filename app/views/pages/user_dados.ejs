@@ -37,141 +37,41 @@
     </header>
 
     <main>
-
-        <section>
-
-            <h1>Dados da dados</h1>
-
-            <div class="img-view">
-                <img src="<%=autenticado.img_usuario%>" alt="foto de perfil">
-            </div>
-
-            <div class="email-x">
-                <label for="">E-mail:</label>
-                <span>
-                    <%=autenticado.email%>
-                </span>
-            </div>
-            
-            <div class="nome-x">
-                <label for="">Nome:</label>
-                <span>
-                    <%=autenticado.autenticado%>
-                </span>
-            </div>
-
-            <div class="cpf-x">
-                <label for="">CPF:</label>
-                <span>
-                    <%=autenticado.cpf%>
-                </span>
-                <script>
-                    $('#cpf').mask('000.000.000-00', { reverse: true });
-                </script>
-            </div>
-
-            <div class="number">
-                <!-- <form action="/perfil" method="post"> -->
-                <label for="">Tel.</label>
-                <span>
-                    <%=autenticado.telefone%>
-                </span>
-                <!-- <input type="text" name="telefone" id="phone" placeholder="<%=autenticado.telefone%>" autocomplete="off"> -->
-                <!-- </form> -->
-                <script>
-                    $('#phone').mask('(00) 00000-0000');
-                </script>
-            </div>
-
-        </section>
-
-            <section class="sec2">
-                <!-- <form action="/perfil" method="post" enctype="multipart/form-data"> -->
-                    <h1>Atualizar dados</h1>
-
-                    <form action="/at" method="post">
-                        <div class="number">
-                        
-                            <label for="">Tel.</label>
-                            <input type="text" name="telefone" id="phone"  autocomplete="off">
-                            <button>enviar</button>
-                        </div>    
-                     
-                    </form>
+        <div id="perfil">
+            <form action="/perfil" method="post" enctype="multipart/form-data">
+                <h1>Meu Perfil</h1>
+                <p>
+                    <input type="text" name="nome" id="nome" placeholder="Nome" value="<%= autenticado.autenticado %>" /> 
+                   
+                </p>
+                <p>
+                    <input type="text" name="email" id="email" placeholder="E-mail" value="<%= autenticado.email %>" /> 
                     
-                    <form action="/attelefone" method="post">
-                        <div class="number">
-                        
-                            <label for="">Tel.</label>
-                            <input type="text" name="telefone" id="phone"  autocomplete="off">
-                            <button>enviar</button>
-                        </div>    
-                     
-                    </form>
-                    
+                </p>
+                <p>
+                    <input type="text" name="cpf" id="cpf" placeholder="CPF" value="<%= autenticado.cpf %>"/> 
+                </p>
+                <p>
+                    <input type="text" name="telefone" id="telefone" placeholder="Telefone" value="<%= autenticado.telefone %>" /> 
+                </p>
+                <p>
+                    <input type="file" name="img_usuario" id="img_usuario" onchange="loadImg()">
+                    <img class="img-perfil"  id="img-preview" src="<%= autenticado.img_usuario %>">
+                </p>
+                <p>
+                    <input type="password" name="senha" id="senha" placeholder="senha de Usuario">
+                    <span class="aviso">Não preencha este campo para manter a senha atual</span>
+                </p>
+                <p>
+                    <input type="submit" value="Alterar dados perfil" />
+                </p>
+            </form>
 
-                <!-- </form> -->
-            </section>
-       
+        </div>
 
-        <!-- <section class="sec1">
-
-            <h1>Dados da dados</h1>
-
-            <div>
-
-                <form action="">
-                    <label for="">E-mail</label>
-                    <input type="email" placeholder="<%=autenticado.email%>" autocomplete="off">
-                    <button type="submit">Alterar</button>
-                </form>
-            </div>
-
-            <div>
-
-                <form action="">
-                    <label for="">Senha</label>
-                    <input type="password" placeholder="************" autocomplete="off">
-                    <button type="submit">Alterar</button>
-                </form>
-            </div>
-        </section>
-
-        <section class="sec2">
-            <h1>Dados pessoais</h1>
-
-            <div class="name">
-                <form action="" class="name">
-                    <label for="">Nome</label>
-                    <input type="text" placeholder="<%= autenticado.autenticado%>" autocomplete="off">
-                    <button type="submit">Alterar</button>
-                </form>
-            </div>
-
-            <div>
-                <form action="/atcpf" method="post">
-                    <label for="">CPF</label>
-                    <input type="text" id="cpf" name="cpf" autocomplete="off" maxlength="14">
-                    <button type="submit">Alterar</button>
-                </form>
-
-                
-            </div>
-
-            <div class="number">
-                <form action="" class="number">
-                    <label for="">Telefone</label>
-                    <input type="text" id="phone" placeholder="" autocomplete="off">
-                    <button type="submit">Alterar</button>
-                </form>
-                
-                <script>
-                    $('#phone').mask('(00) 00000-0000');
-                </script>
-
-            </div>
-
-        </section> -->
+    </main>
+</body>
+     
     </main>
 
     <footer>
