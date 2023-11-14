@@ -50,6 +50,9 @@
    
     <main>
 
+        <h1>ola <%=autenticado.autenticado%></h1>
+        <h3>id: <%=autenticado.id%></h3>
+
         <% produtos.forEach(function(produto){ %>
         <h3><%=produto.nome_produto%></h3>
         
@@ -71,6 +74,10 @@
                 <span id="numero">1</span>
                 <button id="aumentar">+</button>
             </div>
+
+            <a href="/addfavorito/<%=produto.id_produto%>/<%=autenticado.id%>">
+                <button>Add aos Favoritos</button>
+            </a>
             
 
             <% }); %>

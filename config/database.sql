@@ -18,13 +18,7 @@ CREATE TABLE usuarios (
 );
 
 
-create table favoritos (
-	id_favoritos int auto_increment primary key,
-	id_usuario int,
-	id_produto int,
-    foreign key (id_produto) references produtos(id_produto),
-    foreign key (id_usuario) references usuarios(id) 
-);	
+
 
 CREATE TABLE produtos (
   id_produto int not null auto_increment,
@@ -46,6 +40,14 @@ create table `tipo_usuario` (
     
 );	
 
+
+create table favoritos (
+	id_favoritos int auto_increment primary key,
+	id_usuario int,
+	id_produto int,
+    foreign key (id_produto) references produtos(id_produto),
+    foreign key (id_usuario) references usuarios(id) 
+);	
 
 
 alter table usuarios

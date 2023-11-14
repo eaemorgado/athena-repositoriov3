@@ -2,7 +2,6 @@ var express = require("express");
 var router = express.Router();
 var bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(10);
-const uuid = require('uuid');
 const mysql = require('mysql2');
 const flash = require('express-flash');
 const app = require('express')
@@ -27,29 +26,22 @@ var upload = multer({ storage: storagePasta });
 var fabricaDeConexao = require("../../config/connection-factory");
 var conexao = fabricaDeConexao();
 
-// const db = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "@ITB123456",
-//   database: "athenashop",
-//   port: 3306
-// });
+//  const db = mysql.createConnection({
+//    host: "localhost",
+//    user: "root",
+//    password: "@ITB123456",
+//    database: "athenashop",
+//    port: 3306
+//  });
 
-// const db = mysql.createConnection({
-//   host:   "viaduct.proxy.rlwy.net",
-//   user:   "root",
-//   password:   "c1D5BfbbgEh54Faa6bhEbd45GC5D3CGf",
-//   database:   "railway",
-//   port:   "33808"
-//   });
 
-const db = mysql.createConnection({
-  host: "monorail.proxy.rlwy.net",
-  user: "root",
-  password: "aEg3e4HcD5B14bA3bHAGF6254A5g-Cdc",
-  database: "railway",
-  port: "34180"
-});
+ const db = mysql.createConnection({
+   host: "monorail.proxy.rlwy.net",
+   user: "root",
+   password: "aEg3e4HcD5B14bA3bHAGF6254A5g-Cdc",
+   database: "railway",
+   port: "34180"
+ });
 
 db.connect((err) => {
   if (err) {
@@ -65,6 +57,9 @@ var usuarioDAL = new UsuarioDAL(conexao);
 
 var ProdutosDAL = require("../models/ProdutosDAL");
 var produtosDAL = new ProdutosDAL(conexao);
+
+var FavoritosDAL = require("../models/FavoritosDAL");
+var favoritosDAL = new FavoritosDAL(conexao);
 
 // const path = require('path');
 // const e = require('express')
@@ -556,6 +551,37 @@ router.get("/excluirproduto/:id", function (req, res) {
   res.redirect("/");
 });
 
+// router.get("/addfavorito/:id_produto", function (req, res){
+//   try {
+
+//   }catch{
+    
+//   }
+// })
+
+ router.get("/addfavorito/:id_produto/:id", function (req, res){
+   var query = db.query (
+     "insert into favoritos set ?",
+     {id_produto: req.params.id_produto,
+     id_usuario: req.params.id
+     },
+     function (error, results, fields) {
+       if (error) throw error;
+     }
+   )
+   res.redirect("/produto/:id_produto");
+ })
+
+// router.post("/addfavorito/:id_produto",function(req, res){
+//   var produtoFav = {
+//     id_usuario: req.session.id,
+//     id_produto: req.query.id_produto
+//   }
+//   const erros = validationResult(req);
+//     if (!erros.isEmpty()) {
+//       return res.render("pages/home", { listaErros: erros, dadosNotificacao: null, valores: req.body, autenticado: req.session.autenticado })
+//     }
+// })
 
 router.get("/cartao", function (req, res) {
   res.render("pages/cartao", { retorno: null, erros: null })
