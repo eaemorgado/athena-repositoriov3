@@ -569,7 +569,7 @@ router.get("/excluirproduto/:id", function (req, res) {
        if (error) throw error;
      }
    )
-   res.redirect("/produto/:id_produto");
+   res.redirect("/");
  })
 
 // router.post("/addfavorito/:id_produto",function(req, res){
