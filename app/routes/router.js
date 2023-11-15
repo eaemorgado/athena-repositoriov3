@@ -79,32 +79,238 @@ router.get("/sair", limparSessao, function (req, res) {
 });
 
 
+// { produtoscarrinho: result }
+// router.get("/", verificarUsuAutenticado, async function (req, res) {
+  
+//   try {
+//     const id_usuario = req.session.autenticado.id;
+//     console.log('ID do usuário logado:', id_usuario);
 
-router.get("/", async function (req, res) {
+//     const sql = 'SELECT id_produto FROM carrinho WHERE id_usuario = ?';
+//     db.query(sql, id_usuario, (err, result) => {
+//       if (err) {
+        
+//       } else {
+//         const produtosFavoritados = result.map(row => row.id_produto);
+//         const queryProdutos = 'SELECT * FROM produtos WHERE id_produto IN (?)';
+        
+//         db.query(queryProdutos, [produtosFavoritados], (err, result) => {
+//           if (err) {
+//             res.status(500).send('Erro ao buscar detalhes dos produtos favoritados');
+//           } else {
+            
+//           }
+//         });
+//       }
+//     });
+
+
+
+//     let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+
+//     inicio = parseInt(pagina - 1) * 10
+//     resultsprod = await produtosDAL.FindPage(inicio, 10);
+//     totReg = await produtosDAL.TotalReg();
+//     // console.log(results)
+
+//     totPaginas = Math.ceil(totReg[0].total / 10);
+
+//     var paginador = totReg[0].total <= 10 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
+
+//     // console.log("auth --> ")
+//     // console.log(req.session.autenticado)
+//     res.render("pages/home", {produtos: resultsprod, paginador: paginador, autenticado: req.session.autenticado, login: req.res.autenticado });
+//   } catch (e) {
+//     console.log(e); // console log the error so we can see it in the console
+//     res.json({ erro: "Falha ao acessar dados" });
+//   }
+
+// });
+
+// Módulo para buscar produtos Carriho
+// async function buscarProdutosCarrinho(req) {
+//   return new Promise((resolve, reject) => {
+//     const id_usuario = req.session.autenticado.id;
+//     const sql = 'SELECT id_produto FROM carrinho WHERE id_usuario = ?';
+
+//     db.query(sql, [id_usuario], (err, result) => {
+//       if (err) {
+//         reject(err);
+//       } else {
+//         const produtosCarrinho = result.map(row => row.id_produto);
+//         resolve(produtosCarrinho);
+//       }
+//     });
+//   });
+// }
+
+// async function buscarProdutosCarrinho(req) {
+//   return new Promise((resolve, reject) => {
+//     const id_usuario = req.session.autenticado.id;
+//     const sql = 'SELECT id_produto FROM carrinho WHERE id_usuario = ?';
+
+//     db.query(sql, [id_usuario], (err, result) => {
+//       if (err) {
+//         reject(err);
+//       } else {
+//         const produtosCarrinho = result.map(row => row.id_produto);
+
+//         // Consulta para buscar os detalhes dos produtos na tabela 'produtos'
+//         const queryProdutos = `SELECT * FROM produtos WHERE id_produto IN (?)`;
+
+//         db.query(queryProdutos, [produtosCarrinho], (err, resultProdutos) => {
+//           if (err) {
+//             reject(err);
+//           } else {
+//             resolve(resultProdutos);
+//           }
+//         });
+//       }
+//     });
+//   });
+// }
+
+
+// async function buscarProdutosCarrinho(req) {
+//   return new Promise((resolve, reject) => {
+//     const id_usuario = req.session.autenticado ? req.session.autenticado.id : null;
+    
+//     if (!id_usuario) {
+//       // Lógica para lidar com o caso em que nenhum usuário está logado
+//       // Por exemplo, você pode retornar uma lista vazia de produtos do carrinho
+//       resolve([]);
+//     } else {
+//       const sql = 'SELECT id_produto FROM carrinho WHERE id_usuario = ?';
+      
+//       db.query(sql, [id_usuario], (err, result) => {
+//         if (err) {
+//           reject(err);
+//         } else {
+//           const produtosCarrinho = result.map(row => row.id_produto);
+
+//           const queryProdutos = `SELECT * FROM produtos WHERE id_produto IN (?)`;
+
+//           db.query(queryProdutos, [produtosCarrinho], (err, resultProdutos) => {
+//             if (err) {
+//               reject(err);
+//             } else {
+//               resolve(resultProdutos);
+//             }
+//           });
+//         }
+//       });
+//     }
+//   });
+// }
+
+
+async function buscarProdutosCarrinho(req) {
+  return new Promise((resolve, reject) => {
+    const id_usuario = req.session.autenticado ? req.session.autenticado.id : null;
+    
+    if (!id_usuario) {
+      // Se nenhum usuário estiver logado, resolve com uma lista vazia de produtos
+      resolve([]);
+    } else {
+      const sql = 'SELECT id_produto FROM carrinho WHERE id_usuario = ?';
+      
+      db.query(sql, [id_usuario], (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          // Verifica se há produtos no carrinho
+          if (result.length === 0) {
+            // Se não houver produtos, resolve com uma lista vazia
+            resolve([]);
+          } else {
+            const produtosCarrinho = result.map(row => row.id_produto);
+
+            const queryProdutos = `SELECT * FROM produtos WHERE id_produto IN (?)`;
+
+            db.query(queryProdutos, [produtosCarrinho], (err, resultProdutos) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(resultProdutos);
+              }
+            });
+          }
+        }
+      });
+    }
+  });
+}
+
+
+// Rota para renderizar a página inicial
+router.get("/", verificarUsuAutenticado, async function (req, res) {
   try {
+    const produtosCarrinho = await buscarProdutosCarrinho(req);
 
+    // Lógica para buscar os produtos para exibir na página inicial
     let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
-
     inicio = parseInt(pagina - 1) * 10
-    results = await produtosDAL.FindPage(inicio, 10);
+    resultsprod = await produtosDAL.FindPage(inicio, 10);
     totReg = await produtosDAL.TotalReg();
-    // console.log(results)
-
     totPaginas = Math.ceil(totReg[0].total / 10);
-
     var paginador = totReg[0].total <= 10 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
 
-    // console.log("auth --> ")
-    // console.log(req.session.autenticado)
-    res.render("pages/home", { produtos: results, paginador: paginador, autenticado: req.session.autenticado, login: req.res.autenticado });
+    res.render("pages/home", { produtos: resultsprod, paginador: paginador, autenticado: req.session.autenticado, login: req.res.autenticado, produtosCarrinho: produtosCarrinho });
   } catch (e) {
-    console.log(e); // console log the error so we can see it in the console
+    console.log(e);
     res.json({ erro: "Falha ao acessar dados" });
   }
-
-
-  //    res.render("pages/adm", {usuarios: results, retorno: null, erros: null, autenticado: req.session.autenticado})
 });
+
+router.get("/addcarrinho/:id_produto/:id", function (req, res){
+  var query = db.query (
+    "insert into carrinho set ?",
+    {id_produto: req.params.id_produto,
+    id_usuario: req.params.id
+    },
+    function (error, results, fields) {
+      if (error) throw error;
+    }
+  )
+  res.redirect("/");
+})
+
+
+router.get('/favoritos/:id', verificarUsuAutenticado,(req, res) => {
+  const id_usuario = req.params.id; // Supondo que o ID do usuário está na sessão
+  console.log('ID do usuário logado:', id_usuario);
+  const sql = 'SELECT id_produto FROM favoritos WHERE id_usuario = ?';
+  
+  db.query(sql, id_usuario, (err, result) => {
+    if (err) {
+      res.status(500).send('Erro ao buscar favoritos');
+    } else {
+      const produtosFavoritados = result.map(row => row.id_produto);
+      const queryProdutos = 'SELECT * FROM produtos WHERE id_produto IN (?)';
+      
+      db.query(queryProdutos, [produtosFavoritados], (err, result) => {
+        if (err) {
+          res.status(500).send('Erro ao buscar detalhes dos produtos favoritados');
+        } else {
+          res.render('pages/favoritos', { produtos: result });
+        }
+      });
+    }
+  });
+});
+
+router.get("/excluirprodutocart/:id", function (req, res) {
+  var query = db.query(
+    "DELETE FROM carrinho WHERE ?",
+    { id_produto: req.params.id },
+    function (error, results, fields) {
+      if (error) throw error;
+    }
+  );
+  res.redirect("/");
+});
+
+
 
 
 // router.get("/produto/:id_produto", async function(req, res){
@@ -453,10 +659,6 @@ router.get("/compras", function (req, res) {
 }
 );
 
-router.get("/favoritos", function (req, res) {
-  res.render("pages/favoritos", { retorno: null, erros: null })
-}
-);
 
 router.get("/config", function (req, res) {
   res.render("pages/config", { retorno: null, erros: null })
@@ -571,6 +773,32 @@ router.get("/excluirproduto/:id", function (req, res) {
    )
    res.redirect("/");
  })
+
+
+router.get('/favoritos/:id', verificarUsuAutenticado,(req, res) => {
+  const id_usuario = req.params.id; // Supondo que o ID do usuário está na sessão
+  console.log('ID do usuário logado:', id_usuario);
+  const sql = 'SELECT id_produto FROM favoritos WHERE id_usuario = ?';
+  
+  db.query(sql, id_usuario, (err, result) => {
+    if (err) {
+      res.status(500).send('Erro ao buscar favoritos');
+    } else {
+      const produtosFavoritados = result.map(row => row.id_produto);
+      const queryProdutos = 'SELECT * FROM produtos WHERE id_produto IN (?)';
+      
+      db.query(queryProdutos, [produtosFavoritados], (err, result) => {
+        if (err) {
+          res.status(500).send('Erro ao buscar detalhes dos produtos favoritados');
+        } else {
+          res.render('pages/favoritos', { produtos: result });
+        }
+      });
+    }
+  });
+});
+
+
 
 // router.post("/addfavorito/:id_produto",function(req, res){
 //   var produtoFav = {

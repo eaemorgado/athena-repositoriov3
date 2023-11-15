@@ -13,7 +13,9 @@
         </div>
     </header>
     <main>
-        
+        <% produtos.forEach(function(produto){ %>
+        <h2><%=produto.nome_produto%></h2>
+        <% }); %>
     </main>
     <footer>
         <section class="section-1">

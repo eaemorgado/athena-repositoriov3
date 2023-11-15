@@ -49,6 +49,13 @@ create table favoritos (
     foreign key (id_usuario) references usuarios(id) 
 );	
 
+create table carrinho (
+	id_carrinho int auto_increment primary key,
+	id_usuario int,
+	id_produto int,
+    foreign key (id_produto) references produtos(id_produto),
+    foreign key (id_usuario) references usuarios(id) 
+);
 
 alter table usuarios
 add constraint tipo_usuario
