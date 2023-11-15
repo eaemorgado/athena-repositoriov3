@@ -310,6 +310,61 @@ router.get("/excluirprodutocart/:id", function (req, res) {
   res.redirect("/");
 });
 
+// Rota para remover um produto da lista de produtos
+router.delete("/produt/:id", async function (req, res) {
+  const productId = req.params.id;
+
+  try {
+    // Lógica para remover o produto da lista de produtos
+    await produtosDAL.Delete(productId);
+
+    // Identificar usuários que possuem o produto no carrinho
+    const usuariosComProdutoNoCarrinho = await buscarUsuariosComProdutoNoCarrinho(productId);
+    
+    // Identificar usuários que têm o produto marcado como favorito
+    const usuariosComProdutoNosFavoritos = await buscarUsuariosComProdutoNosFavoritos(productId);
+
+    // Remover o produto do carrinho para os usuários identificados
+    for (const usuario of usuariosComProdutoNoCarrinho) {
+      await removerProdutoDoCarrinho(usuario.id, productId);
+    }
+
+    // Remover o produto dos favoritos para os usuários identificados
+    for (const usuario of usuariosComProdutoNosFavoritos) {
+      await removerProdutoDosFavoritos(usuario.id, productId);
+    }
+
+    res.status(200).json({ message: "Produto removido com sucesso" });
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao remover o produto" });
+  }
+});
+
+// Função para buscar usuários que possuem o produto no carrinho
+async function buscarUsuariosComProdutoNoCarrinho(productId) {
+  // Lógica para buscar usuários que têm o produto no carrinho
+  // Exemplo: SELECT DISTINCT id_usuario FROM carrinho WHERE id_produto = productId;
+}
+
+// Função para buscar usuários que têm o produto marcado como favorito
+async function buscarUsuariosComProdutoNosFavoritos(productId) {
+  // Lógica para buscar usuários que têm o produto nos favoritos
+  // Exemplo: SELECT DISTINCT id_usuario FROM favoritos WHERE id_produto = productId;
+}
+
+// Função para remover o produto do carrinho para um usuário específico
+async function removerProdutoDoCarrinho(userId, productId) {
+  // Lógica para remover o produto do carrinho para um usuário específico
+  // Exemplo: DELETE FROM carrinho WHERE id_usuario = userId AND id_produto = productId;
+}
+
+// Função para remover o produto dos favoritos para um usuário específico
+async function removerProdutoDosFavoritos(userId, productId) {
+  // Lógica para remover o produto dos favoritos para um usuário específico
+  // Exemplo: DELETE FROM favoritos WHERE id_usuario = userId AND id_produto = productId;
+}
+
+
 
 
 
@@ -512,69 +567,69 @@ router.post("/perfil", upload.single('img_usuario'),
 
   });
 
-router.post("/perfil", upload.single('img_usuario'),
-  // body("nome")
-  //   .isLength({ min: 3, max: 50 }).withMessage("Mínimo de 3 letras e máximo de 50!"),
-  // body("email")
-  //   .isEmail().withMessage("Digite um e-mail válido!"),
-  // body("cpf")
-  //   .isLength({ min: 6, max: 20 }).withMessage("Cpf invalido"),
-  // body("telefone")
-  //   .isLength({ min: 6, max: 20 }).withMessage("Digite um telefone válido!"),
-  // verificarUsuAutorizado([1, 2, 3], "pages/login"),
-  async function (req, res) {
-    const erros = validationResult(req);
-    console.log(erros)
-    if (!erros.isEmpty()) {
-      return res.render("pages/login", { listaErros: erros, dadosNotificacao: null, valores: req.body })
-    }
-    try {
-      var dadosForm = {
-        nome: req.body.nome,
-        email: req.body.email,
-        id_tipo_usuario: 1,
-        cpf: req.body.cpf,
-        telefone: req.body.telefone,
-        img_usuario: null
-      };
-      console.log("senha: " + req.body.senha)
-      if (req.body.senha != "") {
-        dadosForm.senha = bcrypt.hashSync(req.body.senha, salt);
-      }
-      if (!req.file) {
-        console.log("Falha no carregamento");
-      } else {
-        caminhoArquivo = "img/perfil/" + req.file.filename;
-        dadosForm.img_usuario = caminhoArquivo
-      }
-      console.log(dadosForm);
-      console.log(autenticado);
+// router.post("/perfil", upload.single('img_usuario'),
+//   // body("nome")
+//   //   .isLength({ min: 3, max: 50 }).withMessage("Mínimo de 3 letras e máximo de 50!"),
+//   // body("email")
+//   //   .isEmail().withMessage("Digite um e-mail válido!"),
+//   // body("cpf")
+//   //   .isLength({ min: 6, max: 20 }).withMessage("Cpf invalido"),
+//   // body("telefone")
+//   //   .isLength({ min: 6, max: 20 }).withMessage("Digite um telefone válido!"),
+//   // verificarUsuAutorizado([1, 2, 3], "pages/login"),
+//   async function (req, res) {
+//     const erros = validationResult(req);
+//     console.log(erros)
+//     if (!erros.isEmpty()) {
+//       return res.render("pages/login", { listaErros: erros, dadosNotificacao: null, valores: req.body })
+//     }
+//     try {
+//       var dadosForm = {
+//         nome: req.body.nome,
+//         email: req.body.email,
+//         id_tipo_usuario: 1,
+//         cpf: req.body.cpf,
+//         telefone: req.body.telefone,
+//         img_usuario: null
+//       };
+//       console.log("senha: " + req.body.senha)
+//       if (req.body.senha != "") {
+//         dadosForm.senha = bcrypt.hashSync(req.body.senha, salt);
+//       }
+//       if (!req.file) {
+//         console.log("Falha no carregamento");
+//       } else {
+//         caminhoArquivo = "img/perfil/" + req.file.filename;
+//         dadosForm.img_usuario = caminhoArquivo
+//       }
+//       console.log(dadosForm);
+//       console.log(autenticado);
 
-      let resultUpdate = await usuarioDAL.update(dadosForm, req.session.autenticado.id);
-      if (!resultUpdate.isEmpty) {
-        if (resultUpdate.changedRows == 1) {
-          var result = await usuarioDAL.findID(req.session.autenticado.id);
-          var autenticado = {
-            autenticado: result[0].nome,
-            id: result[0].id,
-            tipo: result[0].id_tipo_usuario,
-            img_usuario: result[0].img_usuario
-          };
-          req.session.autenticado = autenticado;
-          var campos = {
-            nome: result[0].nome, email: result[0].email, img_usuario: result[0].img_usuario,
-            cpf: result[0].cpf,
-            telefone: result[0].telefone, senha: ""
-          }
-          res.render("pages/user_dados", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "", tipo: "success" }, valores: campos, autenticado: req.session.autenticado });
-        }
-      }
-    } catch (e) {
-      console.log(e)
-      res.render("pages/user_dados", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body, autenticado: req.session.autenticado })
-    }
+//       let resultUpdate = await usuarioDAL.update(dadosForm, req.session.autenticado.id);
+//       if (!resultUpdate.isEmpty) {
+//         if (resultUpdate.changedRows == 1) {
+//           var result = await usuarioDAL.findID(req.session.autenticado.id);
+//           var autenticado = {
+//             autenticado: result[0].nome,
+//             id: result[0].id,
+//             tipo: result[0].id_tipo_usuario,
+//             img_usuario: result[0].img_usuario
+//           };
+//           req.session.autenticado = autenticado;
+//           var campos = {
+//             nome: result[0].nome, email: result[0].email, img_usuario: result[0].img_usuario,
+//             cpf: result[0].cpf,
+//             telefone: result[0].telefone, senha: ""
+//           }
+//           res.render("pages/user_dados", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "", tipo: "success" }, valores: campos, autenticado: req.session.autenticado });
+//         }
+//       }
+//     } catch (e) {
+//       console.log(e)
+//       res.render("pages/user_dados", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body, autenticado: req.session.autenticado })
+//     }
 
-  });
+//   });
 
 //   router.post("/attelefone",
 //   async function (req, res) {
